@@ -528,11 +528,3 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Tiny safe event listener hook (declared after to keep file tidy)
-import { useEffect as _useEffect } from "react";
-function useStableEvent(name: string, handler: (e: Event) => void) {
-  _useEffect(() => {
-    window.addEventListener(name, handler);
-    return () => window.removeEventListener(name, handler);
-  }, [name, handler]);
-}
