@@ -360,14 +360,14 @@ function OrderSection() {
   const [book, setBook] = useState<string>("");
   const [formKey, setFormKey] = useState(0);
 
-  // listen for prefill from book cards
-  if (typeof window !== "undefined") {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useStableEvent("prefill-book", (e: Event) => {
+  useEffect(() => {
+    const handler = (e: Event) => {
       const detail = (e as CustomEvent<string>).detail;
       setBook(detail);
-    });
-  }
+    };
+    window.addEventListener("prefill-book", handler);
+    return () => window.removeEventListener("prefill-book", handler);
+  }, []);
 
   const mutation = useMutation({
     mutationFn: async (data: {
