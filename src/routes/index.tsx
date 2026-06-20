@@ -1,138 +1,43 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
-import { toast, Toaster } from "sonner";
-
-import { sendOrder } from "@/lib/order.functions";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, BookOpen, Sparkles, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
+import { Reveal } from "@/components/site/Reveal";
+import { SectionLabel } from "@/components/site/SectionLabel";
 import portraitAsset from "@/assets/portrait.jpg.asset.json";
-import logoAsset from "@/assets/logo.jpg.asset.json";
-import ulamkyAsset from "@/assets/ulamky.jpg.asset.json";
-import abetkaAsset from "@/assets/abetka.jpg.asset.json";
-import abetka2Asset from "@/assets/abetka2.jpg.asset.json";
-import abetkaKartkyAsset from "@/assets/abetka_kartky.jpg.asset.json";
-import kartky2Asset from "@/assets/kartky2.jpg.asset.json";
-import kartky3Asset from "@/assets/kartky3.jpg.asset.json";
-import kartky4Asset from "@/assets/kartky4.jpg.asset.json";
+import { books } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Інґіґерда — Ірина Рудика | Поетеса та авторка" },
+      {
+        name: "description",
+        content:
+          "Сайт української поетеси Інґіґерди (Ірини Рудики): книги «Уламки», «Смачненька абетка», проєкт «Літературні забави».",
+      },
+    ],
+  }),
   component: HomePage,
 });
 
-const books = [
-  {
-    id: "ulamky",
-    title: "Уламки",
-    price: "450 грн",
-    cover: ulamkyAsset.url,
-    description:
-      "Збірка для дорослих про втрати, травму та жіночий досвід в умовах повномасштабної війни. Поезія, що тримає за руку.",
-  },
-  {
-    id: "abetka",
-    title: "Смачненька абетка",
-    price: "400 грн",
-    cover: abetkaAsset.url,
-    description:
-      "Дитяча книжка-абетка, виконана шрифтом «Рутенія». Літературна гра, ритм і смак рідної мови — для маленьких і дорослих читачів.",
-  },
-  {
-    id: "abetka-kartky",
-    title: "Смачненька абетка — картки",
-    price: "350 грн",
-    cover: abetkaKartkyAsset.url,
-    description:
-      "Колекційні ілюстровані картки до «Смачненької абетки» — для ігор, читання та родинних вечорів за столом.",
-  },
-];
-
-const navLinks = [
-  { href: "#about", label: "Про мене" },
-  { href: "#projects", label: "Проєкти" },
-  { href: "#books", label: "Книги" },
-  { href: "#order", label: "Замовити" },
-];
-
 function HomePage() {
   return (
-    <div className="paper-bg min-h-screen bg-background text-foreground">
-      <Toaster position="top-center" richColors />
-      <Header />
+    <>
       <Hero />
-      <About />
-      <Projects />
-      <Books />
-      <OrderSection />
-      <Footer />
-    </div>
-  );
-}
-
-function Header() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-3">
-          <img src={logoAsset.url} alt="Логотип Інґіґерди" className="h-10 w-10 object-contain" />
-          <span className="font-display text-xl tracking-wide">Інґіґерда</span>
-        </a>
-        <nav className="hidden gap-8 text-sm md:flex">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-foreground/80 transition-colors hover:text-accent"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <button
-          className="md:hidden text-sm text-foreground/80"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Меню"
-        >
-          {open ? "Закрити" : "Меню"}
-        </button>
-      </div>
-      {open && (
-        <nav className="border-t border-border/60 md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 text-sm">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-foreground/80 hover:text-accent"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-        </nav>
-      )}
-    </header>
+      <Featured />
+      <Highlights />
+      <CTA />
+    </>
   );
 }
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1.1fr_1fr] md:py-28">
-        <div>
+        <Reveal>
           <p className="mb-4 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-accent">
             <span className="h-px w-10 bg-accent" />
             Поетеса · Прозаїк · Авторка
@@ -142,203 +47,101 @@ function Hero() {
             <span className="italic text-accent"> за руку</span>.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Вітаю. Я Інґіґерда — творчий псевдонім Ірини Рудики. Пишу для дітей і дорослих,
-            засновую простір, де українська література звучить уголос.
+            Вітаю. Я <strong className="text-foreground">Ірина Рудика</strong>,{" "}
+            <em className="text-foreground">Інґіґерда</em> — мій творчий псевдонім. Пишу для дітей
+            і дорослих, засновую простір, де українська література звучить уголос.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="#books">Переглянути книги</a>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10">
-              <a href="#projects">Літературні забави</a>
-            </Button>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-accent/10 blur-2xl" />
-          <div className="overflow-hidden rounded-[1.5rem] border border-border shadow-2xl">
-            <img
-              src={portraitAsset.url}
-              alt="Портрет Інґіґерди — Ірини Рудики"
-              className="aspect-[3/4] w-full object-cover"
-              loading="eager"
-            />
-          </div>
-          <div className="absolute -bottom-6 -left-6 hidden rounded-lg border border-border bg-card px-5 py-3 shadow-lg md:block">
-            <p className="font-display text-lg italic">«…а слово — як свіча у долонях.»</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="border-t border-border/60 bg-card/40">
-      <div className="mx-auto max-w-4xl px-6 py-24">
-        <SectionLabel>Про мене</SectionLabel>
-        <h2 className="font-display text-4xl md:text-5xl">Ірина Рудика — Інґіґерда</h2>
-        <div className="gold-line my-8 w-24" />
-        <div className="space-y-6 text-lg leading-relaxed text-foreground/85">
-          <p>
-            Українська поетеса і прозаїк, авторка дитячої та дорослої літератури, засновниця
-            культурного проєкту <em>«Літературні забави»</em>. Творчий шлях розпочала з поезії для
-            дітей і дорослих, а згодом звернулася до написання книжок.
-          </p>
-          <p>
-            У збірці <strong>«Уламки»</strong> звертаюся до тем втрат, травми та жіночого досвіду в
-            умовах повномасштабної російсько-української війни. Для дітей створила{" "}
-            <strong>«Смачненьку абетку»</strong> — поєднання літературної гри, алфавітної структури
-            та поетичного викладу, виконане авторським шрифтом «Рутенія».
-          </p>
-          <p>
-            Походжу з Костополя на Рівненщині, наразі мешкаю в Києві. Маю дві освіти — медичну та
-            економічну. Працюю з дітьми від шести років, викладаю курси розвитку «м’яких» навичок
-            та емоційного інтелекту.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Projects() {
-  return (
-    <section id="projects" className="border-t border-border/60">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <SectionLabel>Проєкти</SectionLabel>
-        <h2 className="font-display text-4xl md:text-5xl">Літературна діяльність</h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Поезія, проза, дитячі книжки, освітні курси та культурні події — усе те, що допомагає
-          українському слову звучати.
-        </p>
-
-        {/* Featured: Літературні забави */}
-        <div className="mt-12 overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card to-card shadow-xl">
-          <div className="grid gap-0 md:grid-cols-[1.2fr_1fr]">
-            <div className="p-10 md:p-14">
-              <p className="mb-3 text-xs uppercase tracking-[0.3em] text-accent">
-                Авторський проєкт
-              </p>
-              <h3 className="font-display text-4xl md:text-5xl">Літературні забави</h3>
-              <div className="gold-line my-6 w-20" />
-              <p className="text-lg leading-relaxed text-foreground/85">
-                Мистецький проєкт, заснований у листопаді 2021 року. Майданчик зустрічі творчого
-                авангарду України — тих, хто творить сучасну літературу, музику, театр, кіно,
-                живопис, і тих, хто ними цікавиться.
-              </p>
-              <ul className="mt-6 grid gap-3 text-foreground/80 sm:grid-cols-2">
-                <li>📖 Щотижневі авторські вечори</li>
-                <li>🎙️ Відкритий мікрофон</li>
-                <li>🎭 Перформанси та презентації</li>
-                <li>📺 Прямі трансляції</li>
-              </ul>
-              <p className="mt-6 text-sm text-muted-foreground">
-                Понад <strong className="text-foreground">150 українських авторів</strong> уже
-                звучали на сцені проєкту.
-              </p>
-            </div>
-            <div className="relative min-h-[260px] bg-primary/90 p-10 text-primary-foreground md:p-14">
-              <p className="font-display text-2xl italic leading-snug">
-                «Зробити літературні вечори такими ж регулярними, як ритм самого міста.»
-              </p>
-              <p className="mt-6 text-sm opacity-70">— Інґіґерда, засновниця проєкту</p>
-              <div className="mt-10 flex flex-wrap gap-3 text-xs uppercase tracking-widest opacity-80">
-                <span className="rounded-full border border-primary-foreground/30 px-3 py-1">Київ</span>
-                <span className="rounded-full border border-primary-foreground/30 px-3 py-1">з 2021</span>
-                <span className="rounded-full border border-primary-foreground/30 px-3 py-1">щотижня</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Other activities */}
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: "Поезія для дітей і дорослих",
-              text: "Вірші, що поєднують доброзичливий гумор, ритм і мовну образність.",
-            },
-            {
-              title: "Освітні курси",
-              text: "Робота з дітьми та школярами: розвиток «м’яких» навичок і емоційного інтелекту.",
-            },
-            {
-              title: "Авторські презентації",
-              text: "Зустрічі з читачами, читання нових текстів, інтерактивні літературні заходи.",
-            },
-          ].map((p) => (
-            <div
-              key={p.title}
-              className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-accent/60"
+            <Button
+              asChild
+              size="lg"
+              className="group bg-primary text-primary-foreground transition-all duration-300 hover:scale-105 hover:bg-primary/90 hover:shadow-xl"
             >
-              <h4 className="font-display text-2xl">{p.title}</h4>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-            </div>
-          ))}
-        </div>
+              <Link to="/books">
+                Переглянути книги
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-accent text-accent transition-all duration-300 hover:scale-105 hover:bg-accent/10 hover:shadow-md"
+            >
+              <Link to="/projects">Літературні забави</Link>
+            </Button>
+          </div>
+        </Reveal>
 
-        {/* Gallery */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          {[kartky2Asset, kartky3Asset, kartky4Asset].map((a, i) => (
-            <div key={i} className="overflow-hidden rounded-xl border border-border">
+        <Reveal delay={150}>
+          <div className="relative">
+            <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-accent/10 blur-2xl" />
+            <div className="overflow-hidden rounded-[1.5rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
               <img
-                src={a.url}
-                alt="Картки до «Смачненької абетки»"
-                className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-105"
-                loading="lazy"
+                src={portraitAsset.url}
+                alt="Портрет Інґіґерди — Ірини Рудики"
+                className="aspect-[3/4] w-full object-cover"
+                loading="eager"
               />
             </div>
-          ))}
-        </div>
+            <div className="absolute -bottom-6 -left-6 hidden rounded-lg border border-border bg-card px-5 py-3 shadow-lg md:block animate-fade-in">
+              <p className="font-display text-lg italic">«…а слово — як свіча у долонях.»</p>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function Books() {
+function Featured() {
   return (
-    <section id="books" className="border-t border-border/60 bg-card/40">
+    <section className="border-t border-border/60 bg-card/40">
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <SectionLabel>Мої книги</SectionLabel>
-        <h2 className="font-display text-4xl md:text-5xl">Бібліотека</h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Поезія для дорослих та ілюстровані видання для дітей. Кожна книга — окрема історія, яку
-          можна тримати в руках.
-        </p>
+        <Reveal>
+          <SectionLabel>Бібліотека</SectionLabel>
+          <div className="flex items-end justify-between gap-6 flex-wrap">
+            <h2 className="font-display text-4xl md:text-5xl">Книги авторки</h2>
+            <Link
+              to="/books"
+              className="story-link text-sm text-accent"
+            >
+              Усі книги →
+            </Link>
+          </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-8 md:grid-cols-3">
-          {books.map((book) => (
-            <article
-              key={book.id}
-              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background transition-shadow hover:shadow-xl"
-            >
-              <div className="aspect-[3/4] overflow-hidden bg-muted">
-                <img
-                  src={book.cover}
-                  alt={`Обкладинка книги «${book.title}»`}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-display text-2xl">{book.title}</h3>
-                <p className="mt-1 text-sm text-accent">{book.price}</p>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {book.description}
-                </p>
-                <Button
-                  asChild
-                  className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  <a href={`#order?book=${encodeURIComponent(book.title)}`} onClick={() => prefillBook(book.title)}>
-                    Замовити
-                  </a>
-                </Button>
-              </div>
-            </article>
+          {books.map((book, i) => (
+            <Reveal key={book.slug} delay={i * 120}>
+              <Link
+                to="/books/$slug"
+                params={{ slug: book.slug }}
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-2xl"
+              >
+                <div className="aspect-[3/4] overflow-hidden bg-muted">
+                  <img
+                    src={book.cover}
+                    alt={`Обкладинка «${book.title}»`}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-display text-2xl transition-colors group-hover:text-accent">
+                    {book.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-accent">{book.price}</p>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {book.short}
+                  </p>
+                  <span className="mt-6 inline-flex items-center text-sm font-medium text-accent">
+                    Детальніше та замовити
+                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -346,185 +149,76 @@ function Books() {
   );
 }
 
-function prefillBook(title: string) {
-  if (typeof window === "undefined") return;
-  setTimeout(() => {
-    const el = document.getElementById("order-book-trigger");
-    el?.setAttribute("data-prefill", title);
-    window.dispatchEvent(new CustomEvent("prefill-book", { detail: title }));
-  }, 50);
-}
-
-function OrderSection() {
-  const sendOrderFn = useServerFn(sendOrder);
-  const [book, setBook] = useState<string>("");
-  const [formKey, setFormKey] = useState(0);
-
-  useEffect(() => {
-    const handler = (e: Event) => {
-      const detail = (e as CustomEvent<string>).detail;
-      setBook(detail);
-    };
-    window.addEventListener("prefill-book", handler);
-    return () => window.removeEventListener("prefill-book", handler);
-  }, []);
-
-  const mutation = useMutation({
-    mutationFn: async (data: {
-      name: string;
-      phone: string;
-      telegram: string;
-      book: string;
-      comment: string;
-    }) => sendOrderFn({ data }),
-    onSuccess: () => {
-      toast.success("Дякую! Замовлення надіслано. Я зв’яжуся з вами найближчим часом.");
-      setBook("");
-      setFormKey((k) => k + 1);
+function Highlights() {
+  const items = [
+    {
+      icon: BookOpen,
+      title: "Дитяча та доросла поезія",
+      text: "Книги для різного віку: від ілюстрованих абеток до глибокої лірики.",
     },
-    onError: (err: Error) => {
-      toast.error(err.message || "Сталася помилка. Спробуйте ще раз.");
+    {
+      icon: Sparkles,
+      title: "Авторський шрифт «Рутенія»",
+      text: "Власноруч створений шрифт, що звучить як рідна мова.",
     },
-  });
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const data = {
-      name: String(fd.get("name") || "").trim(),
-      phone: String(fd.get("phone") || "").trim(),
-      telegram: String(fd.get("telegram") || "").trim(),
-      book: book || String(fd.get("book") || "").trim(),
-      comment: String(fd.get("comment") || "").trim(),
-    };
-    if (!data.name || !data.phone || !data.book) {
-      toast.error("Будь ласка, заповніть ім'я, телефон та оберіть книгу.");
-      return;
-    }
-    mutation.mutate(data);
-  }
-
+    {
+      icon: Calendar,
+      title: "Літературні вечори щотижня",
+      text: "Понад 150 українських авторів уже виступили на сцені проєкту.",
+    },
+  ];
   return (
-    <section id="order" className="border-t border-border/60">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.2fr]">
-        <div>
-          <SectionLabel>Замовлення</SectionLabel>
-          <h2 className="font-display text-4xl md:text-5xl">Замовити книгу</h2>
-          <div className="gold-line my-6 w-20" />
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            Заповніть форму — і я особисто зв’яжуся з вами у Telegram або телефоном, щоб
-            підтвердити деталі замовлення та доставки.
-          </p>
-          <div className="mt-8 space-y-3 text-sm text-foreground/80">
-            <p>📦 Надсилаю Новою поштою по Україні</p>
-            <p>✍️ Можу підписати книгу з персональним побажанням</p>
-            <p>💬 Відповідаю особисто, без ботів</p>
-          </div>
+    <section className="border-t border-border/60">
+      <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="grid gap-6 md:grid-cols-3">
+          {items.map((it, i) => (
+            <Reveal key={it.title} delay={i * 100}>
+              <div className="group h-full rounded-xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent transition-all duration-300 group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground">
+                  <it.icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-2xl">{it.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.text}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
-
-        <form
-          key={formKey}
-          onSubmit={onSubmit}
-          className="rounded-2xl border border-border bg-card p-8 shadow-lg"
-        >
-          <div className="grid gap-5">
-            <Field label="Ім'я" required>
-              <Input name="name" required maxLength={100} placeholder="Ваше ім’я" />
-            </Field>
-            <Field label="Номер телефону" required>
-              <Input
-                name="phone"
-                type="tel"
-                required
-                maxLength={40}
-                placeholder="+380 __ ___ __ __"
-              />
-            </Field>
-            <Field label="Telegram нікнейм">
-              <Input name="telegram" maxLength={80} placeholder="@username" />
-            </Field>
-            <Field label="Книга для замовлення" required>
-              <Select value={book} onValueChange={setBook}>
-                <SelectTrigger id="order-book-trigger">
-                  <SelectValue placeholder="Оберіть книгу" />
-                </SelectTrigger>
-                <SelectContent>
-                  {books.map((b) => (
-                    <SelectItem key={b.id} value={b.title}>
-                      {b.title} — {b.price}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Field>
-            <Field label="Коментар">
-              <Textarea
-                name="comment"
-                maxLength={1000}
-                rows={4}
-                placeholder="Кількість, місто доставки, побажання щодо підпису…"
-              />
-            </Field>
-            <Button
-              type="submit"
-              size="lg"
-              disabled={mutation.isPending}
-              className="bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              {mutation.isPending ? "Надсилаю…" : "Надіслати замовлення"}
-            </Button>
-            <p className="text-xs text-muted-foreground">
-              Натискаючи кнопку, ви погоджуєтесь на обробку контактних даних виключно для зв’язку
-              щодо замовлення.
-            </p>
-          </div>
-        </form>
       </div>
     </section>
   );
 }
 
-function Field({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
+function CTA() {
   return (
-    <div className="grid gap-2">
-      <Label className="text-sm">
-        {label} {required && <span className="text-accent">*</span>}
-      </Label>
-      {children}
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-border/60 bg-card/60">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
-        <div className="flex items-center gap-3">
-          <img src={logoAsset.url} alt="" className="h-8 w-8 object-contain opacity-80" />
-          <span className="font-display text-base text-foreground">Інґіґерда</span>
-        </div>
-        <p className="text-center md:text-right">
-          © {new Date().getFullYear()} Ірина Рудика. Усі права захищено.
-        </p>
+    <section className="border-t border-border/60 bg-primary/95 text-primary-foreground">
+      <div className="mx-auto max-w-4xl px-6 py-20 text-center">
+        <Reveal>
+          <h2 className="font-display text-4xl md:text-5xl">
+            Долучайтеся до літературних забав
+          </h2>
+          <p className="mt-4 text-lg text-primary-foreground/80">
+            Щотижневі авторські вечори, прямі трансляції та зустрічі з найцікавішими голосами
+            сучасної української літератури.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+            >
+              <Link to="/events">Найближчі події</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary-foreground/40 bg-transparent text-primary-foreground transition-all duration-300 hover:scale-105 hover:bg-primary-foreground/10"
+            >
+              <Link to="/contact">Зв’язатися</Link>
+            </Button>
+          </div>
+        </Reveal>
       </div>
-    </footer>
+    </section>
   );
 }
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="mb-3 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-accent">
-      <span className="h-px w-10 bg-accent" />
-      {children}
-    </p>
-  );
-}
-
