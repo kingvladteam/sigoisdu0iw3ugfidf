@@ -50,7 +50,7 @@ function BookPage() {
           </div>
           {book.gallery.length > 1 && (
             <div className="mt-4 grid grid-cols-3 gap-3">
-              {book.gallery.slice(1).map((g, i) => (
+              {book.gallery.slice(1).map((g: string, i: number) => (
                 <div
                   key={i}
                   className="aspect-square overflow-hidden rounded-lg border border-border"
@@ -76,7 +76,7 @@ function BookPage() {
           )}
           <div className="gold-line my-6 w-20" />
           <div className="space-y-4 text-base leading-relaxed text-foreground/85">
-            {book.long.map((p, i) => (
+            {book.long.map((p: string, i: number) => (
               <p key={i}>{p}</p>
             ))}
           </div>
