@@ -6,7 +6,7 @@ type Props = {
   className?: string;
   delay?: number;
   y?: number;
-  as?: keyof JSX.IntrinsicElements;
+  as?: "div" | "section" | "article" | "header" | "h1" | "h2" | "h3" | "p" | "span" | "li";
 };
 
 export function Reveal({ children, className, delay = 0, y = 24, as: Tag = "div" }: Props) {
