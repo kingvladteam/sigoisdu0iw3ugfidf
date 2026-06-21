@@ -1,15 +1,34 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+const itemSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+  qty: z.number().int().min(1).max(99),
+  price: z.string().trim().max(50),
+});
+
 const orderSchema = z.object({
-  name: z.string().trim().min(1, "Введіть ім'я").max(100),
+  firstName: z.string().trim().min(1, "Введіть ім'я").max(80),
+  lastName: z.string().trim().min(1, "Введіть прізвище").max(80),
+  patronymic: z.string().trim().min(1, "Введіть по батькові").max(80),
   phone: z.string().trim().min(5, "Введіть номер телефону").max(40),
   telegram: z.string().trim().max(80).optional().default(""),
-  book: z.string().trim().min(1, "Оберіть книгу").max(200),
+  city: z.string().trim().max(120).optional().default(""),
   comment: z.string().trim().max(1000).optional().default(""),
+  items: z.array(itemSchema).min(1, "Кошик порожній").max(20),
 });
 
 const CHAT_ID = "1012973976";
+
+// Telegram MarkdownV2 reserved characters that must be escaped
+function escMd(s: string): string {
+  return s.replace(/[_*\[\]()~`>#+\-=|{}.!\\]/g, "\\$&");
+}
+
+// Wrap value as a spoiler. The inner value must be MarkdownV2-escaped.
+function spoiler(value: string): string {
+  return `||${escMd(value)}||`;
+}
 
 export const sendOrder = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => orderSchema.parse(data))
@@ -19,13 +38,20 @@ export const sendOrder = createServerFn({ method: "POST" })
       throw new Error("TELEGRAM_BOT_TOKEN не налаштовано");
     }
 
+    const fullName = `${data.lastName} ${data.firstName} ${data.patronymic}`;
+    const itemsLines = data.items
+      .map((i, idx) => `${idx + 1}\\. ${spoiler(`${i.title} × ${i.qty} (${i.price})`)}`)
+      .join("\n");
+    const totalQty = data.items.reduce((s, i) => s + i.qty, 0);
+
     const text =
-      `📚 <b>Нове замовлення книги</b>\n\n` +
-      `<b>Ім'я:</b> ${escapeHtml(data.name)}\n` +
-      `<b>Телефон:</b> ${escapeHtml(data.phone)}\n` +
-      `<b>Telegram:</b> ${escapeHtml(data.telegram || "—")}\n` +
-      `<b>Книга:</b> ${escapeHtml(data.book)}\n` +
-      `<b>Коментар:</b> ${escapeHtml(data.comment || "—")}`;
+      `📚 *Нове замовлення книг*\n\n` +
+      `*ПІБ:* ${spoiler(fullName)}\n` +
+      `*Телефон:* ${spoiler(data.phone)}\n` +
+      `*Telegram:* ${spoiler(data.telegram || "—")}\n` +
+      `*Місто:* ${spoiler(data.city || "—")}\n` +
+      `*Коментар:* ${spoiler(data.comment || "—")}\n\n` +
+      `*Книги \\(${totalQty} шт\\.\\):*\n${itemsLines}`;
 
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
@@ -33,7 +59,7 @@ export const sendOrder = createServerFn({ method: "POST" })
       body: JSON.stringify({
         chat_id: CHAT_ID,
         text,
-        parse_mode: "HTML",
+        parse_mode: "MarkdownV2",
         disable_web_page_preview: true,
       }),
     });
@@ -46,10 +72,3 @@ export const sendOrder = createServerFn({ method: "POST" })
 
     return { ok: true };
   });
-
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}

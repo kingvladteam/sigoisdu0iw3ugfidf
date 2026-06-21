@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Award, Users, Mic, Radio } from "lucide-react";
 import litzabavyLogo from "@/assets/litzabavy-logo.png.asset.json";
-import kartky2 from "@/assets/kartky2.jpg.asset.json";
-import kartky3 from "@/assets/kartky3.jpg.asset.json";
-import kartky4 from "@/assets/kartky4.jpg.asset.json";
+import badgeAsset from "@/assets/litzabavy-badge.png.asset.json";
+import event1 from "@/assets/event-1.jpg.asset.json";
+import event2 from "@/assets/event-2.jpg.asset.json";
+import event3 from "@/assets/event-3.jpg.asset.json";
+import event4 from "@/assets/event-4.jpg.asset.json";
+import event5 from "@/assets/event-5.jpg.asset.json";
+import event6 from "@/assets/event-6.jpg.asset.json";
+import event7 from "@/assets/event-7.jpg.asset.json";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { SocialList } from "@/components/site/SocialList";
@@ -15,7 +21,7 @@ export const Route = createFileRoute("/projects")({
       {
         name: "description",
         content:
-          "«Літературні забави» — авторський проєкт Інґіґерди: щотижневі літературні вечори, відкритий мікрофон, прямі трансляції українських авторів.",
+          "«Літературні забави» — авторський проєкт Інґіґерди: щотижневі літературні вечори, відкритий мікрофон, прямі трансляції у Facebook.",
       },
       { property: "og:image", content: litzabavyLogo.url },
     ],
@@ -23,14 +29,23 @@ export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
 });
 
+const gallery = [event1, event2, event3, event4, event5, event6, event7];
+
+const formats = [
+  { icon: Mic, t: "Авторські вечори", d: "Щотижневі зустрічі з письменниками, поетами, перекладачами." },
+  { icon: Users, t: "Відкритий мікрофон", d: "Можливість прочитати свої тексти перед живою аудиторією." },
+  { icon: Award, t: "Перформанси", d: "Музика, театр, перформативне читання та мультидисциплінарні події." },
+  { icon: Radio, t: "Прямі трансляції", d: "Усі заходи доступні онлайн у Facebook «Літературних забав»." },
+];
+
 function ProjectsPage() {
   return (
     <>
-      <section className="border-t border-border/60 bg-gradient-to-br from-accent/10 via-background to-card">
+      <section className="border-t border-border/60 bg-gradient-to-br from-[#2767d1]/10 via-background to-card">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <SectionLabel>Авторський проєкт</SectionLabel>
-            <h1 className="font-display text-5xl md:text-6xl">Літературні забави</h1>
+            <h1 className="font-display text-5xl font-medium md:text-6xl">Літературні забави</h1>
             <div className="gold-line my-6 w-20" />
             <p className="text-lg leading-relaxed text-foreground/85">
               Мистецький проєкт, заснований у листопаді 2021 року. Майданчик зустрічі творчого
@@ -64,18 +79,18 @@ function ProjectsPage() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <Reveal>
             <SectionLabel>Формати</SectionLabel>
-            <h2 className="font-display text-3xl md:text-4xl">Що відбувається на «Забавах»</h2>
+            <h2 className="font-display text-3xl font-medium md:text-4xl">
+              Що відбувається на «Забавах»
+            </h2>
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { t: "Авторські вечори", d: "Щотижневі зустрічі з письменниками, поетами, перекладачами." },
-              { t: "Відкритий мікрофон", d: "Можливість прочитати свої тексти перед живою аудиторією." },
-              { t: "Перформанси", d: "Музика, театр, перформативне читання та мультидисциплінарні події." },
-              { t: "Прямі трансляції", d: "Усі заходи доступні онлайн у Facebook та YouTube." },
-            ].map((it, i) => (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {formats.map((it, i) => (
               <Reveal key={it.t} delay={i * 90}>
-                <div className="h-full rounded-xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg">
-                  <h3 className="font-display text-xl">{it.t}</h3>
+                <div className="group h-full rounded-2xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/10 text-accent transition-all group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground">
+                    <it.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-display text-xl font-semibold">{it.t}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.d}</p>
                 </div>
               </Reveal>
@@ -84,20 +99,48 @@ function ProjectsPage() {
         </div>
       </section>
 
+      <section className="border-t border-border/60 bg-gradient-to-br from-accent/5 via-background to-accent/10">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1fr_1.4fr]">
+          <Reveal>
+            <div className="mx-auto max-w-xs">
+              <img
+                src={badgeAsset.url}
+                alt="Значок учасника «Літературних забав»"
+                className="w-full drop-shadow-2xl animate-float"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <SectionLabel>Спільнота</SectionLabel>
+            <h2 className="font-display text-3xl font-medium md:text-4xl">
+              Значок учасника
+            </h2>
+            <div className="gold-line my-6 w-20" />
+            <p className="text-lg leading-relaxed text-foreground/85">
+              Кожен автор, який виступив на «Літературних забавах», отримує пам'ятний значок —
+              символ належності до спільноти, що творить сучасну українську літературу.
+            </p>
+            <p className="mt-3 text-muted-foreground">
+              Це маленький знак вдячності та визнання — і нагадування, що слово об'єднує.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="border-t border-border/60 bg-card/40">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <Reveal>
             <SectionLabel>Галерея</SectionLabel>
-            <h2 className="font-display text-3xl md:text-4xl">Атмосфера зустрічей</h2>
+            <h2 className="font-display text-3xl font-medium md:text-4xl">Атмосфера зустрічей</h2>
           </Reveal>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[kartky2, kartky3, kartky4].map((a, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className="overflow-hidden rounded-xl border border-border">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {gallery.map((a, i) => (
+              <Reveal key={i} delay={i * 70}>
+                <div className="group overflow-hidden rounded-xl border border-border bg-card">
                   <img
                     src={a.url}
                     alt="Літературні забави — момент"
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-110"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
                 </div>
