@@ -83,13 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Інґіґерда — поетеса та авторка | Ірина Рудика" },
+      { title: "Інґіґерда — письменниця, поетеса, культурна діячка" },
       {
         name: "description",
         content:
           "Офіційний сайт української поетеси Інґіґерди (Ірини Рудики) — книги, проєкт «Літературні забави», події та замовлення.",
       },
-      { property: "og:title", content: "Інґіґерда — поетеса та авторка" },
+      { property: "og:title", content: "Інґіґерда — письменниця, поетеса, культурна діячка" },
       {
         property: "og:description",
         content:
@@ -97,6 +97,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Інґіґерда — письменниця, поетеса, культурна діячка" },
+      { name: "description", content: "Інґіґерда: Віртуальна Крамниця — це адаптивний сайт-портфоліо для поетеси та авторки з функціоналом інтернет-магазину." },
+      { property: "og:description", content: "Інґіґерда: Віртуальна Крамниця — це адаптивний сайт-портфоліо для поетеси та авторки з функціоналом інтернет-магазину." },
+      { name: "twitter:description", content: "Інґіґерда: Віртуальна Крамниця — це адаптивний сайт-портфоліо для поетеси та авторки з функціоналом інтернет-магазину." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0e1c2dfd-ddac-47c4-8080-ba92258b6444/id-preview-6d8ef6b3--745d69ec-0bd9-43a9-a2c1-7c32041cf0af.lovable.app-1782027260869.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0e1c2dfd-ddac-47c4-8080-ba92258b6444/id-preview-6d8ef6b3--745d69ec-0bd9-43a9-a2c1-7c32041cf0af.lovable.app-1782027260869.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
