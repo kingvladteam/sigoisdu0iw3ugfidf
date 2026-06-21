@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, Check, ShoppingBag } from "lucide-react";
+import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
-import { OrderForm } from "@/components/site/OrderForm";
+import { Button } from "@/components/ui/button";
 import { getBook, books } from "@/lib/site-data";
+import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/books/$slug")({
   loader: ({ params }) => {
@@ -27,10 +29,12 @@ export const Route = createFileRoute("/books/$slug")({
 
 function BookPage() {
   const { book } = Route.useLoaderData();
+  const { add, items } = useCart();
+  const inCart = items.some((i) => i.slug === book.slug);
 
   return (
     <article className="border-t border-border/60">
-      <div className="mx-auto max-w-6xl px-6 py-12">
+      <div className="mx-auto max-w-6xl px-6 py-10">
         <Link
           to="/books"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-accent"
@@ -50,7 +54,7 @@ function BookPage() {
           </div>
           {book.gallery.length > 1 && (
             <div className="mt-4 grid grid-cols-3 gap-3">
-              {book.gallery.slice(1).map((g: string, i: number) => (
+              {book.gallery.slice(1).map((g, i) => (
                 <div
                   key={i}
                   className="aspect-square overflow-hidden rounded-lg border border-border"
@@ -68,15 +72,17 @@ function BookPage() {
         </Reveal>
 
         <Reveal delay={100}>
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">{book.audience}</p>
-          <h1 className="mt-3 font-display text-4xl md:text-5xl">{book.title}</h1>
-          <p className="mt-3 text-2xl text-accent">{book.price}</p>
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent">
+            {book.audience}
+          </p>
+          <h1 className="mt-3 font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
+          <p className="mt-3 font-display text-3xl text-accent">{book.price}</p>
           {book.pages && (
             <p className="mt-1 text-sm text-muted-foreground">{book.pages}</p>
           )}
           <div className="gold-line my-6 w-20" />
           <div className="space-y-4 text-base leading-relaxed text-foreground/85">
-            {book.long.map((p: string, i: number) => (
+            {book.long.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
@@ -86,11 +92,11 @@ function BookPage() {
             </blockquote>
           )}
 
-          <ul className="mt-8 grid gap-2 text-sm text-foreground/85">
+          <ul className="mt-7 grid gap-2 text-sm text-foreground/85">
             {[
               "Доставка Новою поштою по Україні",
-              "Можливий авторський підпис із персональним побажанням",
-              "Зв'язок особисто від авторки у Telegram @ingi_gerda",
+              "Авторський підпис із персональним побажанням",
+              "Зв'язок лише від авторки у Telegram @ingi_gerda",
             ].map((l) => (
               <li key={l} className="flex items-start gap-2">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
@@ -98,27 +104,29 @@ function BookPage() {
               </li>
             ))}
           </ul>
-        </Reveal>
-      </div>
 
-      <div className="border-t border-border/60 bg-card/40">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1fr_1.2fr]">
-          <Reveal>
-            <p className="mb-3 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-accent">
-              <span className="h-px w-10 bg-accent" /> Замовлення
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl">
-              Замовити «{book.title}»
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              Заповніть форму — і авторка особисто зв'яжеться з вами у Telegram або телефоном.
-              Жодних ботів, лише <strong className="text-foreground">@ingi_gerda</strong>.
-            </p>
-          </Reveal>
-          <Reveal delay={100}>
-            <OrderForm defaultBook={book.title} />
-          </Reveal>
-        </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button
+              size="lg"
+              onClick={() => {
+                add(book);
+                toast.success(`«${book.title}» додано в кошик`);
+              }}
+              className="bg-accent text-accent-foreground transition-all hover:scale-105 hover:bg-accent/90 hover:shadow-lg"
+            >
+              <ShoppingBag className="mr-2 h-4 w-4" />
+              {inCart ? "Додати ще одну" : "Додати в кошик"}
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-accent text-accent hover:bg-accent/10"
+            >
+              <Link to="/cart">Перейти до кошика</Link>
+            </Button>
+          </div>
+        </Reveal>
       </div>
 
       <RelatedBooks currentSlug={book.slug} />
@@ -130,9 +138,9 @@ function RelatedBooks({ currentSlug }: { currentSlug: string }) {
   const related = books.filter((b) => b.slug !== currentSlug);
   if (related.length === 0) return null;
   return (
-    <section className="border-t border-border/60">
+    <section className="border-t border-border/60 bg-card/40">
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <h3 className="font-display text-2xl">Інші книги</h3>
+        <h3 className="font-display text-2xl font-semibold">Інші книги</h3>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {related.map((b) => (
             <Link
@@ -148,7 +156,7 @@ function RelatedBooks({ currentSlug }: { currentSlug: string }) {
                 loading="lazy"
               />
               <div className="min-w-0">
-                <p className="font-display text-xl transition-colors group-hover:text-accent">
+                <p className="font-display text-xl font-semibold transition-colors group-hover:text-accent">
                   {b.title}
                 </p>
                 <p className="text-sm text-accent">{b.price}</p>
