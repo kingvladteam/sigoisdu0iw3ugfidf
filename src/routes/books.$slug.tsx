@@ -54,7 +54,7 @@ function BookPage() {
           </div>
           {book.gallery.length > 1 && (
             <div className="mt-4 grid grid-cols-3 gap-3">
-              {book.gallery.slice(1).map((g, i) => (
+              {book.gallery.slice(1).map((g: string, i: number) => (
                 <div
                   key={i}
                   className="aspect-square overflow-hidden rounded-lg border border-border"
