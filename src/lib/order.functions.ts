@@ -11,7 +11,7 @@ const orderSchema = z.object({
   firstName: z.string().trim().min(1, "Введіть ім'я").max(80),
   lastName: z.string().trim().min(1, "Введіть прізвище").max(80),
   patronymic: z.string().trim().min(1, "Введіть по батькові").max(80),
-  phone: z.string().trim().min(5, "Введіть номер телефону").max(40),
+  phone: z.string().trim().min(9, "Введіть номер телефону").max(40),
   telegram: z.string().trim().max(80).optional().default(""),
   city: z.string().trim().max(120).optional().default(""),
   comment: z.string().trim().max(1000).optional().default(""),
