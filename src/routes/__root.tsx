@@ -132,14 +132,16 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="paper-bg flex min-h-screen flex-col bg-background text-foreground">
-        <Toaster position="top-center" richColors closeButton />
-        <Header />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+      <CartProvider>
+        <div className="paper-bg flex min-h-screen flex-col bg-background text-foreground">
+          <Toaster position="top-center" richColors closeButton />
+          <Header />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+      </CartProvider>
     </QueryClientProvider>
   );
 }
