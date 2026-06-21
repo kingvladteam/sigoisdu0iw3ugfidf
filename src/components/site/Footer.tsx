@@ -48,7 +48,7 @@ export function Footer() {
       </div>
       <div className="border-t border-border/60">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-muted-foreground md:flex-row">
-          <p>© {new Date().getFullYear()} Ірина Рудика (Інґіґерда). Усі права захищено.</p>
+          <p>© {new Date().getFullYear()} Інґіґерда. Усі права захищено.</p>
           <p>Зроблено з любов'ю до українського слова.</p>
         </div>
       </div>
