@@ -82,7 +82,7 @@ function BookPage() {
           )}
           <div className="gold-line my-6 w-20" />
           <div className="space-y-4 text-base leading-relaxed text-foreground/85">
-            {book.long.map((p, i) => (
+            {book.long.map((p: string, i: number) => (
               <p key={i}>{p}</p>
             ))}
           </div>
