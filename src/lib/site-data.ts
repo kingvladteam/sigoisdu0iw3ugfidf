@@ -24,8 +24,8 @@ export const books: Book[] = [
   {
     slug: "ulamky",
     title: "Уламки",
-    price: "450 грн",
-    priceValue: 450,
+    price: "400 грн",
+    priceValue: 400,
     audience: "Для дорослих",
     pages: "≈ 120 сторінок",
     cover: ulamkyAsset.url,
