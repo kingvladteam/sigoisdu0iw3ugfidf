@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, MapPin, Radio, ExternalLink, Clock } from "lucide-react";
+import { Calendar, MapPin, Radio, ExternalLink, Clock, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Button } from "@/components/ui/button";
+import { upcomingEvents } from "@/lib/site-data";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
