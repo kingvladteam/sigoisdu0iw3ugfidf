@@ -172,7 +172,7 @@ function BookPage() {
           )}
           {book.gallery.length > 1 && (
             <div className="flex justify-center gap-2 p-3">
-              {book.gallery.map((g, i) => (
+              {book.gallery.map((g: string, i: number) => (
                 <button
                   key={i}
                   type="button"
