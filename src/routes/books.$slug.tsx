@@ -150,8 +150,7 @@ function BookPage() {
 
       <Dialog open={lightbox !== null} onOpenChange={(o) => !o && setLightbox(null)}>
         <DialogContent
-          showCloseButton={false}
-          className="max-w-[96vw] border-none bg-background/95 p-0 sm:max-w-5xl"
+          className="max-w-[96vw] border-none bg-background/95 p-0 sm:max-w-5xl [&>button]:hidden"
         >
           <DialogTitle className="sr-only">
             {book.title} — фото {lightbox !== null ? lightbox + 1 : ""}
