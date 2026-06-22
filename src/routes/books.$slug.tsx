@@ -33,6 +33,9 @@ function BookPage() {
   const { book } = Route.useLoaderData();
   const { add, items } = useCart();
   const inCart = items.some((i) => i.slug === book.slug);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const openImage = (idx: number) => setLightbox(idx);
 
   return (
     <article className="border-t border-border/60">
@@ -47,31 +50,43 @@ function BookPage() {
 
       <div className="mx-auto grid max-w-6xl gap-12 px-6 pb-20 md:grid-cols-[1fr_1.1fr]">
         <Reveal>
-          <div className="overflow-hidden rounded-2xl border border-border shadow-xl">
+          <button
+            type="button"
+            onClick={() => openImage(0)}
+            className="group relative block w-full overflow-hidden rounded-2xl border border-border shadow-xl"
+            aria-label="Відкрити фото на весь екран"
+          >
             <img
               src={book.cover}
               alt={`Обкладинка «${book.title}»`}
-              className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+              className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-          </div>
+            <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-xs text-foreground/80 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+              <Expand className="h-3.5 w-3.5" /> Збільшити
+            </span>
+          </button>
           {book.gallery.length > 1 && (
             <div className="mt-4 grid grid-cols-3 gap-3">
               {book.gallery.slice(1).map((g: string, i: number) => (
-                <div
+                <button
+                  type="button"
                   key={i}
-                  className="aspect-square overflow-hidden rounded-lg border border-border"
+                  onClick={() => openImage(i + 1)}
+                  className="group aspect-square overflow-hidden rounded-lg border border-border"
+                  aria-label={`Відкрити фото ${i + 2}`}
                 >
                   <img
                     src={g}
                     alt={`${book.title} — фото ${i + 2}`}
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                </div>
+                </button>
               ))}
             </div>
           )}
         </Reveal>
+
 
         <Reveal delay={100}>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent">
