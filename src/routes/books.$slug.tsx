@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Check, ShoppingBag } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, Check, ShoppingBag, Expand, X } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { getBook, books } from "@/lib/site-data";
 import { useCart } from "@/lib/cart";
 
