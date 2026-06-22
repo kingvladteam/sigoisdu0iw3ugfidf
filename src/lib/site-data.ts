@@ -61,8 +61,8 @@ export const books: Book[] = [
   {
     slug: "abetka-kartky",
     title: "Смачненька абетка — картки",
-    price: "350 грн",
-    priceValue: 350,
+    price: "300 грн",
+    priceValue: 300,
     audience: "Для дітей від 4 років",
     pages: "33 ілюстровані картки",
     cover: abetkaKartkyAsset.url,
