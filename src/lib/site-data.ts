@@ -104,7 +104,6 @@ export type UpcomingEvent = {
   guest?: string;
   fbUrl?: string;
 };
-{ title: "Поетичний вечір з …", date: "28 червня 2026", time: "18:00", fbUrl: "https://fb.me/e/..." }
 
 /**
  * Майбутні події «Літературних забав».
