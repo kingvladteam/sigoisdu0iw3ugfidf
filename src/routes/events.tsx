@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, MapPin, Radio, ExternalLink, Clock } from "lucide-react";
+import { Calendar, MapPin, Radio, ExternalLink, Clock, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Button } from "@/components/ui/button";
+import { upcomingEvents } from "@/lib/site-data";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -88,46 +89,104 @@ function EventsPage() {
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-5">
-            {recurring.map((e, i) => (
-              <Reveal key={e.title} delay={i * 100}>
-                <article className="group grid gap-6 rounded-2xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl md:grid-cols-[220px_1fr_auto] md:items-center md:p-8">
-                  <div>
-                    <p className="font-display text-2xl text-accent">{e.when}</p>
-                    <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                      <Clock className="h-3.5 w-3.5" /> {e.time}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                      {e.type}
-                    </p>
-                    <h2 className="mt-1 font-display text-2xl font-semibold transition-colors group-hover:text-accent">
-                      {e.title}
-                    </h2>
-                    <p className="mt-2 flex items-center gap-2 text-sm text-foreground/80">
-                      <MapPin className="h-4 w-4 text-accent" />
-                      Вільний Принт Хаб · Нижній Вал, 23 (3 поверх), Київ
-                    </p>
-                    <p className="mt-1 flex items-center gap-2 text-sm text-foreground/80">
-                      <Radio className="h-4 w-4 text-accent" />
-                      Пряма трансляція у Facebook
-                    </p>
-                  </div>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="border-accent text-accent transition-all hover:scale-105 hover:bg-accent/10"
-                  >
-                    <a href={FB_PAGE} target="_blank" rel="noopener noreferrer">
-                      Деталі
-                      <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                    </a>
-                  </Button>
-                </article>
-              </Reveal>
-            ))}
+          {upcomingEvents.length > 0 && (
+            <div className="mt-12">
+              <h2 className="font-display text-2xl font-semibold md:text-3xl">
+                <Sparkles className="mr-2 inline h-5 w-5 text-accent" />
+                Найближчі вечори
+              </h2>
+              <div className="mt-6 grid gap-5">
+                {upcomingEvents.map((ev, i) => (
+                  <Reveal key={`${ev.title}-${i}`} delay={i * 80}>
+                    <article className="group grid gap-6 rounded-2xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl md:grid-cols-[220px_1fr_auto] md:items-center md:p-8">
+                      <div>
+                        <p className="font-display text-2xl text-accent">{ev.date}</p>
+                        {ev.time && (
+                          <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                            <Clock className="h-3.5 w-3.5" /> {ev.time}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        {ev.guest && (
+                          <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                            Запрошений автор: {ev.guest}
+                          </p>
+                        )}
+                        <h3 className="mt-1 font-display text-2xl font-semibold transition-colors group-hover:text-accent">
+                          {ev.title}
+                        </h3>
+                        <p className="mt-2 flex items-center gap-2 text-sm text-foreground/80">
+                          <MapPin className="h-4 w-4 text-accent" />
+                          Вільний Принт Хаб · Нижній Вал, 23 (3 поверх), Київ
+                        </p>
+                        <p className="mt-1 flex items-center gap-2 text-sm text-foreground/80">
+                          <Radio className="h-4 w-4 text-accent" />
+                          Пряма трансляція у Facebook
+                        </p>
+                      </div>
+                      <Button
+                        asChild
+                        className="bg-accent text-accent-foreground transition-all hover:scale-105 hover:bg-accent/90"
+                      >
+                        <a href={ev.fbUrl ?? FB_EVENTS} target="_blank" rel="noopener noreferrer">
+                          Деталі у Facebook
+                          <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    </article>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-12">
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">
+              Регулярні зустрічі
+            </h2>
+            <div className="mt-6 grid gap-5">
+              {recurring.map((e, i) => (
+                <Reveal key={e.title} delay={i * 100}>
+                  <article className="group grid gap-6 rounded-2xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl md:grid-cols-[220px_1fr_auto] md:items-center md:p-8">
+                    <div>
+                      <p className="font-display text-2xl text-accent">{e.when}</p>
+                      <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <Clock className="h-3.5 w-3.5" /> {e.time}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                        {e.type}
+                      </p>
+                      <h3 className="mt-1 font-display text-2xl font-semibold transition-colors group-hover:text-accent">
+                        {e.title}
+                      </h3>
+                      <p className="mt-2 flex items-center gap-2 text-sm text-foreground/80">
+                        <MapPin className="h-4 w-4 text-accent" />
+                        Вільний Принт Хаб · Нижній Вал, 23 (3 поверх), Київ
+                      </p>
+                      <p className="mt-1 flex items-center gap-2 text-sm text-foreground/80">
+                        <Radio className="h-4 w-4 text-accent" />
+                        Пряма трансляція у Facebook
+                      </p>
+                    </div>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="border-accent text-accent transition-all hover:scale-105 hover:bg-accent/10"
+                    >
+                      <a href={FB_PAGE} target="_blank" rel="noopener noreferrer">
+                        Деталі
+                        <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                      </a>
+                    </Button>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
+
 
           <Reveal delay={200}>
             <p className="mt-10 text-center text-sm text-muted-foreground">

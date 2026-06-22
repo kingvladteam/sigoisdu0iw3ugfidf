@@ -38,11 +38,11 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
         <Link to="/" className="group flex items-center gap-3">
-          <span className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border bg-card shadow-sm transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110">
+          <span className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border bg-card shadow-sm transition-all duration-500 group-hover:rotate-[8deg] group-hover:scale-110 dark:border-accent/50 dark:bg-gradient-to-br dark:from-accent/25 dark:to-accent/5 dark:shadow-[0_0_24px_-6px_var(--color-accent)] dark:ring-1 dark:ring-accent/30">
             <img
               src={logoAsset.url}
               alt="Логотип Інґіґерди"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-all duration-500 dark:scale-[1.05] dark:mix-blend-luminosity dark:opacity-90 dark:contrast-110"
             />
           </span>
           <span className="font-display text-xl font-semibold tracking-tight">Інґіґерда</span>

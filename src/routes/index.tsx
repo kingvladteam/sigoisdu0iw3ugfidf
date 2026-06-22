@@ -10,11 +10,11 @@ import event1 from "@/assets/event-1.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Інґіґерда — Ірина Рудика | Поетеса та авторка" },
+      { title: "Інґіґерда — поетеса та авторка" },
       {
         name: "description",
         content:
-          "Офіційний сайт української поетеси Інґіґерди (Ірини Рудики) — авторки книг та засновниці проєкту «Літературні забави».",
+          "Офіційний сайт української поетеси Інґіґерди — авторки книг та засновниці проєкту «Літературні забави».",
       },
     ],
   }),
@@ -43,12 +43,12 @@ function Hero() {
             Поетеса · Авторка · Засновниця
           </p>
           <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
-            Вітаю. Я <span className="text-accent">Ірина Рудика</span>,
+            Вітаю. Я <span className="text-accent">Інґіґерда</span>
+            <span className="font-light text-foreground/70"> —</span>
             <br />
-            <em className="font-normal italic">Інґіґерда</em>
-            <span className="font-light text-foreground/70"> — мій</span>
-            <br className="hidden md:block" />
-            <span className="font-light text-foreground/70"> творчий псевдонім.</span>
+            <em className="font-normal italic text-foreground/85">поетеса</em>
+            <span className="font-light text-foreground/70"> та</span>{" "}
+            <em className="font-normal italic text-foreground/85">авторка</em>.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
             Пишу для дітей і дорослих, засновую простір, де українська література звучить

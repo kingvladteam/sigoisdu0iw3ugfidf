@@ -24,8 +24,8 @@ export const books: Book[] = [
   {
     slug: "ulamky",
     title: "Уламки",
-    price: "450 грн",
-    priceValue: 450,
+    price: "400 грн",
+    priceValue: 400,
     audience: "Для дорослих",
     pages: "≈ 120 сторінок",
     cover: ulamkyAsset.url,
@@ -61,8 +61,8 @@ export const books: Book[] = [
   {
     slug: "abetka-kartky",
     title: "Смачненька абетка — картки",
-    price: "350 грн",
-    priceValue: 350,
+    price: "300 грн",
+    priceValue: 300,
     audience: "Для дітей від 4 років",
     pages: "33 ілюстровані картки",
     cover: abetkaKartkyAsset.url,
@@ -96,3 +96,23 @@ export const litZabavySocials = [
 ];
 
 export const AUTHOR_TELEGRAM = "@ingi_gerda";
+
+export type UpcomingEvent = {
+  title: string;
+  date: string; // human-readable, e.g. "28 червня 2026"
+  time?: string;
+  guest?: string;
+  fbUrl?: string;
+};
+
+/**
+ * Майбутні події «Літературних забав».
+ * Facebook не дозволяє автоматично завантажувати свій список подій із публічної сторінки
+ * (для цього потрібен Graph API з токеном сторінки). Тому актуальні події наразі
+ * оновлюються вручну тут, а кнопка нижче веде на офіційний список у Facebook.
+ */
+export const upcomingEvents: UpcomingEvent[] = [
+  // Приклад — замініть на актуальні дати:
+  // { title: "Поетичний вечір з …", date: "28 червня 2026", time: "18:00", fbUrl: "https://fb.me/e/..." },
+];
+
