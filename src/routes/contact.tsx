@@ -8,7 +8,7 @@ import { authorSocials } from "@/lib/site-data";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Контакти — Інґіґерда (Ірина Рудика)" },
+      { title: "Контакти — Інґіґерда" },
       {
         name: "description",
         content:
