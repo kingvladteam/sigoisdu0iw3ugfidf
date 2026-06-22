@@ -16,28 +16,47 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CartProvider } from "@/lib/cart";
 
+const lostVerses = [
+  "«Загубилась сторінка, мов слово між хвиль —\nповертайся додому, де теплиться штиль.»",
+  "«Тут на полицях немає такої глави,\nале попереду — інші, відкриті, нові.»",
+  "«Цей рядок ще не дописано пером,\nвертайся на головну — там чекає том.»",
+  "«Можливо, ця стежка існує у сні,\nа поки що — інші сторінки ясні.»",
+];
+
 function NotFoundComponent() {
+  const verse = lostVerses[Math.floor(Math.random() * lostVerses.length)];
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <div className="flex flex-1 items-center justify-center bg-background px-4 py-24">
-        <div className="max-w-md text-center">
-          <h1 className="font-display text-7xl text-foreground">404</h1>
-          <h2 className="mt-4 font-display text-2xl text-foreground">Сторінку не знайдено</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Можливо, її було переміщено або вона ще не написана.
-          </p>
-          <div className="mt-6">
-            <Link
-              to="/"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:scale-105 hover:bg-primary/90"
-            >
-              На головну
-            </Link>
-          </div>
+    <div className="relative flex flex-1 items-center justify-center overflow-hidden px-4 py-24">
+      <div className="pointer-events-none absolute inset-0 opacity-60">
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl animate-float" />
+        <div className="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-primary/10 blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
+      </div>
+      <div className="relative max-w-lg text-center">
+        <p className="font-display text-[8rem] leading-none tracking-tight text-foreground/90 md:text-[10rem]">
+          4<span className="inline-block animate-float text-accent">0</span>4
+        </p>
+        <div className="mx-auto mt-2 h-px w-32 gold-line" />
+        <h2 className="mt-6 font-display text-2xl text-foreground md:text-3xl">
+          Сторінку загублено між рядків
+        </h2>
+        <pre className="mt-5 whitespace-pre-wrap font-display text-base italic leading-relaxed text-muted-foreground md:text-lg">
+          {verse}
+        </pre>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:scale-105 hover:bg-primary/90"
+          >
+            На головну
+          </Link>
+          <Link
+            to="/books"
+            className="inline-flex items-center justify-center rounded-md border border-border bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:scale-105 hover:border-accent hover:text-accent"
+          >
+            До книг
+          </Link>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
