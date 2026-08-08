@@ -126,8 +126,10 @@ function ProjectsPage() {
       <section className="border-t border-border/60 bg-card/40">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <Reveal>
-            <SectionLabel>Галерея</SectionLabel>
-            <h2 className="font-display text-3xl font-medium md:text-4xl">Атмосфера зустрічей</h2>
+
+            <h2 className="font-display text-2xl font-medium leading-tight text-accent md:text-4xl">
+        Галерея
+      </h2>
           </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {gallery.map((a, i) => (
