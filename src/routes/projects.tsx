@@ -108,7 +108,7 @@ function ProjectsPage() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <h5 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
+            <h5 className="font-display text-[1.6rem] font-medium leading-[1.02] md:text-7xl">
             <span className="text-accent">Наша подяка учасникам</span>
             <br />
           </h5>
