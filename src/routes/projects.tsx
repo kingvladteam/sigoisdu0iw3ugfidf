@@ -75,9 +75,8 @@ function ProjectsPage() {
       <section className="border-t border-border/60 bg-gradient-to-b from-card/60 via-background to-background">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <Reveal>
-            <SectionLabel>Формати</SectionLabel>
             <h2 className="font-display text-3xl font-medium md:text-4xl">
-              Що відбувається на «Забавах»
+              Що особливого:
             </h2>
           </Reveal>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
