@@ -38,21 +38,13 @@ function Hero() {
 
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-[1.05fr_1fr] md:py-32">
         <Reveal>
-          <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent">
-            <span className="h-px w-10 bg-accent" />
-            Поетеса · Авторка · Засновниця
-          </p>
           <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
-            Вітаю. Я <span className="text-accent">Інґіґерда</span>
+            <span className="text-accent">ІНҐІГЕРДА</span>
             <span className="font-light text-foreground/70"> —</span>
             <br />
-            <em className="font-normal italic text-foreground/85">поетеса</em>
-            <span className="font-light text-foreground/70"> та</span>{" "}
-            <em className="font-normal italic text-foreground/85">авторка</em>.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
-            Пишу для дітей і дорослих, засновую простір, де українська література звучить
-            уголос.
+            письменниця, авторка статей, перекладачка, громадська діячка, організаторка мистецьких імпрез, експертка з розвитку освітніх та культурних проєктів.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button
