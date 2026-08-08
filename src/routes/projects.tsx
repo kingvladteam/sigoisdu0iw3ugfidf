@@ -44,8 +44,6 @@ function ProjectsPage() {
       <section className="border-t border-border/60 bg-gradient-to-br from-[#2767d1]/10 via-background to-card">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
-            <SectionLabel>Авторський проєкт</SectionLabel>
-            <h1 className="font-display text-5xl font-medium md:text-6xl">Літературні забави</h1>
             <div className="gold-line my-6 w-20" />
             <p className="text-lg leading-relaxed text-foreground/85">
               «Літературні забави» — це проєкт із 5-річною історією, на сцені якого вже прозвучали голоси понад 165 сучасних українських авторів. Вигадала та реалізувала його Інґіґерда. Власне, це секрет його довготривалості та сталості. 
@@ -64,11 +62,11 @@ function ProjectsPage() {
           <Reveal delay={120}>
             <div className="relative">
               <div className="absolute inset-0 -z-10 rounded-3xl bg-[#2767d1] blur-3xl opacity-30" />
-              <div className="overflow-hidden rounded-3xl border border-border shadow-2xl bg-[#2767d1] transition-transform duration-700 hover:scale-[1.02]">
+              <div className="overflow-hidden rounded-full border border-border shadow-2xl bg-[#2767d1] transition-transform duration-700 hover:scale-[1.02]">
                 <img
                   src={litzabavyLogo.url}
                   alt="Логотип «Літературні забави»"
-                  className="w-full"
+                  className="aspect-square w-full rounded-full object-cover"
                 />
               </div>
             </div>
