@@ -72,7 +72,7 @@ function ProjectsPage() {
         </div>
       </section>
 
-      <section className="border-t border-border/60">
+      <section className="border-t border-border/60 bg-gradient-to-b from-card/60 via-background to-background">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <Reveal>
             <SectionLabel>Формати</SectionLabel>
@@ -83,11 +83,11 @@ function ProjectsPage() {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {formats.map((it, i) => (
               <Reveal key={it.t} delay={i * 90}>
-                <div className="group h-full rounded-2xl border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/10 text-accent transition-all group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground">
+                <div className="group h-full rounded-2xl border border-accent/10 bg-gradient-to-b from-card to-card/60 p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/15 transition-all group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground">
                     <it.icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 font-display text-xl font-semibold">{it.t}</h3>
+                  <h3 className="mt-5 font-display text-xl font-semibold leading-snug">{it.t}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.d}</p>
                 </div>
               </Reveal>
@@ -95,6 +95,7 @@ function ProjectsPage() {
           </div>
         </div>
       </section>
+
 
       <section className="border-t border-border/60 bg-gradient-to-br from-accent/5 via-background to-accent/10">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1fr_1.4fr]">
