@@ -15,8 +15,8 @@ export function Footer() {
             <span className="font-display text-xl font-semibold">Інґіґерда</span>
           </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Українська поетеса і прозаїк, авторка проєкту «Літературні забави». Книги
-            для дітей і дорослих, авторські вечори та літературні події.
+            Українська письменниця, очільниця «Літературні забави». Книги
+            для дітей і дорослих, організаторка мистецьких івентів, фахівчиня в Facebook зі стажем в 12 років Афігеть да?
           </p>
           <div className="mt-5">
             <SocialList items={authorSocials} variant="compact" />
