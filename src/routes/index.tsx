@@ -56,7 +56,7 @@ function Hero() {
               Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
             </span>
           </p>
-          <div className="mt-10 flex flex-wrap justify-end gap-4">
+          <div className="mt-10 flex flex-wrap justify-start gap-4">
               <Button
                 asChild
                 size="lg"
