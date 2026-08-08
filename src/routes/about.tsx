@@ -32,7 +32,7 @@ function AboutPage() {
           <div className="mt-6 grid gap-2 text-sm text-muted-foreground">
             <Fact label="Псевдонім" value="Інґіґерда" />
             <Fact label="Походження" value="Костопіль, Рівненщина" />
-            <Fact label="Мешкає" value="В туалєті" />
+            <Fact label="Зависла" value="В туалєті" />
             <Fact label="Освіта" value="Медична, економічна" />
             <Fact label="Засновниця" value="«Літературні забави» (з 2021)" />
           </div>
