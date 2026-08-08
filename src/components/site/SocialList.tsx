@@ -28,7 +28,7 @@ export function SocialList({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${s.label} — ${s.handle}`}
-              className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-foreground/5 text-accent shadow-[inset_0_1px_0_hsl(var(--accent)/0.08),0_2px_10px_-4px_hsl(var(--accent)/0.35)] ring-1 ring-inset ring-accent/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-accent/15 hover:ring-accent/40 hover:shadow-[0_6px_20px_-6px_hsl(var(--accent)/0.55)]"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-foreground/5 text-accent shadow-[0_2px_12px_-4px_color-mix(in_oklab,var(--accent)_45%,transparent)] ring-1 ring-inset ring-accent/15 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-accent/15 hover:ring-accent/40 hover:shadow-[0_6px_22px_-6px_color-mix(in_oklab,var(--accent)_60%,transparent)]"
             >
               <Icon className="h-5 w-5" strokeWidth={1.5} />
 
