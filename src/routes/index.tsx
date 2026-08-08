@@ -83,7 +83,10 @@ function Hero() {
             </div>
             <div className="absolute -bottom-6 -left-6 hidden max-w-[16rem] rounded-xl border border-border bg-card px-5 py-3 shadow-lg md:block animate-fade-in">
               <p className="font-display text-base italic leading-snug">
-                «…а слово — як свіча у долонях.»
+                «Усе, чим я займаюся — 
+культура, мистецтво, освіта, громадська 
+діяльність, — насправді має велике значення.
+А зараз — особливо.»
               </p>
             </div>
           </div>
