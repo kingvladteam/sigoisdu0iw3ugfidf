@@ -62,17 +62,9 @@ function Hero() {
               className="group bg-foreground text-background transition-all duration-300 hover:scale-105 hover:bg-foreground/90 hover:shadow-xl"
             >
               <Link to="/about">
-                Про мене
+                Більше
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-accent text-accent transition-all duration-300 hover:scale-105 hover:bg-accent/10"
-            >
-              <Link to="/projects">Літературні забави</Link>
             </Button>
           </div>
         </Reveal>
