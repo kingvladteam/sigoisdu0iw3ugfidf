@@ -50,11 +50,17 @@ function Hero() {
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
             письменниця, авторка статей, перекладачка, громадська діячка, організаторка мистецьких імпрез, експертка з розвитку освітніх та культурних проєктів.
           </p>
-          <p className="mt-4 max-w-xl text-base italic leading-relaxed text-foreground/50">
-      «Моє покликання — втілювати сенси у словах та діях. 
-      Моя творчість — це поезія та коротка проза для дітей та дорослих різних жанрів і тематики. 
-      Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
-    </p>
+          <p className="mt-6 max-w-xl space-y-4 text-sm leading-relaxed text-foreground/50">
+            <span className="block font-display text-base italic text-foreground/60">
+              «Моє покликання — втілювати сенси у словах та діях.
+            </span>
+            <span className="block">
+              Моя творчість — це поезія та коротка проза для дітей та дорослих різних жанрів і тематики.
+            </span>
+            <span className="block">
+              Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
+            </span>
+          </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button
               asChild
