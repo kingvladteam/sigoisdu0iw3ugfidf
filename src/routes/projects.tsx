@@ -130,6 +130,7 @@ function ProjectsPage() {
             <h2 className="font-display text-2xl font-medium leading-tight text-accent md:text-4xl">
         Галерея
       </h2>
+            <div className="gold-line my-6 w-20" />
           </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {gallery.map((a, i) => (
