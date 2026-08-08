@@ -18,7 +18,7 @@ export function Footer() {
             Українська письменниця, очільниця проєкту «Літературні забави», організаторка мистецьких івентів.
           </p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Книги для дітей і дорослих, організаторка мистецьких івентів
+          Книги для дітей та дорослих.
             </p>
           <div className="mt-5">
             <SocialList items={authorSocials} variant="compact" />
