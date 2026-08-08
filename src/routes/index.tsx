@@ -125,7 +125,7 @@ function LitZabavyTeaser() {
             <p className="mb-5 flex items-center justify-end gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent">
               Авторський проєкт
             </p>
-            <h2 className="font-display text-[2.4rem] font-medium leading-[1.02] md:text-6xl">
+            <h2 className="font-display text-[1.9rem] font-medium leading-[1.05] md:text-5xl">
               <span className="text-accent">ЛІТЕРАТУРНІ ЗАБАВИ</span>
             </h2>
             <div className="gold-line my-6 ml-auto w-20" />
@@ -133,10 +133,8 @@ function LitZabavyTeaser() {
               Інтелектуальні мистецькі імпрези з 2021 року.
             </p>
             <p className="mt-3 text-lg leading-relaxed text-foreground/75">
-              Проєкт, який популяризує сучасну українську літературу, музику, театр.
-            </p>
-            <p className="mt-3 text-lg leading-relaxed text-foreground/75">
-              Щотижневі авторські вечори з прямими трансляціями, фотосетами та активностями.
+              Проєкт, який популяризує сучасну українську літературу, музику, театр. Щотижневі
+              авторські вечори з прямими трансляціями, фотосетами та активностями.
             </p>
             <div className="mt-10 flex flex-wrap justify-end gap-4">
               <Button
