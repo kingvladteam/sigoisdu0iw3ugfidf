@@ -17,7 +17,7 @@ export function Footer() {
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
             Українська письменниця, очільниця проєкту «Літературні забави», організаторка мистецьких івентів.
           </p>
-          <p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
           Книги для дітей та дорослих.
             </p>
           <div className="mt-5">
