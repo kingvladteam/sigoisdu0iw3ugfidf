@@ -108,10 +108,10 @@ function ProjectsPage() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
+            <h5 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
             <span className="text-accent">Наша подяка учасникам</span>
             <br />
-          </h2>
+          </h5>
             <div className="gold-line my-6 w-20" />
             <p className="text-lg leading-relaxed text-foreground/85">
               Кожен автор, який виступив на «Літературних забавах», отримує пам'ятний значок —
