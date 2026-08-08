@@ -40,7 +40,6 @@ function Hero() {
         <Reveal>
           <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
             <span className="text-accent">ІНҐІГЕРДА</span>
-            <span className="font-light text-foreground/70"> —</span>
             <br />
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
