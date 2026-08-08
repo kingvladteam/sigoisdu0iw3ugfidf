@@ -39,8 +39,12 @@ function AboutPage() {
         </Reveal>
 
         <Reveal delay={120}>
-          <SectionLabel>Про мене</SectionLabel>
-          <h1 className="font-display text-4xl md:text-5xl">Ірина Рудика — Інґіґерда</h1>
+         
+          <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
+            <span className="text-accent">Інґіґерда — Ірина Рудика</span>
+            <br />
+            <div className="gold-line my-6 w-20" />
+          </h1>
           <div className="gold-line my-8 w-24" />
           <div className="space-y-5 text-lg leading-relaxed text-foreground/85">
             <p>
