@@ -38,11 +38,9 @@ function Hero() {
     
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-[1.05fr_1fr] md:py-32">
         <Reveal>
-          <p class="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-white">
-  
-  Вірші · Пісні · Проза
- 
-</p>
+          <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent">
+            Вірші · Пісні · Проза
+          </p>
           <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
             <span className="text-accent">ІНҐІГЕРДА</span>
             <br />
