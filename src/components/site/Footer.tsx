@@ -15,9 +15,11 @@ export function Footer() {
             <span className="font-display text-xl font-semibold">Інґіґерда</span>
           </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Українська письменниця, очільниця «Літературні забави». Книги
-            для дітей і дорослих, організаторка мистецьких івентів, фахівчиня в Facebook зі стажем в 12 років Афігеть да?
+            Українська письменниця, очільниця проєкту «Літературні забави», організаторка мистецьких івентів.
           </p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+          Книги для дітей і дорослих, організаторка мистецьких івентів
+            </p>
           <div className="mt-5">
             <SocialList items={authorSocials} variant="compact" />
           </div>
