@@ -118,29 +118,15 @@ function LitZabavyTeaser() {
         </Reveal>
 
         <Reveal delay={120}>
-          <section className="relative overflow-hidden bg-[radial-gradient(120%_90%_at_85%_-10%,color-mix(in_oklab,var(--color-accent)_18%,transparent),transparent_55%),radial-gradient(100%_80%_at_-10%_110%,color-mix(in_oklab,var(--color-gold)_16%,transparent),transparent_50%)]">
-      <div className="pointer-events-none absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-accent/15 blur-3xl animate-float" />
-      <div className="pointer-events-none absolute -bottom-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-3xl" />
-    
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-[1.05fr_1fr] md:py-32">
-        <Reveal>
-          <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent">
-            Вірші · Пісні · Проза
-          </p>
-          <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
-            <span className="text-accent">ІНҐІГЕРДА</span>
-            <br />
-            <div className="gold-line my-6 w-20" />
-          </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
-            письменниця, авторка статей, перекладачка, громадська діячка, організаторка мистецьких імпрез, експертка з розвитку освітніх та культурних проєктів.
-          </p>
-          <p className="mt-6 max-w-xl space-y-4 text-sm leading-relaxed text-foreground/50">
-            <span className="block font-display text-base italic text-foreground/60">
-              «Моє покликання — втілювати сенси у словах та діях. 
-              Моя творчість — це поезія та коротка проза для дітей та дорослих різних жанрів і тематики.
-              Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
-            </span>
+          <SectionLabel>Авторський проєкт</SectionLabel>
+          <h2 className="font-display text-4xl font-medium leading-tight md:text-5xl">
+            Літературні забави
+          </h2>
+          <div className="gold-line my-6 w-20" />
+          <p className="text-lg leading-relaxed text-foreground/80">
+            Мистецький проєкт, заснований у листопаді 2021 року. Майданчик для творчого
+            авангарду України — авторів, музикантів, художників і всіх, хто живе сучасною
+            культурою.
           </p>
           <div className="mt-7 grid gap-3 text-sm text-foreground/80 sm:grid-cols-2">
             <p className="flex items-center gap-2">
