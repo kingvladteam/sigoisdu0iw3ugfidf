@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Award, Users, Mic, Radio } from "lucide-react";
+import { Award, Users, Mic, Radio, Camera } from "lucide-react";
 import litzabavyLogo from "@/assets/litzabavy-logo.png.asset.json";
 import badgeAsset from "@/assets/litzabavy-badge.png.asset.json";
 import event1 from "@/assets/event-1.jpg.asset.json";
@@ -34,7 +34,7 @@ const gallery = [event1, event2, event3, event4, event5, event6, event7];
 const formats = [
   { icon: Mic, t: "Авторські вечори", d: "Щотижневі зустрічі з письменниками, поетами, перекладачами." },
   { icon: Users, t: "Відкритий мікрофон", d: "Можливість прочитати свої тексти перед живою аудиторією." },
-  { icon: Award, t: "Перформанси", d: "Музика, театр, перформативне читання та мультидисциплінарні події." },
+  { icon: Camera, t: "Фотосети", d: "Кожну подію супроводжує професійний фотограф, а світлини ми публікуємо у Facebook." },
   { icon: Radio, t: "Прямі трансляції", d: "Усі заходи доступні онлайн у Facebook «Літературних забав»." },
 ];
 
