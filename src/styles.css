@@ -115,6 +115,12 @@
     font-family: var(--font-body);
     font-feature-settings: "ss01", "liga";
   }
+  body:not(.dark) {
+    background-image:
+      radial-gradient(90% 70% at 90% -10%, oklch(0.62 0.105 60 / 0.08), transparent 55%),
+      radial-gradient(80% 60% at -5% 100%, oklch(0.45 0.06 40 / 0.06), transparent 55%);
+    background-attachment: fixed;
+  }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
