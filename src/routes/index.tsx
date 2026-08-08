@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, BookHeart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
@@ -95,19 +95,52 @@ function Hero() {
 
 function LitZabavyTeaser() {
   return (
-    <section className="relative border-t border-border/60 bg-gradient-to-br from-card/40 via-background to-accent/5">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-[1fr_1.1fr]">
+    <section className="relative overflow-hidden border-t border-border/60 bg-[radial-gradient(120%_90%_at_85%_-10%,color-mix(in_oklab,var(--color-accent)_16%,transparent),transparent_55%),radial-gradient(100%_80%_at_-10%_110%,color-mix(in_oklab,var(--color-gold)_15%,transparent),transparent_50%)]">
+      <div className="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl animate-float" />
+
+      <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-[1.05fr_1fr] md:py-32">
         <Reveal>
+          <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent">
+            Авторський проєкт
+          </p>
+          <h2 className="font-display text-[2.4rem] font-medium leading-[1.02] md:text-6xl">
+            <span className="text-accent">ЛІТЕРАТУРНІ ЗАБАВИ</span>
+            <br />
+            <div className="gold-line my-6 w-20" />
+          </h2>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
+            Інтелектуальні мистецькі імпрези з 2021 року.
+          </p>
+          <div className="mt-8 max-w-xl space-y-4 border-l border-accent/30 pl-4 text-sm italic leading-relaxed text-foreground/60">
+            <p>Проєкт, який популяризує сучасну українську літературу, музику, театр.</p>
+            <p>Щотижневі авторські вечори з прямими трансляціями, фотосетами та активностями.</p>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+            >
+              <Link to="/projects">
+                Дізнатися більше
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        </Reveal>
+
+        <Reveal delay={150}>
           <div className="relative">
-            <div className="overflow-hidden rounded-2xl border border-border shadow-xl">
+            <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
+            <div className="overflow-hidden rounded-[1.8rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
               <img
                 src={event1.url}
                 alt="Літературні забави — авторський вечір"
-                className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-105"
+                className="aspect-[3/4] w-full object-cover"
                 loading="lazy"
               />
             </div>
-            <div className="absolute -bottom-8 -right-8 hidden h-32 w-32 items-center justify-center rounded-full border border-border bg-card p-3 shadow-xl md:flex">
+            <div className="absolute -bottom-6 -left-6 hidden h-28 w-28 items-center justify-center rounded-full border border-border bg-card p-2 shadow-lg md:flex">
               <img
                 src={litzabavyLogo.url}
                 alt="Логотип Літературних забав"
@@ -115,39 +148,6 @@ function LitZabavyTeaser() {
               />
             </div>
           </div>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <SectionLabel>Авторський проєкт</SectionLabel>
-          <h2 className="font-display text-4xl font-medium leading-tight md:text-5xl">
-            Літературні забави
-          </h2>
-          <div className="gold-line my-6 w-20" />
-          <p className="text-lg leading-relaxed text-foreground/80">
-            Мистецький проєкт, заснований у листопаді 2021 року. Майданчик для творчого
-            авангарду України — авторів, музикантів, художників і всіх, хто живе сучасною
-            культурою.
-          </p>
-          <div className="mt-7 grid gap-3 text-sm text-foreground/80 sm:grid-cols-2">
-            <p className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-accent" />
-              Понад 150 українських авторів
-            </p>
-            <p className="flex items-center gap-2">
-              <BookHeart className="h-4 w-4 text-accent" />
-              Щотижневі літературні вечори
-            </p>
-          </div>
-          <Button
-            asChild
-            size="lg"
-            className="group mt-8 bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
-          >
-            <Link to="/projects">
-              Дізнатися більше
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
         </Reveal>
       </div>
     </section>
