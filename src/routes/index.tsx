@@ -56,18 +56,18 @@ function Hero() {
               Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
             </span>
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button
-              asChild
-              size="lg"
-              className="group bg-foreground text-background transition-all duration-300 hover:scale-105 hover:bg-foreground/90 hover:shadow-xl"
-            >
-              <Link to="/about">
-                Більше
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </div>
+          <div className="mt-10 flex flex-wrap justify-end gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+              >
+                <Link to="/about">
+                  Дізнатися більше
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </div>
         </Reveal>
 
         <Reveal delay={150}>
