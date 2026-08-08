@@ -42,7 +42,7 @@ function Hero() {
             Вірші · Пісні · Проза
           </p>
           <h1 className="font-display text-[2.7rem] font-medium leading-[1.02] md:text-7xl">
-            <span className="text-accent">ІНҐІГЕРДА</span>
+            <span className="text-accent">ІНҐІҐЕРДА</span>
             <br />
             <div className="gold-line my-6 w-20" />
           </h1>
