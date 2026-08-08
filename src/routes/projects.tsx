@@ -97,32 +97,31 @@ function ProjectsPage() {
 
 
       <section className="border-t border-border/60 bg-gradient-to-br from-accent/5 via-background to-accent/10">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1fr_1.4fr]">
-          <Reveal>
-            <div className="mx-auto max-w-xs">
-              <img
-                src={badgeAsset.url}
-                alt="Значок учасника «Літературних забав»"
-                className="w-full drop-shadow-2xl animate-float"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <h5 className="font-display text-[1.6rem] font-medium leading-[1.02] md:text-7xl">
-            <span className="text-accent">Наша подяка учасникам</span>
-            <br />
-          </h5>
-            <div className="gold-line my-6 w-20" />
-            <p className="text-lg leading-relaxed text-foreground/85">
-              Кожен автор, який виступив на «Літературних забавах», отримує пам'ятний значок —
-              символ належності до спільноти, що творить сучасну українську літературу.
-            </p>
-            <p className="mt-3 text-muted-foreground">
-              Це маленький знак вдячності та визнання — і нагадування, що слово об'єднує.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+  <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1fr_1.4fr]">
+    <Reveal>
+      <div className="mx-auto max-w-xs">
+        <img
+          src={badgeAsset.url}
+          alt="Значок учасника «Літературних забав»"
+          className="w-full drop-shadow-2xl animate-float"
+        />
+      </div>
+    </Reveal>
+    <Reveal delay={120}>
+      <h2 className="font-display text-2xl font-medium leading-tight text-accent md:text-4xl">
+        Наша подяка учасникам
+      </h2>
+      <div className="gold-line my-6 w-20" />
+      <p className="text-lg leading-relaxed text-foreground/85">
+        Кожен автор, який виступив на «Літературних забавах», отримує пам'ятний значок —
+        символ належності до спільноти, що творить сучасну українську літературу.
+      </p>
+      <p className="mt-3 text-muted-foreground">
+        Це маленький знак вдячності та визнання — і нагадування, що слово об'єднує.
+      </p>
+    </Reveal>
+  </div>
+</section>
 
       <section className="border-t border-border/60 bg-card/40">
         <div className="mx-auto max-w-6xl px-6 py-20">
