@@ -118,56 +118,38 @@ function LitZabavyTeaser() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="flex flex-col items-end text-right">
-            {/* Суперепграф у стилі першої секції */}
-            <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-white">
-              <span className="h-px w-10 bg-accent"></span>
-              Авторський проєкт
-              <span className="h-px w-10 bg-accent"></span>
+          <SectionLabel>Авторський проєкт</SectionLabel>
+          <h2 className="font-display text-4xl font-medium leading-tight md:text-5xl">
+            Літературні забави
+          </h2>
+          <div className="gold-line my-6 w-20" />
+          <p className="text-lg leading-relaxed text-foreground/80">
+            Мистецький проєкт, заснований у листопаді 2021 року. Майданчик для творчого
+            авангарду України — авторів, музикантів, художників і всіх, хто живе сучасною
+            культурою.
+          </p>
+          <div className="mt-7 grid gap-3 text-sm text-foreground/80 sm:grid-cols-2">
+            <p className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-accent" />
+              Понад 150 українських авторів
             </p>
-
-            {/* Заголовок у стилі Hero */}
-            <h2 className="font-display text-[2.7rem] font-medium leading-[1.02] text-accent md:text-6xl">
-              Літературні забави
-            </h2>
-
-            {/* Опис у стилі Hero */}
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/75">
-              Мистецький проєкт, заснований у листопаді 2021 року. Майданчик для творчого
-              авангарду України — авторів, музикантів, художників і всіх, хто живе сучасною
-              культурою.
+            <p className="flex items-center gap-2">
+              <BookHeart className="h-4 w-4 text-accent" />
+              Щотижневі літературні вечори
             </p>
-
-            {/* Перелік з іконками, вирівняний праворуч */}
-            <div className="mt-7 flex flex-col items-end gap-3 text-sm text-foreground/80">
-              <p className="flex items-center gap-2">
-                Понад 150 українських авторів
-                <Sparkles className="h-4 w-4 text-accent" />
-              </p>
-              <p className="flex items-center gap-2">
-                Щотижневі літературні вечори
-                <BookHeart className="h-4 w-4 text-accent" />
-              </p>
-            </div>
-
-            {/* Кнопка в стилі Hero */}
-            <div className="mt-10">
-              <Button
-                asChild
-                size="lg"
-                className="group bg-foreground text-background transition-all duration-300 hover:scale-105 hover:bg-foreground/90 hover:shadow-xl"
-              >
-                <Link to="/projects">
-                  Дізнатися більше
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </div>
           </div>
+          <Button
+            asChild
+            size="lg"
+            className="group mt-8 bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+          >
+            <Link to="/projects">
+              Дізнатися більше
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
         </Reveal>
       </div>
     </section>
-  );
-}
   );
 }
