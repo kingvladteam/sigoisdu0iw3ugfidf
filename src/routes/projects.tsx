@@ -108,9 +108,8 @@ function ProjectsPage() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <SectionLabel>Спільнота</SectionLabel>
             <h2 className="font-display text-3xl font-medium md:text-4xl">
-              Значок учасника
+              Наша подяка учасникам
             </h2>
             <div className="gold-line my-6 w-20" />
             <p className="text-lg leading-relaxed text-foreground/85">
