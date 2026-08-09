@@ -113,7 +113,7 @@ function BookPage() {
             <div className="mt-8 rounded-xl border border-border bg-card/60 p-5">
               <h2 className="font-display text-xl font-semibold">Характеристики</h2>
               <dl className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-                {book.specs.map((s) => (
+                {book.specs.map((s: { label: string; value: string }) => (
                   <div
                     key={s.label}
                     className="flex items-baseline justify-between gap-3 border-b border-border/50 py-1.5"
