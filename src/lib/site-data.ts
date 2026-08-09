@@ -12,6 +12,9 @@ import abetkaP16 from "@/assets/abetka-p16.png.asset.json";
 import abetkaP17 from "@/assets/abetka-p17.png.asset.json";
 import abetkaP18 from "@/assets/abetka-p18.png.asset.json";
 import abetkaP19 from "@/assets/abetka-p19.png.asset.json";
+import abetkaLetters from "@/assets/abetka-letters.png.asset.json";
+
+export type BookSpec = { label: string; value: string };
 
 export type Book = {
   slug: string;
@@ -25,6 +28,7 @@ export type Book = {
   short: string;
   long: string[];
   excerpt?: string;
+  specs?: BookSpec[];
 };
 
 export const books: Book[] = [
