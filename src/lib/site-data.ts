@@ -12,6 +12,9 @@ import abetkaP16 from "@/assets/abetka-p16.png.asset.json";
 import abetkaP17 from "@/assets/abetka-p17.png.asset.json";
 import abetkaP18 from "@/assets/abetka-p18.png.asset.json";
 import abetkaP19 from "@/assets/abetka-p19.png.asset.json";
+import abetkaLetters from "@/assets/abetka-letters.png.asset.json";
+
+export type BookSpec = { label: string; value: string };
 
 export type Book = {
   slug: string;
@@ -25,6 +28,7 @@ export type Book = {
   short: string;
   long: string[];
   excerpt?: string;
+  specs?: BookSpec[];
 };
 
 export const books: Book[] = [
@@ -63,6 +67,7 @@ export const books: Book[] = [
       abetkaP17.url,
       abetkaP18.url,
       abetkaP19.url,
+      abetkaLetters.url,
       abetkaAsset.url,
       abetka2Asset.url,
     ],
@@ -73,6 +78,18 @@ export const books: Book[] = [
       "Перша дитяча книга в Україні надрукована Рутенією — відновленим прадавнім українським шрифтом — завдяки якій можна не тільки навчитися читати, а й розвинути свою фантазію та уяву. А ще пізнати широкий світ гастрономії, бо на сторінках цієї абетки зібрано близько 50 різних страв, 10 різноманітних напоїв, а ще овочі, фрукти, ягоди, спеції. Але головний акцент Смачненої абетки — діти, імена яких згадуються майже у кожному вірші. Хочете дізнатися чи є там ваше або когось із ваших рідних? Загляньте всередину! ",
     ],
     excerpt: "«А — це абрикоса, що сонечком пахне з гілки…»",
+    specs: [
+      { label: "Видавництво", value: "Друкарський Двір Олега Федорова" },
+      { label: "Мова", value: "українська" },
+      { label: "Рік видання", value: "2023" },
+      { label: "Кількість сторінок", value: "75" },
+      { label: "Розмір", value: "22×21×1 см" },
+      { label: "Ілюстрації", value: "Валерія Сирота" },
+      { label: "Обкладинка", value: "тверда" },
+      { label: "Категорія", value: "художня література" },
+      { label: "Вік", value: "3+" },
+      { label: "ISBN", value: "978-617-8000-86-8" },
+    ],
   },
   {
     slug: "abetka-kartky",

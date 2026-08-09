@@ -109,6 +109,23 @@ function BookPage() {
             </blockquote>
           )}
 
+          {book.specs && book.specs.length > 0 && (
+            <div className="mt-8 rounded-xl border border-border bg-card/60 p-5">
+              <h2 className="font-display text-xl font-semibold">Характеристики</h2>
+              <dl className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+                {book.specs.map((s: { label: string; value: string }) => (
+                  <div
+                    key={s.label}
+                    className="flex items-baseline justify-between gap-3 border-b border-border/50 py-1.5"
+                  >
+                    <dt className="text-sm text-muted-foreground">{s.label}</dt>
+                    <dd className="text-right text-sm font-medium text-foreground">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+
           <ul className="mt-7 grid gap-2 text-sm text-foreground/85">
             {[
               "Доставка Новою поштою по Україні",
