@@ -65,6 +65,60 @@ function ProjectsPage() {
             <div className="mt-8">
               <SocialList items={litZabavySocials} variant="compact" />
             </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    size="lg"
+                    className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+                  >
+                    Як стати відвідувачем заходу
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Як стати відвідувачем заходу</DialogTitle>
+                    <DialogDescription className="space-y-4 pt-2 text-left">
+                      <p>
+                        Усі події відбуваються наживо за адресою: м. Київ, Нижній Вал, 23, 3 пов.,
+                        «Вільний принт». Проте можна стати онлайн відвідувачем, приєднавшись до
+                        прямої трансляції у Facebook.
+                      </p>
+                      <a
+                        href="https://www.facebook.com/literaturni.zabavy/upcoming_hosted_events"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-accent underline underline-offset-4 transition-colors hover:text-accent/80"
+                      >
+                        Обирайте подію і чекаємо вас у гості!
+                      </a>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    size="lg"
+                    className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+                  >
+                    Як стати героєм проєкту
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Як стати героєм проєкту</DialogTitle>
+                    <DialogDescription className="pt-2 text-left">
+                      Якщо ви автор / авторка, представник / представниця будь-якого виду мистецтва,
+                      просто напишіть у соцмережах або відвідайте захід і особисто поговоріть про це
+                      з організаторами.
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            </div>
           </Reveal>
           <Reveal delay={120}>
             <div className="relative">
