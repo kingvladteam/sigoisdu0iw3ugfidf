@@ -67,6 +67,7 @@ export const books: Book[] = [
       abetkaP17.url,
       abetkaP18.url,
       abetkaP19.url,
+      abetkaLetters.url,
       abetkaAsset.url,
       abetka2Asset.url,
     ],
