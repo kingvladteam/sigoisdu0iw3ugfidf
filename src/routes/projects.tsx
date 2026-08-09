@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Award, Users, Mic, Radio, Camera } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Award, Users, Mic, Radio, Camera, ArrowRight } from "lucide-react";
 import litzabavyLogo from "@/assets/litzabavy-logo.png.asset.json";
 import guestAsset from "@/assets/litzabavy-guest.jpg.asset.json";
 import event1 from "@/assets/event-1.jpg.asset.json";
@@ -12,6 +12,15 @@ import event7 from "@/assets/event-7.jpg.asset.json";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { SocialList } from "@/components/site/SocialList";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { litZabavySocials } from "@/lib/site-data";
 
 export const Route = createFileRoute("/projects")({
