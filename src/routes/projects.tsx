@@ -99,12 +99,16 @@ function ProjectsPage() {
       <section className="border-t border-border/60 bg-gradient-to-br from-accent/5 via-background to-accent/10">
   <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1fr_1.4fr]">
     <Reveal>
-      <div className="mx-auto max-w-xs">
-        <img
-          src={badgeAsset.url}
-          alt="Значок учасника «Літературних забав»"
-          className="w-full drop-shadow-2xl animate-float"
-        />
+      <div className="relative">
+        <div className="absolute -inset-5 -z-10 rounded-[2.2rem] bg-accent/15 blur-2xl" />
+        <div className="overflow-hidden rounded-[1.6rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+          <img
+            src={guestAsset.url}
+            alt="Вручення значка та брендованого записника учаснику «Літературних забав»"
+            className="aspect-[4/5] w-full object-cover object-[50%_30%]"
+            loading="lazy"
+          />
+        </div>
       </div>
     </Reveal>
     <Reveal delay={120}>
