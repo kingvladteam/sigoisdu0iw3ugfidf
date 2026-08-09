@@ -56,8 +56,6 @@ export const books: Book[] = [
     title: "Смачненька абетка",
     price: "400 грн",
     priceValue: 400,
-    audience: "Для дітей від 4 років",
-    pages: "≈ 64 сторінки",
     cover: abetkaAsset.url,
     gallery: [
       abetkaP13.url,
