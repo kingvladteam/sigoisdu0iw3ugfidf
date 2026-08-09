@@ -5,6 +5,13 @@ import abetkaKartkyAsset from "@/assets/abetka_kartky.jpg.asset.json";
 import kartky2Asset from "@/assets/kartky2.jpg.asset.json";
 import kartky3Asset from "@/assets/kartky3.jpg.asset.json";
 import kartky4Asset from "@/assets/kartky4.jpg.asset.json";
+import abetkaP13 from "@/assets/abetka-p13.png.asset.json";
+import abetkaP14 from "@/assets/abetka-p14.png.asset.json";
+import abetkaP15 from "@/assets/abetka-p15.png.asset.json";
+import abetkaP16 from "@/assets/abetka-p16.png.asset.json";
+import abetkaP17 from "@/assets/abetka-p17.png.asset.json";
+import abetkaP18 from "@/assets/abetka-p18.png.asset.json";
+import abetkaP19 from "@/assets/abetka-p19.png.asset.json";
 
 export type Book = {
   slug: string;
@@ -48,7 +55,17 @@ export const books: Book[] = [
     audience: "Для дітей від 4 років",
     pages: "≈ 64 сторінки",
     cover: abetkaAsset.url,
-    gallery: [abetkaAsset.url, abetka2Asset.url],
+    gallery: [
+      abetkaP13.url,
+      abetkaP14.url,
+      abetkaP15.url,
+      abetkaP16.url,
+      abetkaP17.url,
+      abetkaP18.url,
+      abetkaP19.url,
+      abetkaAsset.url,
+      abetka2Asset.url,
+    ],
     short:
       "Дитяча книжка-абетка, виконана авторським шрифтом «Рутенія». Літературна гра і смак рідної мови.",
     long: [
