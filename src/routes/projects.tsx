@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Award, Users, Mic, Radio, Camera } from "lucide-react";
 import litzabavyLogo from "@/assets/litzabavy-logo.png.asset.json";
-import badgeAsset from "@/assets/litzabavy-badge.png.asset.json";
+import guestAsset from "@/assets/litzabavy-guest.jpg.asset.json";
 import event1 from "@/assets/event-1.jpg.asset.json";
 import event2 from "@/assets/event-2.jpg.asset.json";
 import event3 from "@/assets/event-3.jpg.asset.json";
