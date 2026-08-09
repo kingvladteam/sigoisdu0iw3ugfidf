@@ -55,7 +55,17 @@ export const books: Book[] = [
     audience: "Для дітей від 4 років",
     pages: "≈ 64 сторінки",
     cover: abetkaAsset.url,
-    gallery: [abetkaAsset.url, abetka2Asset.url],
+    gallery: [
+      abetkaP13.url,
+      abetkaP14.url,
+      abetkaP15.url,
+      abetkaP16.url,
+      abetkaP17.url,
+      abetkaP18.url,
+      abetkaP19.url,
+      abetkaAsset.url,
+      abetka2Asset.url,
+    ],
     short:
       "Дитяча книжка-абетка, виконана авторським шрифтом «Рутенія». Літературна гра і смак рідної мови.",
     long: [
