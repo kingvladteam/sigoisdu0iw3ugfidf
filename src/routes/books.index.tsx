@@ -3,7 +3,7 @@ import { ArrowRight, ShoppingBag, Check } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Button } from "@/components/ui/button";
-import { books } from "@/lib/site-data";
+import { useBooks } from "@/lib/books-db";
 import { useCart } from "@/lib/cart";
 import { toast } from "sonner";
 
