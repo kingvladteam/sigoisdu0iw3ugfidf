@@ -23,6 +23,7 @@ export const Route = createFileRoute("/books/")({
 
 function BooksIndex() {
   const { add, items } = useCart();
+  const { books } = useBooks();
 
   return (
     <section className="border-t border-border/60">
