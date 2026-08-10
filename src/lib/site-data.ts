@@ -13,6 +13,8 @@ import abetkaP17 from "@/assets/abetka-p17.png.asset.json";
 import abetkaP18 from "@/assets/abetka-p18.png.asset.json";
 import abetkaP19 from "@/assets/abetka-p19.png.asset.json";
 import abetkaLetters from "@/assets/abetka-letters.png.asset.json";
+import kupalaAsset from "@/assets/kupala.png.asset.json";
+import zhnyvaAsset from "@/assets/zhnyva.png.asset.json";
 
 export type BookSpec = { label: string; value: string };
 
@@ -21,7 +23,7 @@ export type Book = {
   title: string;
   price: string;
   priceValue: number;
-  audience: string;
+  audience?: string;
   pages?: string;
   cover: string;
   gallery: string[];
@@ -37,7 +39,6 @@ export const books: Book[] = [
     title: "Уламки",
     price: "400 грн",
     priceValue: 400,
-    audience: "Для дорослих",
     pages: "≈ 120 сторінок",
     cover: ulamkyAsset.url,
     gallery: [ulamkyAsset.url],
@@ -93,7 +94,6 @@ export const books: Book[] = [
     title: "Смачненька абетка — картки",
     price: "300 грн",
     priceValue: 300,
-    audience: "Для дітей від 4 років",
     pages: "33 ілюстровані картки",
     cover: abetkaKartkyAsset.url,
     gallery: [abetkaKartkyAsset.url, kartky2Asset.url, kartky3Asset.url, kartky4Asset.url],
@@ -104,6 +104,28 @@ export const books: Book[] = [
       "Картки виконані на щільному папері, з матовою ламінацією. Підходять для багаторазового використання.",
       "Можна купувати окремо або в комплекті з книгою «Смачненька абетка».",
     ],
+  },
+  {
+    slug: "na-ivana-kupala",
+    title: "На Івана Купала",
+    price: "400 грн",
+    priceValue: 400,
+    cover: kupalaAsset.url,
+    gallery: [kupalaAsset.url],
+    short: "Нова книга Інґіґерди — опис буде додано найближчим часом.",
+    long: ["Опис книги буде додано найближчим часом."],
+    specs: [],
+  },
+  {
+    slug: "kozhnomu-svoi-zhnyva",
+    title: "Кожному свої жнива",
+    price: "400 грн",
+    priceValue: 400,
+    cover: zhnyvaAsset.url,
+    gallery: [zhnyvaAsset.url],
+    short: "Нова книга Інґіґерди — опис буде додано найближчим часом.",
+    long: ["Опис книги буде додано найближчим часом."],
+    specs: [],
   },
 ];
 

@@ -66,9 +66,6 @@ function BooksIndex() {
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-                    <span className="absolute top-3 left-3 rounded-full bg-background/90 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground/80 backdrop-blur">
-                      {book.audience}
-                    </span>
                   </Link>
                   <div className="flex flex-1 flex-col p-5">
                     <h2 className="font-display text-xl font-semibold transition-colors group-hover:text-accent">

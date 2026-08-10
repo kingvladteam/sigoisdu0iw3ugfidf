@@ -14,11 +14,19 @@ const orderSchema = z.object({
   phone: z.string().trim().min(9, "Введіть номер телефону").max(40),
   telegram: z.string().trim().max(80).optional().default(""),
   city: z.string().trim().max(120).optional().default(""),
+  delivery: z.enum(["nova-poshta", "ukrposhta", "pickup"]),
+  consent: z.literal(true, { message: "Потрібна згода на обробку персональних даних" }),
   comment: z.string().trim().max(1000).optional().default(""),
   items: z.array(itemSchema).min(1, "Кошик порожній").max(20),
 });
 
 const CHAT_ID = "1012973976";
+
+const DELIVERY_LABELS: Record<string, string> = {
+  "nova-poshta": "Нова пошта",
+  ukrposhta: "Укрпошта",
+  pickup: "Самовивіз",
+};
 
 // Telegram MarkdownV2 reserved characters that must be escaped
 function escMd(s: string): string {
@@ -50,6 +58,7 @@ export const sendOrder = createServerFn({ method: "POST" })
       `*Телефон:* ${spoiler(data.phone)}\n` +
       `*Telegram:* ${spoiler(data.telegram || "—")}\n` +
       `*Місто:* ${spoiler(data.city || "—")}\n` +
+      `*Доставка:* ${escMd(DELIVERY_LABELS[data.delivery])}\n` +
       `*Коментар:* ${spoiler(data.comment || "—")}\n\n` +
       `*Книги \\(${totalQty} шт\\.\\):*\n${itemsLines}`;
 

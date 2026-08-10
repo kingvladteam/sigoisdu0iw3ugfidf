@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as EventsRouteImport } from './routes/events'
+import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AboutRouteImport } from './routes/about'
@@ -23,9 +23,9 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
+const DeliveryRoute = DeliveryRouteImport.update({
+  id: '/delivery',
+  path: '/delivery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -64,7 +64,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
-  '/events': typeof EventsRoute
+  '/delivery': typeof DeliveryRoute
   '/projects': typeof ProjectsRoute
   '/books/$slug': typeof BooksSlugRoute
   '/books/': typeof BooksIndexRoute
@@ -74,7 +74,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
-  '/events': typeof EventsRoute
+  '/delivery': typeof DeliveryRoute
   '/projects': typeof ProjectsRoute
   '/books/$slug': typeof BooksSlugRoute
   '/books': typeof BooksIndexRoute
@@ -85,7 +85,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
-  '/events': typeof EventsRoute
+  '/delivery': typeof DeliveryRoute
   '/projects': typeof ProjectsRoute
   '/books/$slug': typeof BooksSlugRoute
   '/books/': typeof BooksIndexRoute
@@ -97,7 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/cart'
     | '/contact'
-    | '/events'
+    | '/delivery'
     | '/projects'
     | '/books/$slug'
     | '/books/'
@@ -107,7 +107,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/cart'
     | '/contact'
-    | '/events'
+    | '/delivery'
     | '/projects'
     | '/books/$slug'
     | '/books'
@@ -117,7 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/cart'
     | '/contact'
-    | '/events'
+    | '/delivery'
     | '/projects'
     | '/books/$slug'
     | '/books/'
@@ -128,7 +128,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
-  EventsRoute: typeof EventsRoute
+  DeliveryRoute: typeof DeliveryRoute
   ProjectsRoute: typeof ProjectsRoute
   BooksSlugRoute: typeof BooksSlugRoute
   BooksIndexRoute: typeof BooksIndexRoute
@@ -143,11 +143,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
+    '/delivery': {
+      id: '/delivery'
+      path: '/delivery'
+      fullPath: '/delivery'
+      preLoaderRoute: typeof DeliveryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -200,7 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
-  EventsRoute: EventsRoute,
+  DeliveryRoute: DeliveryRoute,
   ProjectsRoute: ProjectsRoute,
   BooksSlugRoute: BooksSlugRoute,
   BooksIndexRoute: BooksIndexRoute,

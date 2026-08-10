@@ -21,12 +21,20 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useCart, type CartItem } from "@/lib/cart";
 
+const DELIVERY_OPTIONS = [
+  { value: "nova-poshta", label: "Нова пошта" },
+  { value: "ukrposhta", label: "Укрпошта" },
+  { value: "pickup", label: "Самовивіз" },
+] as const;
+
 export function OrderForm({ items }: { items: CartItem[] }) {
   const sendOrderFn = useServerFn(sendOrder);
   const navigate = useNavigate();
   const { clear } = useCart();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
+  const [delivery, setDelivery] = useState<"nova-poshta" | "ukrposhta" | "pickup">("nova-poshta");
+  const [consent, setConsent] = useState(false);
 
   const mutation = useMutation({
     mutationFn: async (data: {
@@ -36,12 +44,16 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       phone: string;
       telegram: string;
       city: string;
+      delivery: "nova-poshta" | "ukrposhta" | "pickup";
+      consent: true;
       comment: string;
       items: { title: string; qty: number; price: string }[];
     }) => sendOrderFn({ data }),
     onSuccess: () => {
       setConfirmOpen(true);
       setFormKey((k) => k + 1);
+      setConsent(false);
+      setDelivery("nova-poshta");
     },
     onError: (err: Error) => {
       toast.error(err.message || "Сталася помилка. Спробуйте ще раз.");
@@ -54,6 +66,10 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       toast.error("Кошик порожній. Додайте хоча б одну книгу.");
       return;
     }
+    if (!consent) {
+      toast.error("Підтвердьте згоду на обробку персональних даних.");
+      return;
+    }
     const fd = new FormData(e.currentTarget);
     const data = {
       firstName: String(fd.get("firstName") || "").trim(),
@@ -62,6 +78,8 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       phone: String(fd.get("phone") || "").trim(),
       telegram: String(fd.get("telegram") || "").trim(),
       city: String(fd.get("city") || "").trim(),
+      delivery: delivery,
+      consent: true as const,
       comment: String(fd.get("comment") || "").trim(),
       items: items.map((i) => ({ title: i.title, qty: i.qty, price: i.price })),
     };
@@ -88,13 +106,13 @@ export function OrderForm({ items }: { items: CartItem[] }) {
         <div className="grid gap-4">
           <div className="grid gap-4 sm:grid-cols-3">
             <Field label="Прізвище" required>
-              <Input name="lastName" required maxLength={80} placeholder="Рудик" />
+              <Input name="lastName" required maxLength={80} placeholder="Ваше прізвище" />
             </Field>
             <Field label="Ім'я" required>
-              <Input name="firstName" required maxLength={80} placeholder="Олена" />
+              <Input name="firstName" required maxLength={80} placeholder="Ваше ім\u0027я" />
             </Field>
             <Field label="По батькові" required>
-              <Input name="patronymic" required maxLength={80} placeholder="Іванівна" />
+              <Input name="patronymic" required maxLength={80} placeholder="Ваше по батькові" />
             </Field>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -102,18 +120,44 @@ export function OrderForm({ items }: { items: CartItem[] }) {
               <Input name="phone" type="tel" required maxLength={40} placeholder="+380 __ ___ __ __" />
             </Field>
             <Field label="Telegram нікнейм">
-              <Input name="telegram" maxLength={80} placeholder="@username" />
+              <Input name="telegram" maxLength={80} placeholder="Ваш нікнейм у Telegram" />
             </Field>
           </div>
-          <Field label="Місто (для доставки Новою поштою)">
-            <Input name="city" maxLength={120} placeholder="Київ" />
+          <Field label="Місто">
+            <Input name="city" maxLength={120} placeholder="Ваше місто" />
           </Field>
+          <div className="grid gap-2">
+            <Label className="text-sm">
+              Спосіб доставки <span className="text-accent">*</span>
+            </Label>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {DELIVERY_OPTIONS.map((o) => (
+                <button
+                  key={o.value}
+                  type="button"
+                  onClick={() => setDelivery(o.value)}
+                  className={`rounded-lg border px-3 py-2.5 text-sm transition-all ${
+                    delivery === o.value
+                      ? "border-accent bg-accent/10 text-foreground shadow-sm"
+                      : "border-border bg-background text-foreground/70 hover:border-accent/50"
+                  }`}
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Нова пошта та Укрпошта — за тарифами перевізника. На замовлення від 1000 грн
+              доставка безкоштовна.
+            </p>
+          </div>
+
           <Field label="Коментар">
             <Textarea
               name="comment"
               maxLength={1000}
               rows={3}
-              placeholder="Відділення Нової пошти, побажання щодо підпису…"
+              placeholder="Номер відділення, побажання щодо підпису…"
             />
           </Field>
 
@@ -125,10 +169,23 @@ export function OrderForm({ items }: { items: CartItem[] }) {
             </span>
           </div>
 
+          <label className="mt-1 flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-foreground/80">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[var(--color-accent)]"
+            />
+            <span>
+              Я даю згоду на обробку моїх персональних даних (ПІБ, номер телефону, контакти та
+              адреса доставки) з метою оформлення й доставки замовлення.
+            </span>
+          </label>
+
           <Button
             type="submit"
             size="lg"
-            disabled={mutation.isPending || items.length === 0}
+            disabled={mutation.isPending || items.length === 0 || !consent}
             className="group relative mt-2 overflow-hidden bg-accent text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-lg active:scale-95"
           >
             <span className="relative z-10 inline-flex items-center gap-2">

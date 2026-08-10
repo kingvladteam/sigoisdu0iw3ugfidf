@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Check, ShoppingBag, Expand, X } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Expand, X } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
@@ -89,10 +89,7 @@ function BookPage() {
 
 
         <Reveal delay={100}>
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-accent">
-            {book.audience}
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
+          <h1 className="font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
           <p className="mt-3 font-display text-3xl text-accent">{book.price}</p>
           {book.pages && (
             <p className="mt-1 text-sm text-muted-foreground">{book.pages}</p>
@@ -125,19 +122,6 @@ function BookPage() {
               </dl>
             </div>
           )}
-
-          <ul className="mt-7 grid gap-2 text-sm text-foreground/85">
-            {[
-              "Доставка Новою поштою по Україні",
-              "Авторський підпис із персональним побажанням",
-              "Зв'язок лише від авторки у Telegram @ingi_gerda",
-            ].map((l) => (
-              <li key={l} className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                <span>{l}</span>
-              </li>
-            ))}
-          </ul>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Button
