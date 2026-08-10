@@ -209,6 +209,7 @@ function BookPage() {
 }
 
 function RelatedBooks({ currentSlug }: { currentSlug: string }) {
+  const { books } = useBooks();
   const related = books.filter((b) => b.slug !== currentSlug);
   if (related.length === 0) return null;
   return (
