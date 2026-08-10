@@ -1,41 +1,54 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, ShoppingBag, Expand, X } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { getBook, books } from "@/lib/site-data";
+import { getBook } from "@/lib/site-data";
+import { useBooks } from "@/lib/books-db";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/books/$slug")({
   loader: ({ params }) => {
-    const book = getBook(params.slug);
-    if (!book) throw notFound();
-    return { book };
+    return { book: getBook(params.slug) ?? null, slug: params.slug };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.book.title} — книга Інґіґерди | Замовити` },
-          { name: "description", content: loaderData.book.short },
-          { property: "og:title", content: `${loaderData.book.title} — Інґіґерда` },
-          { property: "og:description", content: loaderData.book.short },
-          { property: "og:image", content: loaderData.book.cover },
-          { property: "og:type", content: "book" },
-        ]
-      : [],
-  }),
+  head: ({ loaderData }) => {
+    const b = loaderData?.book;
+    if (!b) return { meta: [{ title: "Книга — Інґіґерда" }] };
+    return {
+      meta: [
+        { title: `${b.title} — книга Інґіґерди | Замовити` },
+        { name: "description", content: b.short },
+        { property: "og:title", content: `${b.title} — Інґіґерда` },
+        { property: "og:description", content: b.short },
+        { property: "og:image", content: b.cover },
+        { property: "og:type", content: "book" },
+      ],
+    };
+  },
   component: BookPage,
 });
 
 function BookPage() {
-  const { book } = Route.useLoaderData();
+  const { book: staticBook, slug } = Route.useLoaderData();
+  const { books: allBooks, isLoading } = useBooks();
+  const book = allBooks.find((b) => b.slug === slug) ?? staticBook;
   const { add, items } = useCart();
-  const inCart = items.some((i) => i.slug === book.slug);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
+  if (!book) {
+    return (
+      <div className="mx-auto max-w-3xl px-6 py-24 text-center text-muted-foreground">
+        {isLoading ? "Завантаження…" : "Книгу не знайдено."}
+      </div>
+    );
+  }
+
+  const inCart = items.some((i) => i.slug === book.slug);
+
   const openImage = (idx: number) => setLightbox(idx);
+
 
   return (
     <article className="border-t border-border/60">
@@ -196,6 +209,7 @@ function BookPage() {
 }
 
 function RelatedBooks({ currentSlug }: { currentSlug: string }) {
+  const { books } = useBooks();
   const related = books.filter((b) => b.slug !== currentSlug);
   if (related.length === 0) return null;
   return (
