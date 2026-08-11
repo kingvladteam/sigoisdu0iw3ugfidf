@@ -34,7 +34,9 @@ export function OrderForm({ items }: { items: CartItem[] }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
   const [delivery, setDelivery] = useState<"nova-poshta" | "ukrposhta" | "pickup">("nova-poshta");
-  const [consent, setConsent] = useState(false);
+  const [consentOffer, setConsentOffer] = useState(false);
+  const [consentPrivacy, setConsentPrivacy] = useState(false);
+  const consent = consentOffer && consentPrivacy;
 
   const mutation = useMutation({
     mutationFn: async (data: {
@@ -47,12 +49,13 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       delivery: "nova-poshta" | "ukrposhta" | "pickup";
       consent: true;
       comment: string;
-      items: { title: string; qty: number; price: string }[];
+      items: { title: string; qty: number; price: string; priceValue: number }[];
     }) => sendOrderFn({ data }),
     onSuccess: () => {
       setConfirmOpen(true);
       setFormKey((k) => k + 1);
-      setConsent(false);
+      setConsentOffer(false);
+      setConsentPrivacy(false);
       setDelivery("nova-poshta");
     },
     onError: (err: Error) => {
@@ -67,7 +70,7 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       return;
     }
     if (!consent) {
-      toast.error("Підтвердьте згоду на обробку персональних даних.");
+      toast.error("Підтвердьте згоду з договором оферти та політикою конфіденційності.");
       return;
     }
     const fd = new FormData(e.currentTarget);
@@ -81,7 +84,12 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       delivery: delivery,
       consent: true as const,
       comment: String(fd.get("comment") || "").trim(),
-      items: items.map((i) => ({ title: i.title, qty: i.qty, price: i.price })),
+      items: items.map((i) => ({
+        title: i.title,
+        qty: i.qty,
+        price: i.price,
+        priceValue: i.priceValue,
+      })),
     };
     if (!data.firstName || !data.lastName || !data.patronymic || !data.phone) {
       toast.error("Заповніть ПІБ та телефон.");
@@ -169,18 +177,47 @@ export function OrderForm({ items }: { items: CartItem[] }) {
             </span>
           </div>
 
-          <label className="mt-1 flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-foreground/80">
-            <input
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[var(--color-accent)]"
-            />
-            <span>
-              Я даю згоду на обробку моїх персональних даних (ПІБ, номер телефону, контакти та
-              адреса доставки) з метою оформлення й доставки замовлення.
-            </span>
-          </label>
+          <div className="mt-1 grid gap-2.5">
+            <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-foreground/80">
+              <input
+                type="checkbox"
+                checked={consentOffer}
+                onChange={(e) => setConsentOffer(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[var(--color-accent)]"
+              />
+              <span>
+                Я погоджуюсь з умовами{" "}
+                <Link
+                  to="/offer"
+                  target="_blank"
+                  className="font-medium text-accent hover:underline"
+                >
+                  договору публічної оферти
+                </Link>
+                .
+              </span>
+            </label>
+            <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-foreground/80">
+              <input
+                type="checkbox"
+                checked={consentPrivacy}
+                onChange={(e) => setConsentPrivacy(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[var(--color-accent)]"
+              />
+              <span>
+                Я погоджуюсь з{" "}
+                <Link
+                  to="/privacy"
+                  target="_blank"
+                  className="font-medium text-accent hover:underline"
+                >
+                  політикою конфіденційності
+                </Link>{" "}
+                та даю згоду на обробку моїх персональних даних (ПІБ, номер телефону, контакти
+                та адреса доставки) для оформлення й доставки замовлення.
+              </span>
+            </label>
+          </div>
 
           <Button
             type="submit"
@@ -230,6 +267,10 @@ export function OrderForm({ items }: { items: CartItem[] }) {
                     Не переказуйте кошти стороннім особам.
                   </p>
                 </div>
+                <p>
+                  Якщо написати вам у Telegram не вдасться, ми спробуємо зв'язатися в інших
+                  месенджерах (Viber, WhatsApp) або зателефонуємо на вказаний номер.
+                </p>
               </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
