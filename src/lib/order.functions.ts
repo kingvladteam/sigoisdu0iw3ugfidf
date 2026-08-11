@@ -5,6 +5,7 @@ const itemSchema = z.object({
   title: z.string().trim().min(1).max(200),
   qty: z.number().int().min(1).max(99),
   price: z.string().trim().max(50),
+  priceValue: z.number().int().min(0).max(1000000).optional().default(0),
 });
 
 const orderSchema = z.object({
@@ -20,7 +21,7 @@ const orderSchema = z.object({
   items: z.array(itemSchema).min(1, "Кошик порожній").max(20),
 });
 
-const CHAT_ID = "1012973976";
+const CHAT_IDS = ["1012973976", "547097325"];
 
 const DELIVERY_LABELS: Record<string, string> = {
   "nova-poshta": "Нова пошта",
@@ -51,6 +52,7 @@ export const sendOrder = createServerFn({ method: "POST" })
       .map((i, idx) => `${idx + 1}\\. ${spoiler(`${i.title} × ${i.qty} (${i.price})`)}`)
       .join("\n");
     const totalQty = data.items.reduce((s, i) => s + i.qty, 0);
+    const totalSum = data.items.reduce((s, i) => s + i.qty * i.priceValue, 0);
 
     const text =
       `📚 *Нове замовлення книг*\n\n` +
@@ -60,22 +62,33 @@ export const sendOrder = createServerFn({ method: "POST" })
       `*Місто:* ${spoiler(data.city || "—")}\n` +
       `*Доставка:* ${escMd(DELIVERY_LABELS[data.delivery])}\n` +
       `*Коментар:* ${spoiler(data.comment || "—")}\n\n` +
-      `*Книги \\(${totalQty} шт\\.\\):*\n${itemsLines}`;
+      `*Книги \\(${totalQty} шт\\.\\):*\n${itemsLines}\n\n` +
+      `*Сума:* ${escMd(`${totalSum} грн`)}`;
 
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text,
-        parse_mode: "MarkdownV2",
-        disable_web_page_preview: true,
-      }),
-    });
+    let lastError: string | null = null;
+    let delivered = 0;
 
-    if (!res.ok) {
-      const errText = await res.text();
-      console.error("Telegram API error", res.status, errText);
+    for (const chatId of CHAT_IDS) {
+      const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text,
+          parse_mode: "MarkdownV2",
+          disable_web_page_preview: true,
+        }),
+      });
+
+      if (res.ok) {
+        delivered += 1;
+      } else {
+        lastError = await res.text();
+        console.error("Telegram API error", chatId, res.status, lastError);
+      }
+    }
+
+    if (delivered === 0) {
       throw new Error("Не вдалося надіслати замовлення. Спробуйте ще раз.");
     }
 
