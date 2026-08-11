@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as OfferRouteImport } from './routes/offer'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
@@ -24,6 +26,16 @@ import { Route as ApiPublicBookImageSplatRouteImport } from './routes/api/public
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfferRoute = OfferRouteImport.update({
+  id: '/offer',
+  path: '/offer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeliveryRoute = DeliveryRouteImport.update({
@@ -85,6 +97,8 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/offer': typeof OfferRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/books/$slug': typeof BooksSlugRoute
   '/books/': typeof BooksIndexRoute
@@ -98,6 +112,8 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/offer': typeof OfferRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/books/$slug': typeof BooksSlugRoute
   '/books': typeof BooksIndexRoute
@@ -112,6 +128,8 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/delivery': typeof DeliveryRoute
+  '/offer': typeof OfferRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/books/$slug': typeof BooksSlugRoute
   '/books/': typeof BooksIndexRoute
@@ -127,6 +145,8 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/delivery'
+    | '/offer'
+    | '/privacy'
     | '/projects'
     | '/books/$slug'
     | '/books/'
@@ -140,6 +160,8 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/delivery'
+    | '/offer'
+    | '/privacy'
     | '/projects'
     | '/books/$slug'
     | '/books'
@@ -153,6 +175,8 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/delivery'
+    | '/offer'
+    | '/privacy'
     | '/projects'
     | '/books/$slug'
     | '/books/'
@@ -167,6 +191,8 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   DeliveryRoute: typeof DeliveryRoute
+  OfferRoute: typeof OfferRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
   BooksSlugRoute: typeof BooksSlugRoute
   BooksIndexRoute: typeof BooksIndexRoute
@@ -180,6 +206,20 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offer': {
+      id: '/offer'
+      path: '/offer'
+      fullPath: '/offer'
+      preLoaderRoute: typeof OfferRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/delivery': {
@@ -263,6 +303,8 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   DeliveryRoute: DeliveryRoute,
+  OfferRoute: OfferRoute,
+  PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
   BooksSlugRoute: BooksSlugRoute,
   BooksIndexRoute: BooksIndexRoute,

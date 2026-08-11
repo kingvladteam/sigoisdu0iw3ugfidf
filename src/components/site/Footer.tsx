@@ -46,7 +46,24 @@ export function Footer() {
               </li>
             ))}
           </ul>
+          <h4 className="mt-8 font-display text-xl font-semibold">Документи</h4>
+          <ul className="mt-4 grid gap-2 text-sm">
+            {[
+              { to: "/offer", label: "Договір публічної оферти" },
+              { to: "/privacy", label: "Політика конфіденційності" },
+            ].map((l) => (
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  className="story-link text-foreground/80 transition-colors hover:text-accent"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
+
       </div>
       <div className="border-t border-border/60">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-muted-foreground md:flex-row">
