@@ -18,6 +18,8 @@ import zhnyvaAsset from "@/assets/zhnyva.png.asset.json";
 
 export type BookSpec = { label: string; value: string };
 
+export type BookVariant = { label: string; priceValue: number };
+
 export type Book = {
   slug: string;
   title: string;
@@ -31,7 +33,23 @@ export type Book = {
   long: string[];
   excerpt?: string;
   specs?: BookSpec[];
+  /** Варіанти обкладинки з власними цінами (тверда / м'яка) */
+  variants?: BookVariant[];
 };
+
+/** Найменша ціна книги (з урахуванням варіантів обкладинки). */
+export function minPrice(book: Book): number {
+  if (book.variants?.length) {
+    return Math.min(...book.variants.map((v) => v.priceValue));
+  }
+  return book.priceValue;
+}
+
+/** Текст ціни для списку книг: «від 300 грн», якщо є варіанти. */
+export function displayPrice(book: Book): string {
+  if (book.variants?.length) return `від ${minPrice(book)} грн`;
+  return book.price;
+}
 
 export const books: Book[] = [
   {
