@@ -140,7 +140,7 @@ function PrivacyPage() {
           </P>
           <div className="mt-3 rounded-2xl border border-border bg-card/60 p-5 text-sm leading-relaxed text-foreground/85">
             <p className="font-semibold text-foreground">ФОП Рудика І.В.</p>
-            <p className="mt-2">Телефон: +380 50 917 7274</p>
+            <p className="mt-2">Email: iraruira@gmail.com</p>
           </div>
         </Reveal>
       </div>
