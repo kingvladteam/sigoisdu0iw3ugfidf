@@ -117,7 +117,7 @@ export function OrderForm({ items }: { items: CartItem[] }) {
               <Input name="lastName" required maxLength={80} placeholder="Ваше прізвище" />
             </Field>
             <Field label="Ім'я" required>
-              <Input name="firstName" required maxLength={80} placeholder="Ваше ім\u0027я" />
+              <Input name="firstName" required maxLength={80} placeholder="Ваше ім'я" />
             </Field>
             <Field label="По батькові" required>
               <Input name="patronymic" required maxLength={80} placeholder="Ваше по батькові" />
@@ -156,7 +156,7 @@ export function OrderForm({ items }: { items: CartItem[] }) {
             </div>
             <p className="text-xs text-muted-foreground">
               Нова пошта та Укрпошта — за тарифами перевізника. На замовлення від 1000 грн
-              доставка безкоштовна.
+              доставка безкоштовна. Самовивіз із м. Київ за попередньою домовленністю
             </p>
           </div>
 
