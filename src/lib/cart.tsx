@@ -2,21 +2,26 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Book } from "./site-data";
 
 export type CartItem = {
+  /** Унікальний ключ позиції: slug + варіант обкладинки */
+  key: string;
   slug: string;
   title: string;
+  variant?: string;
   price: string;
   priceValue: number;
   cover: string;
   qty: number;
 };
 
+export type CartVariant = { label: string; priceValue: number };
+
 type CartCtx = {
   items: CartItem[];
   count: number;
   total: number;
-  add: (book: Book, qty?: number) => void;
-  remove: (slug: string) => void;
-  setQty: (slug: string, qty: number) => void;
+  add: (book: Book, qty?: number, variant?: CartVariant) => void;
+  remove: (key: string) => void;
+  setQty: (key: string, qty: number) => void;
   clear: () => void;
 };
 
