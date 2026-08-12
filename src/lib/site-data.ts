@@ -124,24 +124,32 @@ export const books: Book[] = [
   {
     slug: "na-ivana-kupala",
     title: "На Івана Купала",
-    price: "400 грн",
-    priceValue: 400,
+    price: "від 300 грн",
+    priceValue: 300,
     cover: kupalaAsset.url,
     gallery: [kupalaAsset.url],
     short: "Нова книга Інґіґерди — опис буде додано найближчим часом.",
     long: ["Опис книги буде додано найближчим часом."],
     specs: [],
+    variants: [
+      { label: "Тверда обкладинка", priceValue: 450 },
+      { label: "М'яка обкладинка", priceValue: 300 },
+    ],
   },
   {
     slug: "kozhnomu-svoi-zhnyva",
     title: "Кожному свої жнива",
-    price: "400 грн",
-    priceValue: 400,
+    price: "від 360 грн",
+    priceValue: 360,
     cover: zhnyvaAsset.url,
     gallery: [zhnyvaAsset.url],
     short: "Нова книга Інґіґерди — опис буде додано найближчим часом.",
     long: ["Опис книги буде додано найближчим часом."],
     specs: [],
+    variants: [
+      { label: "Тверда обкладинка", priceValue: 470 },
+      { label: "М'яка обкладинка", priceValue: 360 },
+    ],
   },
 ];
 
