@@ -30,6 +30,7 @@ export type Database = {
           specs: Json
           title: string | null
           updated_at: string
+          variants: Json
         }
         Insert: {
           cover?: string | null
@@ -46,6 +47,7 @@ export type Database = {
           specs?: Json
           title?: string | null
           updated_at?: string
+          variants?: Json
         }
         Update: {
           cover?: string | null
@@ -62,6 +64,7 @@ export type Database = {
           specs?: Json
           title?: string | null
           updated_at?: string
+          variants?: Json
         }
         Relationships: []
       }
