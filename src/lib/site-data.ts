@@ -18,6 +18,8 @@ import zhnyvaAsset from "@/assets/zhnyva.png.asset.json";
 
 export type BookSpec = { label: string; value: string };
 
+export type BookVariant = { label: string; priceValue: number };
+
 export type Book = {
   slug: string;
   title: string;
@@ -31,7 +33,23 @@ export type Book = {
   long: string[];
   excerpt?: string;
   specs?: BookSpec[];
+  /** Варіанти обкладинки з власними цінами (тверда / м'яка) */
+  variants?: BookVariant[];
 };
+
+/** Найменша ціна книги (з урахуванням варіантів обкладинки). */
+export function minPrice(book: Book): number {
+  if (book.variants?.length) {
+    return Math.min(...book.variants.map((v) => v.priceValue));
+  }
+  return book.priceValue;
+}
+
+/** Текст ціни для списку книг: «від 300 грн», якщо є варіанти. */
+export function displayPrice(book: Book): string {
+  if (book.variants?.length) return `від ${minPrice(book)} грн`;
+  return book.price;
+}
 
 export const books: Book[] = [
   {
@@ -106,24 +124,32 @@ export const books: Book[] = [
   {
     slug: "na-ivana-kupala",
     title: "На Івана Купала",
-    price: "400 грн",
-    priceValue: 400,
+    price: "від 300 грн",
+    priceValue: 300,
     cover: kupalaAsset.url,
     gallery: [kupalaAsset.url],
     short: "Нова книга Інґіґерди — опис буде додано найближчим часом.",
     long: ["Опис книги буде додано найближчим часом."],
     specs: [],
+    variants: [
+      { label: "Тверда обкладинка", priceValue: 450 },
+      { label: "М'яка обкладинка", priceValue: 300 },
+    ],
   },
   {
     slug: "kozhnomu-svoi-zhnyva",
     title: "Кожному свої жнива",
-    price: "400 грн",
-    priceValue: 400,
+    price: "від 360 грн",
+    priceValue: 360,
     cover: zhnyvaAsset.url,
     gallery: [zhnyvaAsset.url],
     short: "Нова книга Інґіґерди — опис буде додано найближчим часом.",
     long: ["Опис книги буде додано найближчим часом."],
     specs: [],
+    variants: [
+      { label: "Тверда обкладинка", priceValue: 470 },
+      { label: "М'яка обкладинка", priceValue: 360 },
+    ],
   },
 ];
 

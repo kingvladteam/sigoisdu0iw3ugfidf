@@ -2,21 +2,26 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Book } from "./site-data";
 
 export type CartItem = {
+  /** Унікальний ключ позиції: slug + варіант обкладинки */
+  key: string;
   slug: string;
   title: string;
+  variant?: string;
   price: string;
   priceValue: number;
   cover: string;
   qty: number;
 };
 
+export type CartVariant = { label: string; priceValue: number };
+
 type CartCtx = {
   items: CartItem[];
   count: number;
   total: number;
-  add: (book: Book, qty?: number) => void;
-  remove: (slug: string) => void;
-  setQty: (slug: string, qty: number) => void;
+  add: (book: Book, qty?: number, variant?: CartVariant) => void;
+  remove: (key: string) => void;
+  setQty: (key: string, qty: number) => void;
   clear: () => void;
 };
 
@@ -39,21 +44,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } catch {}
   }, [items]);
 
-  const add: CartCtx["add"] = (book, qty = 1) => {
+  const add: CartCtx["add"] = (book, qty = 1, variant) => {
+    const key = variant ? `${book.slug}::${variant.label}` : book.slug;
     setItems((curr) => {
-      const existing = curr.find((i) => i.slug === book.slug);
+      const existing = curr.find((i) => (i.key ?? i.slug) === key);
       if (existing) {
         return curr.map((i) =>
-          i.slug === book.slug ? { ...i, qty: i.qty + qty } : i,
+          (i.key ?? i.slug) === key ? { ...i, qty: i.qty + qty } : i,
         );
       }
+      const priceValue = variant ? variant.priceValue : book.priceValue;
       return [
         ...curr,
         {
+          key,
           slug: book.slug,
           title: book.title,
-          price: book.price,
-          priceValue: book.priceValue,
+          variant: variant?.label,
+          price: `${priceValue} грн`,
+          priceValue,
           cover: book.cover,
           qty,
         },
@@ -61,13 +70,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const remove: CartCtx["remove"] = (slug) =>
-    setItems((c) => c.filter((i) => i.slug !== slug));
+  const remove: CartCtx["remove"] = (key) =>
+    setItems((c) => c.filter((i) => (i.key ?? i.slug) !== key));
 
-  const setQty: CartCtx["setQty"] = (slug, qty) =>
+  const setQty: CartCtx["setQty"] = (key, qty) =>
     setItems((c) =>
       c
-        .map((i) => (i.slug === slug ? { ...i, qty: Math.max(1, qty) } : i))
+        .map((i) => ((i.key ?? i.slug) === key ? { ...i, qty: Math.max(1, qty) } : i))
         .filter((i) => i.qty > 0),
     );
 
