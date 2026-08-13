@@ -314,6 +314,65 @@ function BookEditor({ row }: { row: BookRow }) {
         </div>
       </div>
 
+      <div className="mt-6 rounded-xl border border-border/70 bg-background/40 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <Label className="text-sm">Варіанти обкладинки та ціни</Label>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Якщо додати варіанти (напр. тверда / м'яка), покупець обиратиме їх на сторінці
+              книги, а в каталозі буде «від {"{"}найменша ціна{"}"} грн».
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => set("variants", [...draft.variants, { label: "", priceValue: 0 }])}
+          >
+            <Plus className="mr-1.5 h-3.5 w-3.5" /> Варіант
+          </Button>
+        </div>
+        <div className="mt-3 space-y-2">
+          {draft.variants.map((v, i) => (
+            <div key={i} className="flex gap-2">
+              <Input
+                placeholder="Тверда обкладинка"
+                value={v.label}
+                onChange={(e) =>
+                  set(
+                    "variants",
+                    draft.variants.map((x, j) =>
+                      j === i ? { ...x, label: e.target.value } : x,
+                    ),
+                  )
+                }
+              />
+              <Input
+                type="number"
+                placeholder="Ціна, грн"
+                className="max-w-36"
+                value={v.priceValue}
+                onChange={(e) =>
+                  set(
+                    "variants",
+                    draft.variants.map((x, j) =>
+                      j === i ? { ...x, priceValue: Number(e.target.value) } : x,
+                    ),
+                  )
+                }
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => set("variants", draft.variants.filter((_, j) => j !== i))}
+                aria-label="Видалити варіант"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-4 grid gap-1.5">
         <Label className="text-sm">Короткий опис (у списку книг)</Label>
         <Textarea rows={2} value={draft.short} onChange={(e) => set("short", e.target.value)} />
