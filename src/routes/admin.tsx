@@ -35,6 +35,7 @@ type Draft = {
   short: string;
   long: string;
   specs: { label: string; value: string }[];
+  variants: { label: string; priceValue: number }[];
   cover: string;
   gallery: string[];
   sort_order: number;
@@ -53,6 +54,7 @@ function rowToDraft(row: BookRow): Draft {
     short: merged.short,
     long: merged.long.join("\n\n"),
     specs: merged.specs ?? [],
+    variants: merged.variants ?? [],
     cover: merged.cover,
     gallery: merged.gallery,
     sort_order: row.sort_order,
