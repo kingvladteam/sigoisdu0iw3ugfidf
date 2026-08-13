@@ -110,7 +110,7 @@ function BookPage() {
 
         <Reveal delay={100}>
           <h1 className="font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
-          <p className="mt-3 font-display text-3xl text-accent">{book.price}</p>
+          <p className="mt-3 font-display text-3xl text-accent">{currentPrice}</p>
           {book.pages && (
             <p className="mt-1 text-sm text-muted-foreground">{book.pages}</p>
           )}
