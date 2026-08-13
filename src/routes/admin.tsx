@@ -186,15 +186,22 @@ function BookEditor({ row }: { row: BookRow }) {
 
   async function save() {
     setSaving(true);
+    const variants = draft.variants
+      .filter((v) => v.label.trim())
+      .map((v) => ({ label: v.label.trim(), price_value: Number(v.priceValue) || 0 }));
+    const minValue = variants.length
+      ? Math.min(...variants.map((v) => v.price_value))
+      : draft.price_value;
     const { error } = await supabase
       .from("books")
       .update({
         title: draft.title,
-        price: draft.price,
-        price_value: draft.price_value,
+        price: variants.length ? `від ${minValue} грн` : draft.price,
+        price_value: minValue,
         short: draft.short,
         long_text: draft.long.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean),
         specs: draft.specs.filter((s) => s.label.trim() || s.value.trim()),
+        variants,
         cover: draft.cover,
         gallery: draft.gallery,
         sort_order: draft.sort_order,
