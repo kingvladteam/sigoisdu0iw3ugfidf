@@ -67,7 +67,7 @@ function CartPage() {
               <ul className="grid gap-4">
                 {items.map((item) => (
                   <li
-                    key={item.slug}
+                    key={item.key ?? item.slug}
                     className="flex gap-4 rounded-2xl border border-border bg-card p-4 transition-all hover:border-accent/40 hover:shadow-md"
                   >
                     <Link
@@ -89,6 +89,9 @@ function CartPage() {
                       >
                         {item.title}
                       </Link>
+                      {item.variant && (
+                        <p className="text-xs text-muted-foreground">{item.variant}</p>
+                      )}
                       <p className="text-sm text-accent">{item.price}</p>
                       <div className="mt-auto flex items-center justify-between gap-3 pt-3">
                         <div className="inline-flex items-center rounded-full border border-border">

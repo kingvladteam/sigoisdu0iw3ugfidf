@@ -4,6 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Button } from "@/components/ui/button";
 import { useBooks } from "@/lib/books-db";
+import { displayPrice } from "@/lib/site-data";
 import { useCart } from "@/lib/cart";
 import { toast } from "sonner";
 
