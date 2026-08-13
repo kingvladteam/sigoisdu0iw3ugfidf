@@ -143,12 +143,41 @@ function BookPage() {
             </div>
           )}
 
+          {variants.length > 0 && (
+            <div className="mt-8">
+              <p className="text-sm uppercase tracking-wider text-muted-foreground">
+                Оберіть обкладинку
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {variants.map((v, i) => (
+                  <button
+                    key={v.label}
+                    type="button"
+                    onClick={() => setVariantIdx(i)}
+                    className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all ${
+                      i === variantIdx
+                        ? "border-accent bg-accent/10 shadow-sm"
+                        : "border-border bg-card/60 hover:border-accent/50"
+                    }`}
+                  >
+                    <span className="text-sm font-medium">{v.label}</span>
+                    <span className="font-display text-lg text-accent">{v.priceValue} грн</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mt-8 flex flex-wrap gap-3">
             <Button
               size="lg"
               onClick={() => {
-                add(book);
-                toast.success(`«${book.title}» додано в кошик`);
+                add(book, 1, variant);
+                toast.success(
+                  variant
+                    ? `«${book.title}» (${variant.label}) додано в кошик`
+                    : `«${book.title}» додано в кошик`,
+                );
               }}
               className="bg-accent text-accent-foreground transition-all hover:scale-105 hover:bg-accent/90 hover:shadow-lg"
             >
