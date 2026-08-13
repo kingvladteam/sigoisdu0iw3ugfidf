@@ -67,7 +67,7 @@ function CartPage() {
               <ul className="grid gap-4">
                 {items.map((item) => (
                   <li
-                    key={item.slug}
+                    key={item.key ?? item.slug}
                     className="flex gap-4 rounded-2xl border border-border bg-card p-4 transition-all hover:border-accent/40 hover:shadow-md"
                   >
                     <Link
@@ -89,12 +89,15 @@ function CartPage() {
                       >
                         {item.title}
                       </Link>
+                      {item.variant && (
+                        <p className="text-xs text-muted-foreground">{item.variant}</p>
+                      )}
                       <p className="text-sm text-accent">{item.price}</p>
                       <div className="mt-auto flex items-center justify-between gap-3 pt-3">
                         <div className="inline-flex items-center rounded-full border border-border">
                           <button
                             type="button"
-                            onClick={() => setQty(item.slug, item.qty - 1)}
+                            onClick={() => setQty(item.key ?? item.slug, item.qty - 1)}
                             className="inline-flex h-8 w-8 items-center justify-center rounded-l-full text-foreground/70 transition hover:bg-accent/10 hover:text-accent"
                             aria-label="Зменшити"
                           >
@@ -105,7 +108,7 @@ function CartPage() {
                           </span>
                           <button
                             type="button"
-                            onClick={() => setQty(item.slug, item.qty + 1)}
+                            onClick={() => setQty(item.key ?? item.slug, item.qty + 1)}
                             className="inline-flex h-8 w-8 items-center justify-center rounded-r-full text-foreground/70 transition hover:bg-accent/10 hover:text-accent"
                             aria-label="Збільшити"
                           >
@@ -116,7 +119,7 @@ function CartPage() {
                           <p className="font-medium">{item.qty * item.priceValue} грн</p>
                           <button
                             type="button"
-                            onClick={() => remove(item.slug)}
+                            onClick={() => remove(item.key ?? item.slug)}
                             className="inline-flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition hover:bg-destructive/10 hover:text-destructive"
                             aria-label="Видалити"
                           >

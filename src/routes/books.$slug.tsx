@@ -36,6 +36,7 @@ function BookPage() {
   const book = allBooks.find((b) => b.slug === slug) ?? staticBook;
   const { add, items } = useCart();
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [variantIdx, setVariantIdx] = useState(0);
 
   if (!book) {
     return (
@@ -45,7 +46,13 @@ function BookPage() {
     );
   }
 
-  const inCart = items.some((i) => i.slug === book.slug);
+  const variants = book.variants ?? [];
+  const variant = variants[variantIdx] ?? variants[0];
+  const currentPrice = variant ? `${variant.priceValue} грн` : book.price;
+  const inCart = items.some((i) =>
+    variant ? i.slug === book.slug && i.variant === variant.label : i.slug === book.slug,
+  );
+
 
   const openImage = (idx: number) => setLightbox(idx);
 
@@ -103,7 +110,7 @@ function BookPage() {
 
         <Reveal delay={100}>
           <h1 className="font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
-          <p className="mt-3 font-display text-3xl text-accent">{book.price}</p>
+          <p className="mt-3 font-display text-3xl text-accent">{currentPrice}</p>
           {book.pages && (
             <p className="mt-1 text-sm text-muted-foreground">{book.pages}</p>
           )}
@@ -136,12 +143,41 @@ function BookPage() {
             </div>
           )}
 
+          {variants.length > 0 && (
+            <div className="mt-8">
+              <p className="text-sm uppercase tracking-wider text-muted-foreground">
+                Оберіть обкладинку
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {variants.map((v, i) => (
+                  <button
+                    key={v.label}
+                    type="button"
+                    onClick={() => setVariantIdx(i)}
+                    className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all ${
+                      i === variantIdx
+                        ? "border-accent bg-accent/10 shadow-sm"
+                        : "border-border bg-card/60 hover:border-accent/50"
+                    }`}
+                  >
+                    <span className="text-sm font-medium">{v.label}</span>
+                    <span className="font-display text-lg text-accent">{v.priceValue} грн</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mt-8 flex flex-wrap gap-3">
             <Button
               size="lg"
               onClick={() => {
-                add(book);
-                toast.success(`«${book.title}» додано в кошик`);
+                add(book, 1, variant);
+                toast.success(
+                  variant
+                    ? `«${book.title}» (${variant.label}) додано в кошик`
+                    : `«${book.title}» додано в кошик`,
+                );
               }}
               className="bg-accent text-accent-foreground transition-all hover:scale-105 hover:bg-accent/90 hover:shadow-lg"
             >

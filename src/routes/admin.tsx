@@ -35,6 +35,7 @@ type Draft = {
   short: string;
   long: string;
   specs: { label: string; value: string }[];
+  variants: { label: string; priceValue: number }[];
   cover: string;
   gallery: string[];
   sort_order: number;
@@ -53,6 +54,7 @@ function rowToDraft(row: BookRow): Draft {
     short: merged.short,
     long: merged.long.join("\n\n"),
     specs: merged.specs ?? [],
+    variants: merged.variants ?? [],
     cover: merged.cover,
     gallery: merged.gallery,
     sort_order: row.sort_order,
@@ -184,15 +186,22 @@ function BookEditor({ row }: { row: BookRow }) {
 
   async function save() {
     setSaving(true);
+    const variants = draft.variants
+      .filter((v) => v.label.trim())
+      .map((v) => ({ label: v.label.trim(), price_value: Number(v.priceValue) || 0 }));
+    const minValue = variants.length
+      ? Math.min(...variants.map((v) => v.price_value))
+      : draft.price_value;
     const { error } = await supabase
       .from("books")
       .update({
         title: draft.title,
-        price: draft.price,
-        price_value: draft.price_value,
+        price: variants.length ? `від ${minValue} грн` : draft.price,
+        price_value: minValue,
         short: draft.short,
         long_text: draft.long.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean),
         specs: draft.specs.filter((s) => s.label.trim() || s.value.trim()),
+        variants,
         cover: draft.cover,
         gallery: draft.gallery,
         sort_order: draft.sort_order,
@@ -302,6 +311,65 @@ function BookEditor({ row }: { row: BookRow }) {
             value={draft.sort_order}
             onChange={(e) => set("sort_order", Number(e.target.value))}
           />
+        </div>
+      </div>
+
+      <div className="mt-6 rounded-xl border border-border/70 bg-background/40 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <Label className="text-sm">Варіанти обкладинки та ціни</Label>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Якщо додати варіанти (напр. тверда / м'яка), покупець обиратиме їх на сторінці
+              книги, а в каталозі буде «від {"{"}найменша ціна{"}"} грн».
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => set("variants", [...draft.variants, { label: "", priceValue: 0 }])}
+          >
+            <Plus className="mr-1.5 h-3.5 w-3.5" /> Варіант
+          </Button>
+        </div>
+        <div className="mt-3 space-y-2">
+          {draft.variants.map((v, i) => (
+            <div key={i} className="flex gap-2">
+              <Input
+                placeholder="Тверда обкладинка"
+                value={v.label}
+                onChange={(e) =>
+                  set(
+                    "variants",
+                    draft.variants.map((x, j) =>
+                      j === i ? { ...x, label: e.target.value } : x,
+                    ),
+                  )
+                }
+              />
+              <Input
+                type="number"
+                placeholder="Ціна, грн"
+                className="max-w-36"
+                value={v.priceValue}
+                onChange={(e) =>
+                  set(
+                    "variants",
+                    draft.variants.map((x, j) =>
+                      j === i ? { ...x, priceValue: Number(e.target.value) } : x,
+                    ),
+                  )
+                }
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => set("variants", draft.variants.filter((_, j) => j !== i))}
+                aria-label="Видалити варіант"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
 

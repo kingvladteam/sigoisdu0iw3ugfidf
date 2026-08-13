@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { books as staticBooks, type Book, type BookSpec } from "@/lib/site-data";
+import {
+  books as staticBooks,
+  type Book,
+  type BookSpec,
+  type BookVariant,
+} from "@/lib/site-data";
 
 export type BookRow = {
   id: string;
@@ -11,6 +16,7 @@ export type BookRow = {
   short: string | null;
   long_text: string[] | null;
   specs: unknown;
+  variants?: unknown;
   cover: string | null;
   gallery: string[] | null;
   sort_order: number;
@@ -24,6 +30,19 @@ function toSpecs(value: unknown): BookSpec[] | undefined {
       !!s && typeof s === "object" && "label" in s && "value" in s,
   );
   return specs.length ? specs : undefined;
+}
+
+export function toVariants(value: unknown): BookVariant[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+  const variants = value
+    .filter((v): v is { label: string; price_value?: number; priceValue?: number } =>
+      !!v && typeof v === "object" && "label" in v,
+    )
+    .map((v) => ({
+      label: String(v.label),
+      priceValue: Number(v.price_value ?? v.priceValue ?? 0),
+    }));
+  return variants.length ? variants : undefined;
 }
 
 export function mergeBook(row: BookRow, base?: Book): Book {
@@ -40,6 +59,7 @@ export function mergeBook(row: BookRow, base?: Book): Book {
     long: row.long_text?.length ? row.long_text : base?.long ?? [],
     excerpt: base?.excerpt,
     specs: toSpecs(row.specs) ?? base?.specs,
+    variants: toVariants(row.variants) ?? base?.variants,
   };
 }
 
