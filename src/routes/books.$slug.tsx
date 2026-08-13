@@ -36,6 +36,7 @@ function BookPage() {
   const book = allBooks.find((b) => b.slug === slug) ?? staticBook;
   const { add, items } = useCart();
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [variantIdx, setVariantIdx] = useState(0);
 
   if (!book) {
     return (
@@ -45,7 +46,13 @@ function BookPage() {
     );
   }
 
-  const inCart = items.some((i) => i.slug === book.slug);
+  const variants = book.variants ?? [];
+  const variant = variants[variantIdx] ?? variants[0];
+  const currentPrice = variant ? `${variant.priceValue} грн` : book.price;
+  const inCart = items.some((i) =>
+    variant ? i.slug === book.slug && i.variant === variant.label : i.slug === book.slug,
+  );
+
 
   const openImage = (idx: number) => setLightbox(idx);
 
