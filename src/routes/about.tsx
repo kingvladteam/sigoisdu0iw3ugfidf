@@ -1,4 +1,4 @@
-=import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import portraitAsset from "@/assets/portrait.jpg.asset.json";
 

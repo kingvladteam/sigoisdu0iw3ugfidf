@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "asset_id": "fc1da9ab-ec73-4f9b-8792-f533faa3859b",
+  "asset_id": "9ec70f05-d6a6-4d1a-a0f2-e77a5b87246e",
   "project_id": "745d69ec-0bd9-43a9-a2c1-7c32041cf0af",
-  "url": "/assets/portrait.jpg",
-  "r2_key": "a/v1/745d69ec-0bd9-43a9-a2c1-7c32041cf0af/fc1da9ab-ec73-4f9b-8792-f533faa3859b/portrait.jpg",
+  "url": "/__l5e/assets-v1/9ec70f05-d6a6-4d1a-a0f2-e77a5b87246e/portrait.jpg",
+  "r2_key": "a/v1/745d69ec-0bd9-43a9-a2c1-7c32041cf0af/9ec70f05-d6a6-4d1a-a0f2-e77a5b87246e/portrait.jpg",
   "original_filename": "portrait.jpg",
-  "size": 622630,
-  "content_type": "image/jpeg",
-  "created_at": "2026-06-20T17:23:01Z"
+  "size": 82510,
+  "content_type": "image/webp",
+  "created_at": "2026-08-13T07:30:13Z"
 }
