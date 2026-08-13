@@ -74,28 +74,41 @@ function BooksIndex() {
                         {book.title}
                       </Link>
                     </h2>
-                    <p className="mt-1 font-display text-lg text-accent">{book.price}</p>
+                    <p className="mt-1 font-display text-lg text-accent">
+                      {displayPrice(book)}
+                    </p>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
                       {book.short}
                     </p>
                     <div className="mt-5 flex items-center gap-2">
-                      <Button
-                        onClick={() => {
-                          add(book);
-                          toast.success(`«${book.title}» додано в кошик`);
-                        }}
-                        className="flex-1 bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90"
-                      >
-                        {inCart ? (
-                          <>
-                            <Check className="mr-1.5 h-4 w-4" /> Ще одну
-                          </>
-                        ) : (
-                          <>
-                            <ShoppingBag className="mr-1.5 h-4 w-4" /> У кошик
-                          </>
-                        )}
-                      </Button>
+                      {book.variants?.length ? (
+                        <Button
+                          asChild
+                          className="flex-1 bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90"
+                        >
+                          <Link to="/books/$slug" params={{ slug: book.slug }}>
+                            <ShoppingBag className="mr-1.5 h-4 w-4" /> Обрати обкладинку
+                          </Link>
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            add(book);
+                            toast.success(`«${book.title}» додано в кошик`);
+                          }}
+                          className="flex-1 bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90"
+                        >
+                          {inCart ? (
+                            <>
+                              <Check className="mr-1.5 h-4 w-4" /> Ще одну
+                            </>
+                          ) : (
+                            <>
+                              <ShoppingBag className="mr-1.5 h-4 w-4" /> У кошик
+                            </>
+                          )}
+                        </Button>
+                      )}
                       <Button
                         asChild
                         variant="outline"
