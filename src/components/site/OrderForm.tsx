@@ -85,7 +85,7 @@ export function OrderForm({ items }: { items: CartItem[] }) {
       consent: true as const,
       comment: String(fd.get("comment") || "").trim(),
       items: items.map((i) => ({
-        title: i.title,
+        title: i.variant ? `${i.title} (${i.variant})` : i.title,
         qty: i.qty,
         price: i.price,
         priceValue: i.priceValue,
