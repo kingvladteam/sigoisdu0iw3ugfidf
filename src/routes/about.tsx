@@ -24,10 +24,13 @@ function AboutPage() {
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.4fr]">
         <Reveal>
           <div className="mb-6 md:mb-0">
-            <h1 className="mb-5 block text-center font-display text-[2.4rem] font-medium leading-[1.02] text-accent md:hidden">
-              Інґіґерда
+            <p className="mb-5 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.32em] text-accent md:hidden">
+              Вірші · Пісні · Проза
+            </p>
+            <h1 className="mb-0 block text-center font-display text-[2.4rem] font-medium leading-[1.02] text-accent md:hidden">
+              ІНҐІҐЕРДА
             </h1>
-            <div className="relative mx-auto w-full max-w-[18rem] md:max-w-none">
+            <div className="relative mx-auto mt-5 w-full max-w-[18rem] md:max-w-none">
               <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
               <div className="overflow-hidden rounded-[1.4rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02] md:rounded-2xl">
                 <img
