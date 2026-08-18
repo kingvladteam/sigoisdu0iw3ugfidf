@@ -69,9 +69,9 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={150}>
-          <div className="relative mx-auto w-full max-w-md md:max-w-none">
+          <div className="relative mx-auto mt-2 w-full max-w-[18rem] md:mt-0 md:max-w-none">
             <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
-            <div className="overflow-hidden rounded-[1.8rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+            <div className="overflow-hidden rounded-[1.4rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02] md:rounded-[1.8rem]">
               <img
                 src="/assets/portrait_main.jpg"
                 alt="Портрет Інґіґерди — Ірини Рудики"
