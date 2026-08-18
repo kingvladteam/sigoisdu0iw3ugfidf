@@ -89,8 +89,8 @@ function ProjectsPage() {
   return (
     <>
       <section className="border-t border-border/60 bg-gradient-to-br from-[#2767d1]/10 via-background to-card">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[1.2fr_1fr]">
-          <Reveal>
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-16 md:grid-cols-[1.2fr_1fr] md:gap-12 md:px-6 md:py-20">
+          <Reveal className="order-2 md:order-1">
             <div className="gold-line my-6 w-20" />
             <p className="text-lg leading-relaxed text-foreground/85">
               «Літературні забави» — це проєкт із 5-річною історією, на сцені якого вже прозвучали голоси понад 165 сучасних українських авторів. Вигадала та реалізувала його Інґіґерда. Власне, це секрет його довготривалості та сталості. 
@@ -166,10 +166,10 @@ function ProjectsPage() {
               </Dialog>
             </div>
           </Reveal>
-          <Reveal delay={120}>
-            <div className="relative">
+          <Reveal delay={120} className="order-first md:order-2">
+            <div className="relative mx-auto w-full max-w-[11rem] md:max-w-none">
               <div className="absolute inset-0 -z-10 rounded-3xl bg-[#2767d1] blur-3xl opacity-30" />
-              <div className="overflow-hidden rounded-full border border-border shadow-2xl bg-[#2767d1] transition-transform duration-700 hover:scale-[1.02]">
+              <div className="overflow-hidden rounded-full border border-border bg-[#2767d1] shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
                 <img
                   src={litzabavyLogo.url}
                   alt="Логотип «Літературні забави»"
