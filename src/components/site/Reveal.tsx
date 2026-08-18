@@ -23,7 +23,7 @@ export function Reveal({ children, className, delay = 0, y = 24, as: Tag = "div"
           io.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -15% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -35,11 +35,12 @@ export function Reveal({ children, className, delay = 0, y = 24, as: Tag = "div"
       ref={ref as any}
       style={{
         transitionDelay: `${delay}ms`,
+        transitionDuration: "500ms",
         transform: visible ? "translateY(0)" : `translateY(${y}px)`,
         opacity: visible ? 1 : 0,
       }}
       className={cn(
-        "transition-all duration-700 ease-out will-change-transform",
+        "transition-all ease-out will-change-transform",
         className,
       )}
     >
