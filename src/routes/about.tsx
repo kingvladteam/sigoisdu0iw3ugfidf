@@ -23,12 +23,15 @@ function AboutPage() {
     <section className="border-t border-border/60">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.4fr]">
         <Reveal>
-          <div className="overflow-hidden rounded-2xl border border-border shadow-xl">
-            <img
-              src={portraitAsset.url}
-              alt="Ірина Рудика — Інґіґерда"
-              className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-105"
-            />
+          <div className="relative mx-auto w-full max-w-[18rem] md:max-w-none">
+            <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
+            <div className="overflow-hidden rounded-[1.4rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02] md:rounded-2xl">
+              <img
+                src={portraitAsset.url}
+                alt="Ірина Рудика — Інґіґерда"
+                className="aspect-[3/4] w-full object-cover"
+              />
+            </div>
           </div>
         </Reveal>
 
