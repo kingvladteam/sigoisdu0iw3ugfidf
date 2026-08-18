@@ -1,5 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { Button } from "@/components/ui/button";
 import portraitAsset from "@/assets/portrait.jpg.asset.json";
 
 export const Route = createFileRoute("/about")({
@@ -45,6 +47,19 @@ function AboutPage() {
             <p className="italic">
               «Усе, чим я займаюся — культура, мистецтво, освіта, громадська діяльність, — насправді має велике значення. А зараз — особливо. Мені вкрай важливо розвивати всі напрями своєї діяльності та, за можливості, поєднувати їх. Велике щастя — навчати через творчість і водночас творити, навчаючи».
             </p>
+          </div>
+
+          <div className="mt-8">
+            <Button
+              asChild
+              size="lg"
+              className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+            >
+              <Link to="/books">
+                До книг
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </Reveal>
       </div>
