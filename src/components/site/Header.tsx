@@ -86,14 +86,15 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-border/60 bg-background/95 backdrop-blur md:hidden animate-fade-in">
+        <nav className="mobile-menu-panel border-t border-border/60 bg-background/95 backdrop-blur md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-3 text-sm">
-            {navLinks.map((l) => (
+            {navLinks.map((l, index) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-accent/10 hover:text-accent"
+                style={{ animationDelay: `${index * 70}ms` }}
+                className="mobile-nav-item rounded-md px-3 py-2.5 text-foreground/80 transition-all duration-300 hover:-translate-x-0.5 hover:bg-accent/10 hover:text-accent"
                 activeProps={{ className: "bg-accent/10 text-accent" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
