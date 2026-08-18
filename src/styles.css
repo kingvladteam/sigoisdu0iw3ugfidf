@@ -167,3 +167,35 @@
   50% { transform: translateY(-8px); }
 }
 .animate-float { animation: float-slow 6s ease-in-out infinite; }
+
+@keyframes mobile-menu-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes mobile-nav-item {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu-panel {
+  animation: mobile-menu-slide-down 220ms ease-out;
+}
+
+.mobile-nav-item {
+  animation: mobile-nav-item 260ms ease-out both;
+}
