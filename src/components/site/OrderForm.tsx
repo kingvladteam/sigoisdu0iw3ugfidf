@@ -165,7 +165,7 @@ export function OrderForm({ items }: { items: CartItem[] }) {
               name="comment"
               maxLength={1000}
               rows={3}
-              placeholder="Номер відділення, побажання щодо підпису…"
+              placeholder="Номер відділення, побажання... (необов'язково)"
             />
           </Field>
 
