@@ -200,44 +200,50 @@ function BookPage() {
 
       <Dialog open={lightbox !== null} onOpenChange={(o) => !o && setLightbox(null)}>
         <DialogContent
-          className="max-w-[96vw] border-none bg-background/95 p-0 sm:max-w-5xl [&>button]:hidden"
+          className="w-[94vw] max-w-[94vw] border-none bg-background/95 p-0 shadow-2xl sm:max-w-5xl [&>button]:hidden"
         >
           <DialogTitle className="sr-only">
             {book.title} — фото {lightbox !== null ? lightbox + 1 : ""}
           </DialogTitle>
-          <button
-            type="button"
-            onClick={() => setLightbox(null)}
-            aria-label="Закрити"
-            className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground shadow transition-all hover:scale-110 hover:bg-accent hover:text-accent-foreground"
-          >
-            <X className="h-4 w-4" />
-          </button>
-          {lightbox !== null && (
-            <img
-              src={book.gallery[lightbox] ?? book.cover}
-              alt={`${book.title} — фото ${lightbox + 1}`}
-              className="mx-auto max-h-[88vh] w-auto rounded-lg object-contain"
-            />
-          )}
-          {book.gallery.length > 1 && (
-            <div className="flex justify-center gap-2 p-3">
-              {book.gallery.map((g: string, i: number) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setLightbox(i)}
-                  className={`h-14 w-14 overflow-hidden rounded-md border transition-all ${
-                    i === lightbox
-                      ? "border-accent ring-2 ring-accent"
-                      : "border-border opacity-70 hover:opacity-100"
-                  }`}
-                >
-                  <img src={g} alt="" className="h-full w-full object-cover" />
-                </button>
-              ))}
+          <div className="relative overflow-hidden rounded-lg">
+            <button
+              type="button"
+              onClick={() => setLightbox(null)}
+              aria-label="Закрити"
+              className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground shadow transition-all hover:scale-110 hover:bg-accent hover:text-accent-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="flex max-h-[78vh] items-center justify-center overflow-hidden bg-background/80 px-2 py-3 sm:px-4">
+              {lightbox !== null && (
+                <img
+                  src={book.gallery[lightbox] ?? book.cover}
+                  alt={`${book.title} — фото ${lightbox + 1}`}
+                  className="block max-h-[74vh] w-full rounded-lg object-contain"
+                />
+              )}
             </div>
-          )}
+
+            {book.gallery.length > 1 && (
+              <div className="flex flex-wrap justify-center gap-2 overflow-x-auto p-3">
+                {book.gallery.map((g: string, i: number) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setLightbox(i)}
+                    className={`h-14 w-14 shrink-0 overflow-hidden rounded-md border transition-all ${
+                      i === lightbox
+                        ? "border-accent ring-2 ring-accent"
+                        : "border-border opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={g} alt="" className="h-full w-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
     </article>
