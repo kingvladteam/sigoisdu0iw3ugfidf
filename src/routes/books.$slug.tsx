@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, ShoppingBag, Expand, X } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Expand, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
@@ -55,7 +55,14 @@ function BookPage() {
 
 
   const openImage = (idx: number) => setLightbox(idx);
-
+  const goToPrevImage = () => {
+    if (lightbox === null || book.gallery.length <= 1) return;
+    setLightbox((lightbox - 1 + book.gallery.length) % book.gallery.length);
+  };
+  const goToNextImage = () => {
+    if (lightbox === null || book.gallery.length <= 1) return;
+    setLightbox((lightbox + 1) % book.gallery.length);
+  };
 
   return (
     <article className="border-t border-border/60">
@@ -210,10 +217,31 @@ function BookPage() {
               type="button"
               onClick={() => setLightbox(null)}
               aria-label="Закрити"
-              className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground shadow transition-all hover:scale-110 hover:bg-accent hover:text-accent-foreground"
+              className="absolute right-3 top-3 z-20 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground shadow transition-all hover:scale-110 hover:bg-accent hover:text-accent-foreground"
             >
               <X className="h-4 w-4" />
             </button>
+
+            {book.gallery.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={goToPrevImage}
+                  aria-label="Попереднє фото"
+                  className="absolute left-2 top-1/2 z-20 inline-flex -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 p-2 text-foreground shadow-md transition-all hover:scale-110 hover:bg-accent hover:text-accent-foreground sm:left-4"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={goToNextImage}
+                  aria-label="Наступне фото"
+                  className="absolute right-12 top-1/2 z-20 inline-flex -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 p-2 text-foreground shadow-md transition-all hover:scale-110 hover:bg-accent hover:text-accent-foreground sm:right-16"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </>
+            )}
 
             <div className="flex max-h-[78vh] items-center justify-center overflow-hidden bg-background/80 px-2 py-3 sm:px-4">
               {lightbox !== null && (
