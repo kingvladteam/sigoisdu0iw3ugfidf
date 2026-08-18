@@ -247,12 +247,12 @@ function ProjectsPage() {
             </Reveal>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {visibleGallery.map((src, i) => (
-                <Reveal key={src} delay={i * 70}>
+                <Reveal key={src} delay={i * 40}>
                   <div className="group overflow-hidden rounded-xl border border-border bg-card">
                     <img
                       src={src}
                       alt="Літературні забави — момент"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-110"
                       loading="lazy"
                     />
                   </div>
