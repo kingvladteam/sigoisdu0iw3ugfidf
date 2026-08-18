@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import portraitAsset from "@/assets/portrait.jpg.asset.json";
 import litzabavyLogo from "@/assets/litzabavy-logo.png.asset.json";
 import litzabavyAudience from "@/assets/litzabavy-audience.jpg.asset.json";
 
@@ -75,7 +74,7 @@ function Hero() {
             <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
             <div className="overflow-hidden rounded-[1.8rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
               <img
-                src={portraitAsset.url}
+                src="/assets/portrait_main.jpg"
                 alt="Портрет Інґіґерди — Ірини Рудики"
                 className="aspect-[3/4] w-full object-cover"
                 loading="eager"
