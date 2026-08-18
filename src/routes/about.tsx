@@ -27,10 +27,11 @@ function AboutPage() {
             <p className="mb-5 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.32em] text-accent md:hidden">
               Вірші · Пісні · Проза
             </p>
-            <h1 className="mb-0 block text-center font-display text-[2.4rem] font-medium leading-[1.02] text-accent md:hidden">
+            <h1 className="mb-4 block text-center font-display text-[2.4rem] font-medium leading-[1.02] text-accent md:hidden">
               ІНҐІҐЕРДА
             </h1>
-            <div className="relative mx-auto mt-5 w-full max-w-[18rem] md:max-w-none">
+            <div className="gold-line mx-auto mb-5 block w-20 md:hidden" />
+            <div className="relative mx-auto w-full max-w-[18rem] md:max-w-none">
               <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
               <div className="overflow-hidden rounded-[1.4rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02] md:rounded-2xl">
                 <img
@@ -47,7 +48,6 @@ function AboutPage() {
           <h1 className="hidden font-display text-[2.7rem] font-medium leading-[1.02] md:block md:text-7xl">
             <span className="text-accent">Інґіґерда</span>
           </h1>
-          <div className="gold-line my-8 w-24" />
           <div className="space-y-5 text-lg leading-relaxed text-foreground/85">
             <p>
               Авторка віршів, поем, казок, оповідань для дітей та дорослих, засновниця мистецького проєкту «Літературні забави», співзасновниця фестивалю «Поверхи», фахівчиня у сфері неформальної освіти, амбасадорка концепції Life Long Learning в Україні.
