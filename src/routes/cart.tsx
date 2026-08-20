@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
-import { OrderForm } from "@/components/site/OrderForm";
+import { OrderForm, type DeliveryMethod } from "@/components/site/OrderForm";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/cart")({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { items, count, total, setQty, remove } = useCart();
+  const [delivery, setDelivery] = useState<DeliveryMethod>("nova-poshta");
   const freeShippingThreshold = 1000;
   const amountToFreeShipping = freeShippingThreshold - total;
 
@@ -143,7 +145,9 @@ function CartPage() {
                 </span>
               </div>
               <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground/75">
-                {amountToFreeShipping > 0 ? (
+                {delivery === "pickup" ? (
+                  <strong className="text-accent">Самовивіз безкоштовний.</strong>
+                ) : amountToFreeShipping > 0 ? (
                   <>
                     Додайте ще на <strong className="text-accent">{amountToFreeShipping} грн</strong>,
                     і доставимо замовлення безкоштовно.
@@ -158,7 +162,7 @@ function CartPage() {
 
             <Reveal delay={120}>
               <h2 className="mb-4 font-display text-2xl font-semibold">Контактні дані</h2>
-              <OrderForm items={items} />
+              <OrderForm items={items} onDeliveryChange={setDelivery} />
             </Reveal>
           </div>
         )}
