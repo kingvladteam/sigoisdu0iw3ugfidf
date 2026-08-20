@@ -9,11 +9,11 @@ import litzabavyAudience from "@/assets/litzabavy-audience.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Інґіґерда (Ingigerda)" },
+      { title: "Ingigerda — Інґіґерда (Інгігерда)" },
       {
         name: "description",
         content:
-          "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
+          "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
       },
     ],
   }),
@@ -60,7 +60,7 @@ function Hero() {
           </Reveal>
 
           <p className="mt-7 max-w-xl text-base leading-relaxed text-foreground/75 md:mt-7 md:text-lg">
-            Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.
+            Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.
           </p>
           <p className="mt-6 max-w-xl space-y-4 text-sm leading-relaxed text-foreground/50">
             <span className="block font-display text-base italic text-foreground/60">
