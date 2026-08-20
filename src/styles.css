@@ -135,6 +135,12 @@
     radial-gradient(circle at 75% 85%, oklch(0.88 0.04 50 / 0.4) 0, transparent 45%);
 }
 
+@media (min-width: 768px) {
+  .site-scale {
+    zoom: 0.8;
+  }
+}
+
 .gold-line {
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
   height: 1px;
