@@ -49,7 +49,7 @@ function BookPage() {
   const book = allBooks.find((b) => b.slug === slug) ?? staticBook;
   const { add, items } = useCart();
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const [variantIdx, setVariantIdx] = useState(0);
+  const [variantIdx, setVariantIdx] = useState<number | null>(null);
 
   if (!book) {
     return (
@@ -60,7 +60,13 @@ function BookPage() {
   }
 
   const variants = book.variants ?? [];
-  const variant = variants[variantIdx] ?? variants[0];
+  const cheapestVariantIdx = variants.reduce(
+    (cheapestIndex, currentVariant, index) =>
+      currentVariant.priceValue < variants[cheapestIndex].priceValue ? index : cheapestIndex,
+    0,
+  );
+  const selectedVariantIdx = variantIdx ?? cheapestVariantIdx;
+  const variant = variants[selectedVariantIdx] ?? variants[0];
   const currentPrice = variant ? `${variant.priceValue} грн` : book.price;
   const inCart = items.some((i) =>
     variant ? i.slug === book.slug && i.variant === variant.label : i.slug === book.slug,
@@ -135,6 +141,32 @@ function BookPage() {
             <p className="mt-1 text-sm text-muted-foreground">{book.pages}</p>
           )}
           <div className="gold-line my-6 w-20" />
+
+          {variants.length > 0 && (
+            <div className="mb-8">
+              <p className="text-sm uppercase tracking-wider text-muted-foreground">
+                Оберіть обкладинку
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {variants.map((v, i) => (
+                  <button
+                    key={v.label}
+                    type="button"
+                    onClick={() => setVariantIdx(i)}
+                    className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all ${
+                      i === selectedVariantIdx
+                        ? "border-accent bg-accent/10 shadow-sm"
+                        : "border-border bg-card/60 hover:border-accent/50"
+                    }`}
+                  >
+                    <span className="text-sm font-medium">{v.label}</span>
+                    <span className="font-display text-lg text-accent">{v.priceValue} грн</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="space-y-4 text-base leading-relaxed text-foreground/85">
             {book.long.map((p: string, i: number) => (
               <p key={i}>{p}</p>
@@ -160,31 +192,6 @@ function BookPage() {
                   </div>
                 ))}
               </dl>
-            </div>
-          )}
-
-          {variants.length > 0 && (
-            <div className="mt-8">
-              <p className="text-sm uppercase tracking-wider text-muted-foreground">
-                Оберіть обкладинку
-              </p>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {variants.map((v, i) => (
-                  <button
-                    key={v.label}
-                    type="button"
-                    onClick={() => setVariantIdx(i)}
-                    className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all ${
-                      i === variantIdx
-                        ? "border-accent bg-accent/10 shadow-sm"
-                        : "border-border bg-card/60 hover:border-accent/50"
-                    }`}
-                  >
-                    <span className="text-sm font-medium">{v.label}</span>
-                    <span className="font-display text-lg text-accent">{v.priceValue} грн</span>
-                  </button>
-                ))}
-              </div>
             </div>
           )}
 
