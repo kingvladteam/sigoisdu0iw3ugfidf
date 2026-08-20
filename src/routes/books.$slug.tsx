@@ -141,7 +141,7 @@ function BookPage() {
           <h1 className="font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
           <p
             key={`${book.slug}-${selectedVariantIdx}-${currentPrice}`}
-            className="price-change mt-3 inline-block font-display text-3xl text-accent"
+            className="price-change mt-3 inline-flex min-h-10 items-center font-display text-3xl text-accent"
             aria-live="polite"
           >
             {currentPrice}
