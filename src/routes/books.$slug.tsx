@@ -51,6 +51,7 @@ function BookPage() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const [variantIdx, setVariantIdx] = useState<number | null>(null);
+  const [coverSwitching, setCoverSwitching] = useState(false);
 
   if (!book) {
     return (
@@ -85,6 +86,12 @@ function BookPage() {
     setSlideDirection("next");
     setLightbox((lightbox + 1) % book.gallery.length);
   };
+  const selectVariant = (index: number) => {
+    if (index === selectedVariantIdx) return;
+    setVariantIdx(index);
+    setCoverSwitching(true);
+    window.setTimeout(() => setCoverSwitching(false), 620);
+  };
 
   return (
     <article className="border-t border-border/60">
@@ -102,7 +109,9 @@ function BookPage() {
           <button
             type="button"
             onClick={() => openImage(0)}
-            className="group relative block w-full overflow-hidden rounded-2xl border border-border shadow-xl"
+            className={`cover-switch-frame group relative block w-full overflow-hidden rounded-2xl border border-border shadow-xl ${
+              coverSwitching ? "cover-switching" : ""
+            }`}
             aria-label="Відкрити фото на весь екран"
           >
             <img
@@ -161,7 +170,7 @@ function BookPage() {
                   <button
                     key={v.label}
                     type="button"
-                    onClick={() => setVariantIdx(i)}
+                    onClick={() => selectVariant(i)}
                     className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-300 ${
                       i === selectedVariantIdx
                         ? "variant-option-active border-accent bg-accent/10 shadow-sm"
