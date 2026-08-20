@@ -103,12 +103,12 @@ function ProjectsPage() {
             <div className="mt-8">
               <SocialList items={litZabavySocials} variant="compact" />
             </div>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4">
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+                    className="group h-auto min-h-10 w-full flex-1 whitespace-normal bg-accent px-4 py-3 text-center text-sm leading-snug text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-xl sm:text-base"
                   >
                     Як стати відвідувачем заходу
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -147,7 +147,7 @@ function ProjectsPage() {
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+                    className="group h-auto min-h-10 w-full flex-1 whitespace-normal bg-accent px-4 py-3 text-center text-sm leading-snug text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-xl sm:text-base"
                   >
                     Як стати героєм проєкту
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
