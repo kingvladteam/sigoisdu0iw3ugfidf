@@ -91,6 +91,12 @@ function ProjectsPage() {
       <section className="border-t border-border/60 bg-gradient-to-br from-[#2767d1]/10 via-background to-card">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-16 md:grid-cols-[1.2fr_1fr] md:gap-12 md:px-6 md:py-20">
           <Reveal className="order-2 md:order-1">
+            <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent">
+              Авторський проєкт
+            </p>
+            <h1 className="hero-title font-display text-[2.2rem] font-medium leading-[1.02] md:text-7xl">
+              <span className="text-accent">ЛІТЕРАТУРНІ ЗАБАВИ</span>
+            </h1>
             <div className="gold-line my-6 w-20" />
             <p className="text-lg leading-relaxed text-foreground/85">
               «Літературні забави» — це проєкт із 5-річною історією, на сцені якого вже прозвучали голоси понад 165 сучасних українських авторів. Вигадала та реалізувала його Інґіґерда. Власне, це секрет його довготривалості та сталості. 
