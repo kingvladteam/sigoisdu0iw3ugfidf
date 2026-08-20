@@ -197,6 +197,7 @@ function BookPage() {
                   variant
                     ? `«${book.title}» (${variant.label}) додано в кошик`
                     : `«${book.title}» додано в кошик`,
+                  { description: "Оформіть замовлення зараз, і скоро книга буде у вас." },
                 );
               }}
               className="bg-accent text-accent-foreground transition-all hover:scale-105 hover:bg-accent/90 hover:shadow-lg"
