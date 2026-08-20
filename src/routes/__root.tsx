@@ -161,7 +161,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <div className="paper-bg flex min-h-screen flex-col bg-background text-foreground">
+        <div className="paper-bg site-scale flex min-h-screen flex-col bg-background text-foreground">
           <Toaster position="top-center" richColors closeButton />
           <Header />
           <main className="flex-1">
