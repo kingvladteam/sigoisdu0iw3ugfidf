@@ -4,7 +4,6 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -176,10 +175,8 @@ function RootComponent() {
 }
 
 function PageTransition() {
-  const location = useLocation();
-
   return (
-    <div key={location.pathname} className="page-transition">
+    <div className="page-transition">
       <Outlet />
     </div>
   );
