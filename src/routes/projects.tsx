@@ -108,9 +108,9 @@ function ProjectsPage() {
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="group h-auto min-h-10 w-full flex-1 whitespace-normal bg-accent px-4 py-3 text-center text-sm leading-snug text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-xl sm:text-base"
+                    className="cta-shimmer group h-auto min-h-10 w-full flex-1 whitespace-normal bg-accent px-4 py-3 text-center text-sm font-normal leading-snug text-accent-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-xl"
                   >
-                    Як стати відвідувачем заходу
+                    Як стати відвідувачем
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </DialogTrigger>
@@ -147,7 +147,7 @@ function ProjectsPage() {
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="group h-auto min-h-10 w-full flex-1 whitespace-normal bg-accent px-4 py-3 text-center text-sm leading-snug text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-xl sm:text-base"
+                    className="cta-shimmer group h-auto min-h-10 w-full flex-1 whitespace-normal bg-accent px-4 py-3 text-center text-sm font-normal leading-snug text-accent-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-xl"
                   >
                     Як стати героєм проєкту
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
