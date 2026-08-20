@@ -106,9 +106,10 @@ function BookPage() {
             aria-label="Відкрити фото на весь екран"
           >
             <img
+              key={`${book.slug}-cover-${selectedVariantIdx}`}
               src={book.cover}
               alt={`Обкладинка «${book.title}»`}
-              className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              className="variant-cover-change aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
             <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-xs text-foreground/80 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
               <Expand className="h-3.5 w-3.5" /> Збільшити
@@ -169,7 +170,7 @@ function BookPage() {
                     }`}
                   >
                     <span className="text-sm font-medium">{v.label}</span>
-                    <span className="font-display text-lg text-accent">{v.priceValue} грн</span>
+                        ? "variant-option-active border-accent bg-accent/10 shadow-sm"
                   </button>
                 ))}
               </div>
