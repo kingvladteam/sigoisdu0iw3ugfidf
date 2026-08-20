@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/logo.jpg.asset.json";
 import { authorSocials } from "@/lib/site-data";
 import { SocialList } from "./SocialList";
 
@@ -10,7 +9,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <span className="inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border bg-card">
-              <img src={logoAsset.url} alt="" className="h-full w-full object-cover" />
+              <img src="/assets/logo.jpg" alt="" className="h-full w-full object-cover" />
             </span>
             <span className="font-display text-xl font-semibold">Інґіґерда</span>
           </div>
