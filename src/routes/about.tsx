@@ -45,10 +45,14 @@ function AboutPage() {
         </Reveal>
 
         <Reveal delay={120}>
+          <p className="mb-5 hidden items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent md:flex">
+            Вірші · Пісні · Проза
+          </p>
           <h1 className="hidden font-display text-[2.7rem] font-medium leading-[1.02] md:block md:text-7xl">
-            <span className="text-accent">Інґіґерда</span>
+            <span className="text-accent">ІНҐІҐЕРДА</span>
           </h1>
-          <div className="space-y-5 text-lg leading-relaxed text-foreground/85">
+          <div className="gold-line my-6 hidden w-20 md:block" />
+          <div className="space-y-5 text-lg leading-relaxed text-foreground/85 md:mt-0">
             <p>
               Авторка віршів, поем, казок, оповідань для дітей та дорослих, засновниця мистецького проєкту «Літературні забави», співзасновниця фестивалю «Поверхи», фахівчиня у сфері неформальної освіти, амбасадорка концепції Life Long Learning в Україні.
             </p>
