@@ -104,24 +104,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Інґіґерда (Ingigerda)" },
+      { title: "Ingigerda — Інґіґерда (Інгігерда)" },
       {
         name: "description",
         content:
-          "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
+          "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
       },
-      { property: "og:title", content: "Інґіґерда (Ingigerda)" },
+      { property: "og:title", content: "Ingigerda — Інґіґерда (Інгігерда)" },
       {
         property: "og:description",
         content:
-          "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
+          "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Інґіґерда (Ingigerda)" },
-      { name: "description", content: "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
-      { property: "og:description", content: "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
-      { name: "twitter:description", content: "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
+      { name: "twitter:title", content: "Ingigerda — Інґіґерда (Інгігерда)" },
+      { name: "description", content: "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
+      { property: "og:description", content: "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
+      { name: "twitter:description", content: "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
       { property: "og:image", content: "/assets/site_banner.png" },
       { name: "twitter:image", content: "/assets/site_banner.png" },
     ],
