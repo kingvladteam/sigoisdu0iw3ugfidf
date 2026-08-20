@@ -35,7 +35,7 @@ function Hero() {
       <div className="pointer-events-none absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-accent/15 blur-3xl animate-float" />
       <div className="pointer-events-none absolute -bottom-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-3xl" />
     
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-8 md:grid-cols-[1.05fr_1fr] md:gap-14 md:px-6 md:py-20">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-4 md:grid-cols-[1.05fr_1fr] md:gap-14 md:px-6 md:py-16">
         <Reveal>
           <p className="mb-5 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.32em] text-accent md:justify-start md:text-left">
             Вірші · Пісні · Проза
@@ -69,7 +69,7 @@ function Hero() {
               Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
             </span>
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4 md:justify-start">
+          <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
             <Button
               asChild
               size="lg"
