@@ -22,6 +22,8 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { items, count, total, setQty, remove } = useCart();
+  const freeShippingThreshold = 1000;
+  const amountToFreeShipping = freeShippingThreshold - total;
 
   return (
     <section className="border-t border-border/60">
@@ -139,6 +141,18 @@ function CartPage() {
                 <span className="font-display text-2xl font-semibold text-accent">
                   {total} грн
                 </span>
+              </div>
+              <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground/75">
+                {amountToFreeShipping > 0 ? (
+                  <>
+                    Додайте ще на <strong className="text-accent">{amountToFreeShipping} грн</strong>,
+                    і доставимо замовлення безкоштовно.
+                  </>
+                ) : (
+                  <strong className="text-accent">
+                    У вас безкоштовна доставка. Дякуємо за замовлення!
+                  </strong>
+                )}
               </div>
             </Reveal>
 
