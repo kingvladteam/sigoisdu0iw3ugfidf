@@ -9,11 +9,11 @@ import litzabavyAudience from "@/assets/litzabavy-audience.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Інґіґерда — поетеса та авторка" },
+      { title: "Інґіґерда (Ingigerda)" },
       {
         name: "description",
         content:
-          "Офіційний сайт української поетеси Інґіґерди — авторки книг та засновниці проєкту «Літературні забави».",
+          "Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
       },
     ],
   }),
@@ -51,7 +51,7 @@ function Hero() {
               <div className="overflow-hidden rounded-[1.4rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
                 <img
                   src="/assets/portrait_main.jpg"
-                  alt="Портрет Інґіґерди — Ірини Рудики"
+                  alt="Інґіґерда (Ingigerda)"
                   className="aspect-[3/4] w-full object-cover"
                   loading="eager"
                 />
@@ -60,7 +60,7 @@ function Hero() {
           </Reveal>
 
           <p className="mt-7 max-w-xl text-base leading-relaxed text-foreground/75 md:mt-7 md:text-lg">
-            письменниця, авторка статей, перекладачка, громадська діячка, організаторка мистецьких імпрез, експертка з розвитку освітніх та культурних проєктів.
+            Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.
           </p>
           <p className="mt-6 max-w-xl space-y-4 text-sm leading-relaxed text-foreground/50">
             <span className="block font-display text-base italic text-foreground/60">
@@ -89,7 +89,7 @@ function Hero() {
             <div className="overflow-hidden rounded-[1.8rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
               <img
                 src="/assets/portrait_main.jpg"
-                alt="Портрет Інґіґерди — Ірини Рудики"
+                alt="Інґіґерда (Ingigerda)"
                 className="aspect-[3/4] w-full object-cover"
                 loading="eager"
               />
