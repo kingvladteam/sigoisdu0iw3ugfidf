@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -17,7 +17,23 @@ const navLinks = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cartAttention, setCartAttention] = useState(false);
+  const previousCount = useRef<number | null>(null);
   const { count } = useCart();
+
+  useEffect(() => {
+    if (previousCount.current === null) {
+      previousCount.current = count;
+      return;
+    }
+    if (count > previousCount.current) {
+      setCartAttention(true);
+      const timeout = window.setTimeout(() => setCartAttention(false), 1800);
+      previousCount.current = count;
+      return () => window.clearTimeout(timeout);
+    }
+    previousCount.current = count;
+  }, [count]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -64,7 +80,10 @@ export function Header() {
           <Link
             to="/cart"
             aria-label="Кошик"
-            className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card/60 text-foreground/80 transition-all hover:scale-110 hover:border-accent hover:text-accent"
+            className={cn(
+              "relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card/60 text-foreground/80 transition-all hover:scale-110 hover:border-accent hover:text-accent",
+              cartAttention && "cart-attention border-accent text-accent",
+            )}
           >
             <ShoppingBag className="h-4 w-4" />
             {count > 0 && (
