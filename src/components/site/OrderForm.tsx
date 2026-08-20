@@ -27,13 +27,21 @@ const DELIVERY_OPTIONS = [
   { value: "pickup", label: "Самовивіз" },
 ] as const;
 
-export function OrderForm({ items }: { items: CartItem[] }) {
+export type DeliveryMethod = "nova-poshta" | "ukrposhta" | "pickup";
+
+export function OrderForm({
+  items,
+  onDeliveryChange,
+}: {
+  items: CartItem[];
+  onDeliveryChange?: (delivery: DeliveryMethod) => void;
+}) {
   const sendOrderFn = useServerFn(sendOrder);
   const navigate = useNavigate();
   const { clear } = useCart();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
-  const [delivery, setDelivery] = useState<"nova-poshta" | "ukrposhta" | "pickup">("nova-poshta");
+  const [delivery, setDelivery] = useState<DeliveryMethod>("nova-poshta");
   const [consentOffer, setConsentOffer] = useState(false);
   const [consentPrivacy, setConsentPrivacy] = useState(false);
   const consent = consentOffer && consentPrivacy;
@@ -143,7 +151,10 @@ export function OrderForm({ items }: { items: CartItem[] }) {
                 <button
                   key={o.value}
                   type="button"
-                  onClick={() => setDelivery(o.value)}
+                  onClick={() => {
+                    setDelivery(o.value);
+                    onDeliveryChange?.(o.value);
+                  }}
                   className={`rounded-lg border px-3 py-2.5 text-sm transition-all ${
                     delivery === o.value
                       ? "border-accent bg-accent/10 text-foreground shadow-sm"
@@ -155,8 +166,9 @@ export function OrderForm({ items }: { items: CartItem[] }) {
               ))}
             </div>
             <p className="text-xs text-muted-foreground">
-              Нова пошта та Укрпошта — за тарифами перевізника. На замовлення від 1000 грн
-              доставка безкоштовна. Самовивіз із м. Київ за попередньою домовленністю
+              {delivery === "pickup"
+                ? "Самовивіз із м. Київ — безкоштовно, за попередньою домовленістю."
+                : "Нова пошта та Укрпошта — за тарифами перевізника. На замовлення від 1000 грн доставка безкоштовна."}
             </p>
           </div>
 
@@ -165,7 +177,7 @@ export function OrderForm({ items }: { items: CartItem[] }) {
               name="comment"
               maxLength={1000}
               rows={3}
-              placeholder="Номер відділення, побажання... (необов'язково)"
+              placeholder="Номер відділення, побажання щодо підпису…"
             />
           </Field>
 
