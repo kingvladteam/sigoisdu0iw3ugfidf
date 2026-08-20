@@ -27,7 +27,7 @@ function AboutPage() {
             <p className="mb-5 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.32em] text-accent md:hidden">
               Вірші · Пісні · Проза
             </p>
-            <h1 className="mb-4 block text-center font-display text-[2.4rem] font-medium leading-[1.02] text-accent md:hidden">
+            <h1 className="hero-title mb-4 block text-center font-display text-[2.4rem] font-medium leading-[1.02] text-accent md:hidden">
               ІНҐІҐЕРДА
             </h1>
             <div className="gold-line mx-auto mb-5 block w-20 md:hidden" />
@@ -37,7 +37,7 @@ function AboutPage() {
                 <img
                   src={portraitAsset.url}
                   alt="Ірина Рудика — Інґіґерда"
-                  className="aspect-[3/4] w-full object-cover"
+                  className="portrait-breathe aspect-[3/4] w-full object-cover"
                 />
               </div>
             </div>
@@ -48,7 +48,7 @@ function AboutPage() {
           <p className="mb-5 hidden items-center gap-3 text-xs font-medium uppercase tracking-[0.32em] text-accent md:flex">
             Вірші · Пісні · Проза
           </p>
-          <h1 className="hidden font-display text-[2.7rem] font-medium leading-[1.02] md:block md:text-7xl">
+          <h1 className="hero-title hidden font-display text-[2.7rem] font-medium leading-[1.02] md:block md:text-7xl">
             <span className="text-accent">ІНҐІҐЕРДА</span>
           </h1>
           <div className="gold-line my-6 hidden w-20 md:block" />
@@ -68,7 +68,7 @@ function AboutPage() {
             <Button
               asChild
               size="lg"
-              className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+              className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-xl"
             >
               <Link to="/books">
                 До книг
