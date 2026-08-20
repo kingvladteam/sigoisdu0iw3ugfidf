@@ -106,10 +106,9 @@ function BookPage() {
             aria-label="Відкрити фото на весь екран"
           >
             <img
-              key={`${book.slug}-cover-${selectedVariantIdx}`}
               src={book.cover}
               alt={`Обкладинка «${book.title}»`}
-              className="variant-cover-change aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
             <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-xs text-foreground/80 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
               <Expand className="h-3.5 w-3.5" /> Збільшити
@@ -163,14 +162,14 @@ function BookPage() {
                     key={v.label}
                     type="button"
                     onClick={() => setVariantIdx(i)}
-                    className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all ${
+                    className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-300 ${
                       i === selectedVariantIdx
-                        ? "border-accent bg-accent/10 shadow-sm"
-                        : "border-border bg-card/60 hover:border-accent/50"
+                        ? "variant-option-active border-accent bg-accent/10 shadow-sm"
+                        : "border-border bg-card/60 hover:-translate-y-0.5 hover:border-accent/50"
                     }`}
                   >
                     <span className="text-sm font-medium">{v.label}</span>
-                        ? "variant-option-active border-accent bg-accent/10 shadow-sm"
+                    <span className="font-display text-lg text-accent">{v.priceValue} грн</span>
                   </button>
                 ))}
               </div>
