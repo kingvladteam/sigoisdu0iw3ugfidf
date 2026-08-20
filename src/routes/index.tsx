@@ -40,7 +40,7 @@ function Hero() {
           <p className="mb-5 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.32em] text-accent md:justify-start md:text-left">
             Вірші · Пісні · Проза
           </p>
-          <h1 className="font-display text-[2.2rem] font-medium leading-[1.02] md:text-7xl">
+          <h1 className="hero-title font-display text-[2.2rem] font-medium leading-[1.02] md:text-7xl">
             <span className="block text-center text-accent md:text-left">ІНҐІҐЕРДА</span>
             <span className="gold-line my-6 mx-auto block w-20 md:mx-0" />
           </h1>
@@ -52,7 +52,7 @@ function Hero() {
                 <img
                   src="/assets/portrait_main.jpg"
                   alt="Інґіґерда (Ingigerda)"
-                  className="aspect-[3/4] w-full object-cover"
+                  className="portrait-breathe aspect-[3/4] w-full object-cover"
                   loading="eager"
                 />
               </div>
@@ -73,7 +73,7 @@ function Hero() {
             <Button
               asChild
               size="lg"
-              className="group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+              className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
             >
               <Link to="/about">
                 Дізнатися більше
@@ -90,7 +90,7 @@ function Hero() {
               <img
                 src="/assets/portrait_main.jpg"
                 alt="Інґіґерда (Ingigerda)"
-                className="aspect-[3/4] w-full object-cover"
+                className="portrait-breathe aspect-[3/4] w-full object-cover"
                 loading="eager"
               />
             </div>
