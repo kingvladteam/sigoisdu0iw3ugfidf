@@ -306,38 +306,6 @@
   transform-origin: left center;
 }
 
-.cover-switch-frame {
-  isolation: isolate;
-}
-
-@keyframes cover-switch-image {
-  0% { transform: scale(1.025); filter: saturate(0.86) brightness(1.04); }
-  55% { transform: scale(1.008); filter: saturate(1.04) brightness(1.01); }
-  100% { transform: scale(1); filter: saturate(1) brightness(1); }
-}
-
-@keyframes cover-switch-sweep {
-  0% { opacity: 0; transform: translateX(-120%) skewX(-14deg); }
-  25% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(420%) skewX(-14deg); }
-}
-
-.cover-switching img {
-  animation: cover-switch-image 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.cover-switching::after {
-  position: absolute;
-  inset: -20% auto -20% -25%;
-  z-index: 2;
-  width: 18%;
-  content: "";
-  background: linear-gradient(90deg, transparent, color-mix(in oklab, white 36%, var(--color-accent)), transparent);
-  filter: blur(10px);
-  pointer-events: none;
-  animation: cover-switch-sweep 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 @keyframes variant-option-active {
   from { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-accent) 0%, transparent); }
   45% { box-shadow: 0 0 0 5px color-mix(in oklab, var(--color-accent) 16%, transparent); }
@@ -438,8 +406,6 @@
   .lightbox-image-prev,
   .price-change,
   .variant-option-active,
-  .cover-switching img,
-  .cover-switching::after,
   .price-change::after {
     animation: none;
   }
