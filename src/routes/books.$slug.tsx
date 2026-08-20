@@ -49,6 +49,7 @@ function BookPage() {
   const book = allBooks.find((b) => b.slug === slug) ?? staticBook;
   const { add, items } = useCart();
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const [variantIdx, setVariantIdx] = useState<number | null>(null);
 
   if (!book) {
@@ -76,10 +77,12 @@ function BookPage() {
   const openImage = (idx: number) => setLightbox(idx);
   const goToPrevImage = () => {
     if (lightbox === null || book.gallery.length <= 1) return;
+    setSlideDirection("prev");
     setLightbox((lightbox - 1 + book.gallery.length) % book.gallery.length);
   };
   const goToNextImage = () => {
     if (lightbox === null || book.gallery.length <= 1) return;
+    setSlideDirection("next");
     setLightbox((lightbox + 1) % book.gallery.length);
   };
 
@@ -267,9 +270,10 @@ function BookPage() {
             <div className="flex max-h-[78vh] items-center justify-center overflow-hidden bg-background/80 px-2 py-3 sm:px-4">
               {lightbox !== null && (
                 <img
+                  key={`${lightbox}-${slideDirection}`}
                   src={book.gallery[lightbox] ?? book.cover}
                   alt={`${book.title} — фото ${lightbox + 1}`}
-                  className="block max-h-[74vh] w-full rounded-lg object-contain"
+                  className={`lightbox-image-${slideDirection} block max-h-[74vh] w-full rounded-lg object-contain`}
                 />
               )}
             </div>
