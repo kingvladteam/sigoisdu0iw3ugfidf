@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -165,11 +166,21 @@ function RootComponent() {
           <Toaster position="top-center" richColors closeButton />
           <Header />
           <main className="flex-1">
-            <Outlet />
+            <PageTransition />
           </main>
           <Footer />
         </div>
       </CartProvider>
     </QueryClientProvider>
+  );
+}
+
+function PageTransition() {
+  const location = useLocation();
+
+  return (
+    <div key={location.pathname} className="page-transition">
+      <Outlet />
+    </div>
   );
 }
