@@ -110,7 +110,9 @@ function BooksIndex() {
                         <Button
                           onClick={() => {
                             add(book);
-                            toast.success(`«${book.title}» додано в кошик`);
+                            toast.success(`«${book.title}» додано в кошик`, {
+                              description: "Оформіть замовлення зараз, і скоро книга буде у вас.",
+                            });
                           }}
                           className="flex-1 bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90"
                         >
