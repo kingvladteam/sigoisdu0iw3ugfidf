@@ -15,15 +15,28 @@ export const Route = createFileRoute("/books/$slug")({
   },
   head: ({ loaderData }) => {
     const b = loaderData?.book;
-    if (!b) return { meta: [{ title: "Книга — Інґіґерда" }] };
+    if (!b) {
+      return {
+        meta: [
+          { title: "Книга — Інґіґерда" },
+          { name: "robots", content: "noindex,follow" },
+        ],
+      };
+    }
+    const description = `${b.short} Купити книгу можна онлайн із доставкою по Україні.`;
     return {
       meta: [
-        { title: `${b.title} — книга Інґіґерди | Замовити` },
-        { name: "description", content: b.short },
+        { title: `${b.title} — купити книгу Інґіґерди` },
+        { name: "description", content: description },
+        { name: "robots", content: "index,follow" },
         { property: "og:title", content: `${b.title} — Інґіґерда` },
-        { property: "og:description", content: b.short },
+        { property: "og:description", content: description },
         { property: "og:image", content: b.cover },
         { property: "og:type", content: "book" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: `${b.title} — Інґіґерда` },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: b.cover },
       ],
     };
   },
