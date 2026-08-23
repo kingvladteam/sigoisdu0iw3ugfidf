@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import portraitAsset from "@/assets/portrait.jpg.asset.json";
@@ -71,8 +71,8 @@ function AboutPage() {
               className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-xl"
             >
               <Link to="/books">
+                <BookOpen className="mr-2 h-4 w-4" />
                 Придбати книги
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
