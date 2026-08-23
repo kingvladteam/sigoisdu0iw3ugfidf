@@ -69,7 +69,7 @@ export function PromoOffer() {
           <div className="grid sm:grid-cols-[0.9fr_1.1fr]">
             <div className="bg-accent/10 p-4 sm:p-6">
               <img
-                src="/assets/nabir_abetka+kartky.jpg"
+                src="/assets/nabir_abetka%2Bkartky.jpg"
                 alt="Набір «Смачненька абетка» та картки"
                 className="h-full min-h-56 w-full rounded-xl object-cover shadow-lg"
               />
