@@ -76,7 +76,8 @@ export function PromoOffer() {
                 </DialogTitle>
                 <DialogDescription className="mt-4 text-base leading-relaxed text-foreground/75">
                   Тільки до 1 жовтня набір «Смачненька абетка» (книга та картки) за ціною всього
-                  <strong className="text-foreground"> 650 грн</strong>. Ваша вигода — 100 грн.
+                  <strong className="text-foreground"> 650 грн</strong>.
+                  <span className="mt-2 block">Ваша вигода — 50 грн.</span>
                 </DialogDescription>
               </DialogHeader>
               <div className="mt-6 flex flex-wrap items-center gap-3">
