@@ -61,7 +61,7 @@ function CartPage() {
                 size="lg"
                 className="mt-6 bg-accent text-accent-foreground hover:bg-accent/90"
               >
-                <Link to="/books">До книг</Link>
+                <Link to="/books">Придбати книги</Link>
               </Button>
             </div>
           </Reveal>
