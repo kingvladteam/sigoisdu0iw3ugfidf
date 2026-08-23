@@ -16,7 +16,7 @@ export type CartItem = {
 export const ABETKA_BOOK_SLUG = "smachnenka-abetka";
 export const ABETKA_CARDS_SLUG = "abetka-kartky";
 export const ABETKA_BUNDLE_CARD_PRICE = 250;
-export const ABETKA_BUNDLE_DISCOUNT = 50;
+export const ABETKA_BUNDLE_DISCOUNT = 100;
 
 const PROMO_END = new Date("2026-10-02T00:00:00+03:00");
 
