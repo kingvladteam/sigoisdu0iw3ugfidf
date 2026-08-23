@@ -71,8 +71,8 @@ export const books: Book[] = [
   {
     slug: "smachnenka-abetka",
     title: "Смачненька абетка",
-    price: "400 грн",
-    priceValue: 400,
+    price: "450 грн",
+    priceValue: 450,
     cover: abetkaAsset.url,
     gallery: [
       abetkaP13.url,
