@@ -34,7 +34,7 @@ function Hero() {
     <section className="relative overflow-hidden bg-[radial-gradient(120%_90%_at_85%_-10%,color-mix(in_oklab,var(--color-accent)_18%,transparent),transparent_55%),radial-gradient(100%_80%_at_-10%_110%,color-mix(in_oklab,var(--color-gold)_16%,transparent),transparent_50%)]">
       <div className="pointer-events-none absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-accent/15 blur-3xl animate-float" />
       <div className="pointer-events-none absolute -bottom-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-3xl" />
-    
+
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-4 md:grid-cols-[1.05fr_1fr] md:gap-14 md:px-6 md:py-16">
         <Reveal>
           <p className="mb-5 flex items-center justify-center gap-3 text-center text-xs font-medium uppercase tracking-[0.32em] text-accent md:justify-start md:text-left">
@@ -44,6 +44,19 @@ function Hero() {
             <span className="block text-center text-accent md:text-left">ІНҐІҐЕРДА</span>
             <span className="gold-line my-6 mx-auto block w-20 md:mx-0" />
           </h1>
+
+          <div className="mt-2 flex justify-center md:hidden">
+            <Button
+              asChild
+              size="lg"
+              className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+            >
+              <Link to="/books">
+                <BookOpen className="mr-2 h-4 w-4" />
+                Придбати книги
+              </Link>
+            </Button>
+          </div>
 
           <Reveal delay={150} className="block md:hidden">
             <div className="relative mx-auto mt-2 w-full max-w-[15rem]">
@@ -60,16 +73,18 @@ function Hero() {
           </Reveal>
 
           <p className="mt-7 max-w-xl text-base leading-relaxed text-foreground/75 md:mt-7 md:text-lg">
-            Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.
+            Інґіґерда (Ingigerda) — сучасна українська письменниця, організаторка мистецьких імпрез,
+            громадська діячка, фахівчиня з розвитку людського капіталу.
           </p>
           <p className="mt-6 max-w-xl space-y-4 text-sm leading-relaxed text-foreground/50">
             <span className="block font-display text-base italic text-foreground/60">
-              «Моє покликання — втілювати сенси у словах та діях.
-              Моя творчість — це поезія та коротка проза для дітей та дорослих різних жанрів і тематики.
-              Як громадська діячка та кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та міжкультурних проєктів».
+              «Моє покликання — втілювати сенси у словах та діях. Моя творчість — це поезія та
+              коротка проза для дітей та дорослих різних жанрів і тематики. Як громадська діячка та
+              кураторка, я трансформую літературу в живі імпрези, створюю простори для діалогу та
+              міжкультурних проєктів».
             </span>
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
+          <div className="mt-6 hidden flex-wrap justify-center gap-4 md:flex md:justify-start">
             <Button
               asChild
               size="lg"
