@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { OrderForm, type DeliveryMethod } from "@/components/site/OrderForm";
-import { useCart } from "@/lib/cart";
+import {
+  ABETKA_BOOK_SLUG,
+  ABETKA_CARDS_SLUG,
+  isAbetkaBundlePromoActive,
+  useCart,
+} from "@/lib/cart";
+import { getBook } from "@/lib/site-data";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -13,8 +19,7 @@ export const Route = createFileRoute("/cart")({
       { title: "Кошик — Замовлення книг Інґіґерди" },
       {
         name: "description",
-        content:
-          "Оформлення замовлення книг Інґіґерди з доставкою Новою поштою по Україні.",
+        content: "Оформлення замовлення книг Інґіґерди з доставкою Новою поштою по Україні.",
       },
     ],
   }),
@@ -22,10 +27,18 @@ export const Route = createFileRoute("/cart")({
 });
 
 function CartPage() {
-  const { items, count, total, setQty, remove } = useCart();
+  const { items, count, total, setQty, remove, add } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("nova-poshta");
   const freeShippingThreshold = 1000;
   const amountToFreeShipping = freeShippingThreshold - total;
+  const abetkaBookInCart = items.some((item) => item.slug === ABETKA_BOOK_SLUG);
+  const abetkaCardsInCart = items.some((item) => item.slug === ABETKA_CARDS_SLUG);
+  const canAddAbetkaCards = isAbetkaBundlePromoActive() && abetkaBookInCart && !abetkaCardsInCart;
+  const abetkaBookQty = items.find((item) => item.slug === ABETKA_BOOK_SLUG)?.qty ?? 0;
+  const abetkaCardsQty = items.find((item) => item.slug === ABETKA_CARDS_SLUG)?.qty ?? 0;
+  const bundleDiscount = isAbetkaBundlePromoActive()
+    ? Math.min(abetkaBookQty, abetkaCardsQty) * 50
+    : 0;
 
   return (
     <section className="border-t border-border/60">
@@ -53,8 +66,7 @@ function CartPage() {
               <ShoppingBag className="h-12 w-12 text-muted-foreground/60" />
               <h2 className="mt-6 font-display text-2xl">Кошик порожній</h2>
               <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                Перегляньте книги авторки і додайте їх у кошик — можна замовити декілька
-                одразу.
+                Перегляньте книги авторки і додайте їх у кошик — можна замовити декілька одразу.
               </p>
               <Button
                 asChild
@@ -143,17 +155,21 @@ function CartPage() {
                 <span className="text-sm uppercase tracking-wider text-muted-foreground">
                   Разом
                 </span>
-                <span className="font-display text-2xl font-semibold text-accent">
-                  {total} грн
-                </span>
+                <span className="font-display text-2xl font-semibold text-accent">{total} грн</span>
               </div>
+              {bundleDiscount > 0 && (
+                <p className="mt-2 text-right text-sm text-accent">
+                  Знижка за набір: −{bundleDiscount} грн
+                </p>
+              )}
               <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground/75">
                 {delivery === "pickup" ? (
                   <strong className="text-accent">Самовивіз безкоштовний.</strong>
                 ) : amountToFreeShipping > 0 ? (
                   <>
-                    Додайте ще на <strong className="text-accent">{amountToFreeShipping} грн</strong>,
-                    і доставимо замовлення безкоштовно.
+                    Додайте ще на{" "}
+                    <strong className="text-accent">{amountToFreeShipping} грн</strong>, і доставимо
+                    замовлення безкоштовно.
                   </>
                 ) : (
                   <strong className="text-accent">
@@ -161,6 +177,23 @@ function CartPage() {
                   </strong>
                 )}
               </div>
+              {canAddAbetkaCards && (
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3">
+                  <p className="text-sm leading-relaxed">
+                    Додайте картки до абетки та отримайте набір за <strong>650 грн</strong>.
+                  </p>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      const cards = getBook(ABETKA_CARDS_SLUG);
+                      if (cards) add(cards);
+                    }}
+                    className="shrink-0 bg-accent text-accent-foreground hover:bg-accent/90"
+                  >
+                    Додати картки
+                  </Button>
+                </div>
+              )}
             </Reveal>
 
             <Reveal delay={120}>
