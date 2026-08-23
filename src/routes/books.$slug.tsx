@@ -176,33 +176,31 @@ function BookPage() {
             </div>
           )}
 
-          <div className="mb-8 rounded-2xl border border-accent/30 bg-accent/5 p-4 sm:p-5">
-            <div className="flex flex-wrap gap-3">
-              <Button
-                size="lg"
-                onClick={() => {
-                  add(book, 1, variant);
-                  toast.success(
-                    variant
-                      ? `«${book.title}» (${variant.label}) додано в кошик`
-                      : `«${book.title}» додано в кошик`,
-                    { description: "Оформіть замовлення зараз, і скоро книга буде у вас." },
-                  );
-                }}
-                className="bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90 hover:shadow-lg"
-              >
-                <ShoppingBag className="mr-2 h-4 w-4" />
-                {inCart ? "Додати ще одну" : "Додати в кошик"}
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-accent text-accent hover:bg-accent/10"
-              >
-                <Link to="/cart">Перейти до кошика</Link>
-              </Button>
-            </div>
+          <div className="mb-8 flex flex-wrap gap-3">
+            <Button
+              size="lg"
+              onClick={() => {
+                add(book, 1, variant);
+                toast.success(
+                  variant
+                    ? `«${book.title}» (${variant.label}) додано в кошик`
+                    : `«${book.title}» додано в кошик`,
+                  { description: "Оформіть замовлення зараз, і скоро книга буде у вас." },
+                );
+              }}
+              className="bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90 hover:shadow-lg"
+            >
+              <ShoppingBag className="mr-2 h-4 w-4" />
+              {inCart ? "Додати ще одну" : "Додати в кошик"}
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-accent text-accent hover:bg-accent/10"
+            >
+              <Link to="/cart">Перейти до кошика</Link>
+            </Button>
           </div>
 
           <div className="space-y-4 text-base leading-relaxed text-foreground/85">
