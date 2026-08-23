@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
@@ -74,6 +74,17 @@ function Hero() {
               asChild
               size="lg"
               className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
+            >
+              <Link to="/books">
+                <BookOpen className="mr-2 h-4 w-4" />
+                Придбати книги
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="group border-accent/50 bg-background/40 text-foreground transition-all duration-300 hover:scale-105 hover:border-accent hover:bg-accent/10 hover:text-accent"
             >
               <Link to="/about">
                 Дізнатися більше
