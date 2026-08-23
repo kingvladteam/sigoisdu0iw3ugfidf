@@ -13,6 +13,16 @@ export type CartItem = {
   qty: number;
 };
 
+export const ABETKA_BOOK_SLUG = "smachnenka-abetka";
+export const ABETKA_CARDS_SLUG = "abetka-kartky";
+export const ABETKA_BUNDLE_CARD_PRICE = 250;
+
+const PROMO_END = new Date("2026-10-02T00:00:00+03:00");
+
+export function isAbetkaBundlePromoActive() {
+  return new Date() < PROMO_END;
+}
+
 export type CartVariant = { label: string; priceValue: number };
 
 type CartCtx = {
@@ -35,13 +45,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) setItems(JSON.parse(raw));
-    } catch {}
+    } catch {
+      // localStorage may be unavailable in private browsing.
+    }
   }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem(KEY, JSON.stringify(items));
-    } catch {}
+    } catch {
+      // Ignore persistence failures; the in-memory cart remains usable.
+    }
   }, [items]);
 
   const add: CartCtx["add"] = (book, qty = 1, variant) => {
@@ -49,9 +63,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((curr) => {
       const existing = curr.find((i) => (i.key ?? i.slug) === key);
       if (existing) {
-        return curr.map((i) =>
-          (i.key ?? i.slug) === key ? { ...i, qty: i.qty + qty } : i,
-        );
+        return curr.map((i) => ((i.key ?? i.slug) === key ? { ...i, qty: i.qty + qty } : i));
       }
       const priceValue = variant ? variant.priceValue : book.priceValue;
       return [
@@ -82,11 +94,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clear = () => setItems([]);
 
-  const count = items.reduce((s, i) => s + i.qty, 0);
-  const total = items.reduce((s, i) => s + i.qty * i.priceValue, 0);
+  const hasAbetkaBook = items.some((item) => item.slug === ABETKA_BOOK_SLUG);
+  const hasAbetkaCards = items.some((item) => item.slug === ABETKA_CARDS_SLUG);
+  const promoActive = isAbetkaBundlePromoActive() && hasAbetkaBook && hasAbetkaCards;
+  const pricedItems = promoActive
+    ? items.map((item) =>
+        item.slug === ABETKA_CARDS_SLUG
+          ? {
+              ...item,
+              price: `${ABETKA_BUNDLE_CARD_PRICE} грн`,
+              priceValue: ABETKA_BUNDLE_CARD_PRICE,
+            }
+          : item,
+      )
+    : items;
+
+  const count = pricedItems.reduce((s, i) => s + i.qty, 0);
+  const total = pricedItems.reduce((s, i) => s + i.qty * i.priceValue, 0);
 
   return (
-    <Ctx.Provider value={{ items, count, total, add, remove, setQty, clear }}>
+    <Ctx.Provider value={{ items: pricedItems, count, total, add, remove, setQty, clear }}>
       {children}
     </Ctx.Provider>
   );
