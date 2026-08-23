@@ -156,14 +156,16 @@ function CartPage() {
                 <span className="text-sm uppercase tracking-wider text-muted-foreground">
                   Разом
                 </span>
-                <span className="font-display text-2xl font-semibold text-accent">{total} грн</span>
+                <span className="whitespace-nowrap font-display text-2xl font-semibold text-muted-foreground line-through decoration-accent/70">
+                  {total} грн
+                </span>
               </div>
               {bundleDiscount > 0 && (
-                <div className="mt-3 flex items-center justify-between rounded-xl border border-accent/40 bg-accent/10 px-5 py-4">
-                  <span className="text-sm font-medium text-foreground/80">
+                <div className="mt-3 flex flex-col items-start gap-2 rounded-xl border-2 border-accent bg-accent/15 px-5 py-4 shadow-md sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                  <span className="text-sm font-semibold text-foreground/85">
                     До сплати з урахуванням знижки
                   </span>
-                  <span className="font-display text-2xl font-semibold text-accent">
+                  <span className="whitespace-nowrap font-display text-3xl font-bold text-accent">
                     {payableTotal} грн
                   </span>
                 </div>
