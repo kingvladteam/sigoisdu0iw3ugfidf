@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Gift, ShoppingBag, X } from "lucide-react";
+import { Gift, ShoppingBag } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { getBook } from "@/lib/site-data";
 import {
@@ -58,14 +58,6 @@ export function PromoOffer() {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!fixed !left-1/2 !top-1/2 !z-[60] !w-[calc(100%-2rem)] !max-w-2xl !-translate-x-1/2 !-translate-y-1/2 max-h-[90vh] overflow-y-auto p-0">
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            aria-label="Закрити спеціальну пропозицію"
-            className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/85 text-foreground/70 shadow-sm transition hover:bg-accent hover:text-accent-foreground"
-          >
-            <X className="h-4 w-4" />
-          </button>
           <div className="grid sm:grid-cols-[0.9fr_1.1fr]">
             <div className="bg-accent/10 p-4 sm:p-6">
               <img
