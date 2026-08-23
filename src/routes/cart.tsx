@@ -7,6 +7,7 @@ import { SectionLabel } from "@/components/site/SectionLabel";
 import { OrderForm, type DeliveryMethod } from "@/components/site/OrderForm";
 import {
   ABETKA_BOOK_SLUG,
+  ABETKA_BUNDLE_DISCOUNT,
   ABETKA_CARDS_SLUG,
   isAbetkaBundlePromoActive,
   useCart,
@@ -37,7 +38,7 @@ function CartPage() {
   const abetkaBookQty = items.find((item) => item.slug === ABETKA_BOOK_SLUG)?.qty ?? 0;
   const abetkaCardsQty = items.find((item) => item.slug === ABETKA_CARDS_SLUG)?.qty ?? 0;
   const bundleDiscount = isAbetkaBundlePromoActive()
-    ? Math.min(abetkaBookQty, abetkaCardsQty) * 50
+    ? Math.min(abetkaBookQty, abetkaCardsQty) * ABETKA_BUNDLE_DISCOUNT
     : 0;
 
   return (
