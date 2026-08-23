@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { to: "/", label: "Головна" },
   { to: "/about", label: "Про авторку" },
-  { to: "/books", label: "Книги" },
+  { to: "/books", label: "Придбати книги" },
   { to: "/projects", label: "Літ. забави" },
   { to: "/delivery", label: "Доставка" },
   { to: "/contact", label: "Контакти" },
