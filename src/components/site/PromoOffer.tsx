@@ -57,7 +57,7 @@ export function PromoOffer() {
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="relative z-[60] max-h-[90vh] max-w-2xl overflow-y-auto p-0">
+        <DialogContent className="!fixed !left-1/2 !top-1/2 !z-[60] !w-[calc(100%-2rem)] !max-w-2xl !-translate-x-1/2 !-translate-y-1/2 max-h-[90vh] overflow-y-auto p-0">
           <button
             type="button"
             onClick={() => setOpen(false)}
