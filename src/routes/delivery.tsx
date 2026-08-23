@@ -80,7 +80,7 @@ function DeliveryPage() {
         <Reveal delay={300}>
           <div className="mt-10">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link to="/books">До книг</Link>
+              <Link to="/books">Придбати книги</Link>
             </Button>
           </div>
         </Reveal>
