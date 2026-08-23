@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { BookOpen } from "lucide-react";
 import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
@@ -55,6 +56,7 @@ function NotFoundComponent() {
             to="/books"
             className="inline-flex items-center justify-center rounded-md border border-border bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:scale-105 hover:border-accent hover:text-accent"
           >
+            <BookOpen className="mr-2 h-4 w-4" />
             Придбати книги
           </Link>
         </div>
