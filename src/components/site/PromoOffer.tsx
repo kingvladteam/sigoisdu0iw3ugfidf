@@ -80,11 +80,11 @@ export function PromoOffer() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!fixed !left-1/2 !top-1/2 !z-[60] !w-[calc(100%-2rem)] !max-w-2xl !-translate-x-1/2 !-translate-y-1/2 max-h-[90vh] overflow-y-auto p-0">
           <div className="grid sm:grid-cols-[0.9fr_1.1fr]">
-            <div className="flex items-center justify-center bg-accent/10 p-4 sm:p-6">
+            <div className="flex items-center justify-center bg-accent/10 p-3 sm:p-6">
               <img
                 src="/assets/nabir_abetka%2Bkartky.jpg"
                 alt="Набір «Смачненька абетка» та картки"
-                className="max-h-64 w-full rounded-xl object-contain shadow-lg sm:max-h-72"
+                className="max-h-44 w-full rounded-xl object-contain shadow-lg sm:max-h-72"
               />
             </div>
             <div className="p-6 sm:p-8">
