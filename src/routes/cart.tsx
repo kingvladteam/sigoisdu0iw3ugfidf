@@ -31,7 +31,6 @@ function CartPage() {
   const { items, discountedItems, count, total, payableTotal, setQty, remove, add } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("nova-poshta");
   const freeShippingThreshold = 1000;
-  const amountToFreeShipping = freeShippingThreshold - total;
   const abetkaBookInCart = items.some((item) => item.slug === ABETKA_BOOK_SLUG);
   const abetkaCardsInCart = items.some((item) => item.slug === ABETKA_CARDS_SLUG);
   const canAddAbetkaCards = isAbetkaBundlePromoActive() && abetkaBookInCart && !abetkaCardsInCart;
@@ -40,6 +39,7 @@ function CartPage() {
   const bundleDiscount = isAbetkaBundlePromoActive()
     ? Math.min(abetkaBookQty, abetkaCardsQty) * ABETKA_BUNDLE_DISCOUNT
     : 0;
+  const amountToFreeShipping = freeShippingThreshold - (bundleDiscount > 0 ? payableTotal : total);
 
   return (
     <section className="border-t border-border/60">
@@ -156,7 +156,13 @@ function CartPage() {
                 <span className="text-sm uppercase tracking-wider text-muted-foreground">
                   Разом
                 </span>
-                <span className="whitespace-nowrap font-display text-2xl font-semibold text-muted-foreground line-through decoration-accent/70">
+                <span
+                  className={`whitespace-nowrap font-display text-2xl font-semibold ${
+                    bundleDiscount > 0
+                      ? "text-muted-foreground line-through decoration-accent/70"
+                      : "text-accent"
+                  }`}
+                >
                   {total} грн
                 </span>
               </div>
