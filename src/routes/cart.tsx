@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
@@ -61,7 +61,10 @@ function CartPage() {
                 size="lg"
                 className="mt-6 bg-accent text-accent-foreground hover:bg-accent/90"
               >
-                <Link to="/books">Придбати книги</Link>
+                <Link to="/books">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  Придбати книги
+                </Link>
               </Button>
             </div>
           </Reveal>
