@@ -55,7 +55,7 @@ function NotFoundComponent() {
             to="/books"
             className="inline-flex items-center justify-center rounded-md border border-border bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:scale-105 hover:border-accent hover:text-accent"
           >
-            До книг
+            Придбати книги
           </Link>
         </div>
       </div>
