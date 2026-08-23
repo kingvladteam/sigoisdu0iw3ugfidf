@@ -15,6 +15,7 @@ export type CartItem = {
 
 export const ABETKA_BOOK_SLUG = "smachnenka-abetka";
 export const ABETKA_CARDS_SLUG = "abetka-kartky";
+export const ABETKA_BUNDLE_BOOK_PRICE = 400;
 export const ABETKA_BUNDLE_CARD_PRICE = 250;
 export const ABETKA_BUNDLE_DISCOUNT = 100;
 
@@ -102,13 +103,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const promoActive = isAbetkaBundlePromoActive() && hasAbetkaBook && hasAbetkaCards;
   const discountedItems = promoActive
     ? items.map((item) =>
-        item.slug === ABETKA_CARDS_SLUG
+        item.slug === ABETKA_BOOK_SLUG
           ? {
               ...item,
-              price: `${ABETKA_BUNDLE_CARD_PRICE} грн`,
-              priceValue: ABETKA_BUNDLE_CARD_PRICE,
+              price: `${ABETKA_BUNDLE_BOOK_PRICE} грн`,
+              priceValue: ABETKA_BUNDLE_BOOK_PRICE,
             }
-          : item,
+          : item.slug === ABETKA_CARDS_SLUG
+            ? {
+                ...item,
+                price: `${ABETKA_BUNDLE_CARD_PRICE} грн`,
+                priceValue: ABETKA_BUNDLE_CARD_PRICE,
+              }
+            : item,
       )
     : items;
 
