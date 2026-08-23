@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Gift, ShoppingBag } from "lucide-react";
+import { Gift, ShoppingBag, X } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { getBook } from "@/lib/site-data";
 import {
@@ -52,12 +52,20 @@ export function PromoOffer() {
         aria-label="Відкрити спеціальну пропозицію"
         className="fixed bottom-5 right-5 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-xl ring-4 ring-accent/20 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:bottom-7 sm:right-7"
       >
-        <Gift className="h-7 w-7 animate-pulse" />
+        <Gift className="promo-gift-icon h-7 w-7" />
         <span className="absolute inset-0 rounded-full border-2 border-accent-foreground/40 animate-ping" />
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl overflow-hidden p-0">
+        <DialogContent className="relative max-w-2xl overflow-hidden p-0">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Закрити спеціальну пропозицію"
+            className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/85 text-foreground/70 shadow-sm transition hover:bg-accent hover:text-accent-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
           <div className="grid sm:grid-cols-[0.9fr_1.1fr]">
             <div className="bg-accent/10 p-4 sm:p-6">
               <img
@@ -76,7 +84,7 @@ export function PromoOffer() {
                 </DialogTitle>
                 <DialogDescription className="mt-4 text-base leading-relaxed text-foreground/75">
                   Тільки до 1 жовтня набір «Смачненька абетка» (книга та картки) за ціною всього
-                  <strong className="text-foreground"> 650 грн</strong>.
+                  <strong className="text-foreground"> 650 грн</strong>. Ваша вигода — 100 грн.
                 </DialogDescription>
               </DialogHeader>
               <div className="mt-6 flex flex-wrap items-center gap-3">
