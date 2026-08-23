@@ -15,6 +15,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { PromoOffer } from "@/components/site/PromoOffer";
 import { CartProvider } from "@/lib/cart";
 
 const lostVerses = [
@@ -32,7 +33,10 @@ function NotFoundComponent() {
     <div className="relative flex flex-1 items-center justify-center overflow-hidden px-4 py-24">
       <div className="pointer-events-none absolute inset-0 opacity-60">
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl animate-float" />
-        <div className="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-primary/10 blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
+        <div
+          className="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-primary/10 blur-3xl animate-float"
+          style={{ animationDelay: "1.5s" }}
+        />
       </div>
       <div className="relative max-w-lg text-center">
         <p className="font-display text-[8rem] leading-none tracking-tight text-foreground/90 md:text-[10rem]">
@@ -121,9 +125,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Ingigerda — Інґіґерда (Інгігерда)" },
-      { name: "description", content: "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
-      { property: "og:description", content: "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
-      { name: "twitter:description", content: "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу." },
+      {
+        name: "description",
+        content:
+          "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
+      },
+      {
+        property: "og:description",
+        content:
+          "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
+      },
       { property: "og:image", content: "/assets/site_banner.png" },
       { name: "twitter:image", content: "/assets/site_banner.png" },
     ],
@@ -166,6 +182,7 @@ function RootComponent() {
         <div className="paper-bg site-scale flex min-h-screen flex-col bg-background text-foreground">
           <Toaster position="top-center" richColors closeButton />
           <Header />
+          <PromoOffer />
           <main className="flex-1">
             <PageTransition />
           </main>
