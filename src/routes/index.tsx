@@ -45,19 +45,6 @@ function Hero() {
             <span className="gold-line my-6 mx-auto block w-20 md:mx-0" />
           </h1>
 
-          <div className="mt-2 flex justify-center md:hidden">
-            <Button
-              asChild
-              size="lg"
-              className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl"
-            >
-              <Link to="/books">
-                <BookOpen className="mr-2 h-4 w-4" />
-                Придбати книги
-              </Link>
-            </Button>
-          </div>
-
           <Reveal delay={150} className="block md:hidden">
             <div className="relative mx-auto mt-2 w-full max-w-[15rem]">
               <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
@@ -69,6 +56,29 @@ function Hero() {
                   loading="eager"
                 />
               </div>
+            </div>
+
+            <div className="mx-auto mt-5 flex w-full max-w-[20rem] flex-col items-center gap-2">
+              <Button
+                asChild
+                size="lg"
+                className="cta-shimmer group w-full bg-accent text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:bg-accent/90 hover:shadow-xl"
+              >
+                <Link to="/books">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  Придбати книги
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="ghost"
+                className="group text-foreground/65 hover:bg-accent/10 hover:text-accent"
+              >
+                <Link to="/about">
+                  Дізнатися більше
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
             </div>
           </Reveal>
 
