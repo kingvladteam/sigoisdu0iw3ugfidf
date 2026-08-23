@@ -176,6 +176,15 @@
 }
 .animate-float { animation: float-slow 6s ease-in-out infinite; }
 
+@keyframes promo-gift-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  12% { transform: translateY(-7px) rotate(-10deg) scale(1.08); }
+  24% { transform: translateY(0) rotate(8deg) scale(1); }
+  36% { transform: translateY(-4px) rotate(-5deg) scale(1.04); }
+  48% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+.promo-gift-icon { animation: promo-gift-bounce 2.8s ease-in-out infinite; }
+
 @keyframes page-content-enter {
   from {
     opacity: 0.25;
