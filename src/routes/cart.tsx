@@ -28,7 +28,7 @@ export const Route = createFileRoute("/cart")({
 });
 
 function CartPage() {
-  const { items, count, total, setQty, remove, add } = useCart();
+  const { items, discountedItems, count, total, payableTotal, setQty, remove, add } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("nova-poshta");
   const freeShippingThreshold = 1000;
   const amountToFreeShipping = freeShippingThreshold - total;
@@ -159,9 +159,14 @@ function CartPage() {
                 <span className="font-display text-2xl font-semibold text-accent">{total} грн</span>
               </div>
               {bundleDiscount > 0 && (
-                <p className="mt-2 text-right text-sm text-accent">
-                  Знижка за набір: −{bundleDiscount} грн
-                </p>
+                <div className="mt-3 flex items-center justify-between rounded-xl border border-accent/40 bg-accent/10 px-5 py-4">
+                  <span className="text-sm font-medium text-foreground/80">
+                    До сплати з урахуванням знижки
+                  </span>
+                  <span className="font-display text-2xl font-semibold text-accent">
+                    {payableTotal} грн
+                  </span>
+                </div>
               )}
               <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground/75">
                 {delivery === "pickup" ? (
@@ -199,7 +204,7 @@ function CartPage() {
 
             <Reveal delay={120}>
               <h2 className="mb-4 font-display text-2xl font-semibold">Контактні дані</h2>
-              <OrderForm items={items} onDeliveryChange={setDelivery} />
+              <OrderForm items={discountedItems} onDeliveryChange={setDelivery} />
             </Reveal>
           </div>
         )}
