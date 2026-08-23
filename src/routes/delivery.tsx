@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Truck, Package, MapPin, Gift } from "lucide-react";
+import { Truck, Package, MapPin, Gift, BookOpen } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Button } from "@/components/ui/button";
@@ -80,7 +80,10 @@ function DeliveryPage() {
         <Reveal delay={300}>
           <div className="mt-10">
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link to="/books">Придбати книги</Link>
+              <Link to="/books">
+                <BookOpen className="mr-2 h-4 w-4" />
+                Придбати книги
+              </Link>
             </Button>
           </div>
         </Reveal>
