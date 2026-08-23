@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Gift, ShoppingBag } from "lucide-react";
+import { Gift, ShoppingBag, X } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { getBook } from "@/lib/site-data";
 import {
@@ -19,9 +19,14 @@ import {
 
 export function PromoOffer() {
   const [open, setOpen] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
   const navigate = useNavigate();
   const { add } = useCart();
   const active = isAbetkaBundlePromoActive();
+
+  useEffect(() => {
+    setDismissed(localStorage.getItem("abetka-promo-dismissed") === "1");
+  }, []);
 
   useEffect(() => {
     if (!active || sessionStorage.getItem("abetka-promo-seen")) return;
@@ -32,7 +37,13 @@ export function PromoOffer() {
     return () => window.clearTimeout(timeout);
   }, [active]);
 
-  if (!active) return null;
+  if (!active || dismissed) return null;
+
+  function dismissOffer() {
+    localStorage.setItem("abetka-promo-dismissed", "1");
+    setOpen(false);
+    setDismissed(true);
+  }
 
   function useOffer() {
     const book = getBook(ABETKA_BOOK_SLUG);
@@ -46,15 +57,25 @@ export function PromoOffer() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Відкрити спеціальну пропозицію"
-        className="fixed bottom-5 right-5 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-xl ring-4 ring-accent/20 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:bottom-7 sm:right-7"
-      >
-        <Gift className="promo-gift-icon h-7 w-7" />
-        <span className="absolute inset-0 rounded-full border-2 border-accent-foreground/40 animate-ping" />
-      </button>
+      <div className="fixed bottom-5 right-5 z-30 sm:bottom-7 sm:right-7">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Відкрити спеціальну пропозицію"
+          className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-xl ring-4 ring-accent/20 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <Gift className="promo-gift-icon h-7 w-7" />
+          <span className="absolute inset-0 rounded-full border-2 border-accent-foreground/40 animate-ping" />
+        </button>
+        <button
+          type="button"
+          onClick={dismissOffer}
+          aria-label="Прибрати спеціальну пропозицію"
+          className="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background text-foreground/70 shadow-md transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!fixed !left-1/2 !top-1/2 !z-[60] !w-[calc(100%-2rem)] !max-w-2xl !-translate-x-1/2 !-translate-y-1/2 max-h-[90vh] overflow-y-auto p-0">
