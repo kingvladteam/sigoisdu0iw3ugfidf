@@ -72,7 +72,7 @@ export function PromoOffer() {
                   Спеціальна пропозиція
                 </p>
                 <DialogTitle className="mt-3 font-display text-3xl leading-tight">
-                  Набір для маленьких читачів
+                  Набір для читання та розвитку дитини
                 </DialogTitle>
                 <DialogDescription className="mt-4 text-base leading-relaxed text-foreground/75">
                   Тільки до 1 жовтня набір «Смачненька абетка» (книга та картки) за ціною всього
