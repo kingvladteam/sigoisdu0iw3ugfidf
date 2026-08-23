@@ -71,7 +71,7 @@ function AboutPage() {
               className="cta-shimmer group bg-accent text-accent-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-xl"
             >
               <Link to="/books">
-                До книг
+                Придбати книги
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
