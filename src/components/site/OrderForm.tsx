@@ -177,7 +177,7 @@ export function OrderForm({
               name="comment"
               maxLength={1000}
               rows={3}
-              placeholder="Номер відділення, побажання щодо підпису…"
+              placeholder="Номер відділення, уточнення..."
             />
           </Field>
 
