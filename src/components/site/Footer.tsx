@@ -33,6 +33,7 @@ export function Footer() {
               { to: "/books", label: "Книги" },
               { to: "/projects", label: "Літ. забави" },
               { to: "/delivery", label: "Доставка" },
+              { to: "/media", label: "Медіа" },
               { to: "/contact", label: "Контакти" },
             ].map((l) => (
               <li key={l.to}>

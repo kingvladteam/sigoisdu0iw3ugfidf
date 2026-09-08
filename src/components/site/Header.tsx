@@ -11,6 +11,7 @@ const navLinks = [
   { to: "/books", label: "Придбати книги" },
   { to: "/projects", label: "Літ. забави" },
   { to: "/delivery", label: "Доставка" },
+  { to: "/media", label: "Медіа" },
   { to: "/contact", label: "Контакти" },
 ] as const;
 
