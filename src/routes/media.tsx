@@ -68,7 +68,7 @@ function MediaPage() {
           </h1>
           <div className="gold-line my-6 w-20" />
           <p className="max-w-2xl text-base leading-[1.75] text-foreground/85 md:text-lg">
-            Інтерв'ю, статті та відео про творчість, культурні проєкти та Літературні забави.
+            Інтерв'ю, статті та відео про творчість і культурні проєкти.
           </p>
         </Reveal>
 
