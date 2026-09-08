@@ -43,7 +43,7 @@ function AboutPage() {
               </div>
             </figure>
 
-            <div className="text-justify text-base leading-[1.85] text-foreground/85 md:columns-2 md:gap-x-10 md:text-lg">
+            <div className="text-base leading-[1.85] text-foreground/85 md:text-lg">
               <p className="mb-6 first-letter:float-left first-letter:mr-3 first-letter:mt-[-0.1em] first-letter:font-display first-letter:text-[4.5rem] first-letter:font-medium first-letter:leading-[0.85] first-letter:text-accent">
                 Полісся — історико-етнографічний та природно-географічний регіон України, де я народилася й провела свої перші вісімнадцять років життя. Саме цей край великих лісів, невичерпних боліт та заплав загартував у мені сміливість та дух свободи. Саме він виплекав любов до природи, родини, традицій, діалектів, ремесел та регіональної культури загалом — любов, що згодом втілилася на сторінки не однієї моєї книжки.
               </p>
