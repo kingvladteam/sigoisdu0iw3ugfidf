@@ -32,7 +32,7 @@ function AboutPage() {
 
         <Reveal>
           <article className="relative">
-            <figure className="mx-auto mb-8 w-full max-w-[20rem] md:float-left md:mb-6 md:mr-10 md:w-[42%] md:max-w-none">
+            <figure className="relative mx-auto mb-8 w-full max-w-[20rem] md:float-left md:mb-6 md:mr-10 md:w-[42%] md:max-w-none">
               <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent/15 blur-2xl" />
               <div className="overflow-hidden rounded-[1.4rem] border border-border shadow-2xl transition-transform duration-700 hover:scale-[1.02] md:rounded-2xl">
                 <img
