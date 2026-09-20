@@ -107,7 +107,7 @@ function MediaPage() {
           </a>
         </Reveal>
 
-        {/* YouTube embed */}
+        {/* YouTube embeds */}
         <Reveal delay={150}>
           <div className="mt-16">
             <SectionLabel>Відео</SectionLabel>
@@ -119,6 +119,26 @@ function MediaPage() {
                 <iframe
                   src="https://www.youtube.com/embed/h2xPDvAWAfY"
                   title="Інґіґерда – про «Літературні забави» і не тільки"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                  className="h-full w-full"
+                />
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={175}>
+          <div className="mt-12">
+            <h2 className="mb-6 font-display text-2xl font-medium md:text-3xl">
+              Неочевидне партнерство: медіація в літературі
+            </h2>
+            <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
+              <div className="aspect-video w-full">
+                <iframe
+                  src="https://www.youtube.com/embed/N26rMgeHR-4"
+                  title="Неочевидне партнерство: медіація в літературі"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   loading="lazy"
