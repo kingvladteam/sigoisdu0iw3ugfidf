@@ -5,14 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { OrderForm, type DeliveryMethod } from "@/components/site/OrderForm";
-import {
-  ABETKA_BOOK_SLUG,
-  ABETKA_BUNDLE_DISCOUNT,
-  ABETKA_CARDS_SLUG,
-  isAbetkaBundlePromoActive,
-  useCart,
-} from "@/lib/cart";
-import { getBook } from "@/lib/site-data";
+import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -28,18 +21,10 @@ export const Route = createFileRoute("/cart")({
 });
 
 function CartPage() {
-  const { items, discountedItems, count, total, payableTotal, setQty, remove, add } = useCart();
+  const { items, count, total, setQty, remove } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("nova-poshta");
   const freeShippingThreshold = 1000;
-  const abetkaBookInCart = items.some((item) => item.slug === ABETKA_BOOK_SLUG);
-  const abetkaCardsInCart = items.some((item) => item.slug === ABETKA_CARDS_SLUG);
-  const canAddAbetkaCards = isAbetkaBundlePromoActive() && abetkaBookInCart && !abetkaCardsInCart;
-  const abetkaBookQty = items.find((item) => item.slug === ABETKA_BOOK_SLUG)?.qty ?? 0;
-  const abetkaCardsQty = items.find((item) => item.slug === ABETKA_CARDS_SLUG)?.qty ?? 0;
-  const bundleDiscount = isAbetkaBundlePromoActive()
-    ? Math.min(abetkaBookQty, abetkaCardsQty) * ABETKA_BUNDLE_DISCOUNT
-    : 0;
-  const amountToFreeShipping = freeShippingThreshold - (bundleDiscount > 0 ? payableTotal : total);
+  const amountToFreeShipping = freeShippingThreshold - total;
 
   return (
     <section className="border-t border-border/60">
@@ -156,26 +141,10 @@ function CartPage() {
                 <span className="text-sm uppercase tracking-wider text-muted-foreground">
                   Разом
                 </span>
-                <span
-                  className={`whitespace-nowrap font-display text-2xl font-semibold ${
-                    bundleDiscount > 0
-                      ? "text-muted-foreground line-through decoration-accent/70"
-                      : "text-accent"
-                  }`}
-                >
+                <span className="whitespace-nowrap font-display text-2xl font-semibold text-accent">
                   {total} грн
                 </span>
               </div>
-              {bundleDiscount > 0 && (
-                <div className="mt-3 flex flex-col items-start gap-2 rounded-xl border-2 border-accent bg-accent/15 px-5 py-4 shadow-md sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                  <span className="text-sm font-semibold text-foreground/85">
-                    До сплати з урахуванням знижки
-                  </span>
-                  <span className="whitespace-nowrap font-display text-3xl font-bold text-accent">
-                    {payableTotal} грн
-                  </span>
-                </div>
-              )}
               <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm leading-relaxed text-foreground/75">
                 {delivery === "pickup" ? (
                   <strong className="text-accent">Самовивіз безкоштовний.</strong>
@@ -191,28 +160,11 @@ function CartPage() {
                   </strong>
                 )}
               </div>
-              {canAddAbetkaCards && (
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3">
-                  <p className="text-sm leading-relaxed">
-                    Додайте картки до абетки та отримайте набір за <strong>650 грн</strong>.
-                  </p>
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      const cards = getBook(ABETKA_CARDS_SLUG);
-                      if (cards) add(cards);
-                    }}
-                    className="shrink-0 bg-accent text-accent-foreground hover:bg-accent/90"
-                  >
-                    Додати картки
-                  </Button>
-                </div>
-              )}
             </Reveal>
 
             <Reveal delay={120}>
               <h2 className="mb-4 font-display text-2xl font-semibold">Контактні дані</h2>
-              <OrderForm items={discountedItems} onDeliveryChange={setDelivery} />
+              <OrderForm items={items} onDeliveryChange={setDelivery} />
             </Reveal>
           </div>
         )}

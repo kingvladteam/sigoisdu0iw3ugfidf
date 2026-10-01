@@ -15,7 +15,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { PromoOffer } from "@/components/site/PromoOffer";
 import { CartProvider } from "@/lib/cart";
 
 const lostVerses = [
@@ -182,7 +181,6 @@ function RootComponent() {
         <div className="paper-bg site-scale flex min-h-screen flex-col bg-background text-foreground">
           <Toaster position="top-center" richColors closeButton />
           <Header />
-          <PromoOffer />
           <main className="flex-1">
             <PageTransition />
           </main>
