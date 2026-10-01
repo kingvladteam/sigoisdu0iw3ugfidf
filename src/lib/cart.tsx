@@ -13,26 +13,12 @@ export type CartItem = {
   qty: number;
 };
 
-export const ABETKA_BOOK_SLUG = "smachnenka-abetka";
-export const ABETKA_CARDS_SLUG = "abetka-kartky";
-export const ABETKA_BUNDLE_BOOK_PRICE = 400;
-export const ABETKA_BUNDLE_CARD_PRICE = 250;
-export const ABETKA_BUNDLE_DISCOUNT = 100;
-
-const PROMO_END = new Date("2026-10-02T00:00:00+03:00");
-
-export function isAbetkaBundlePromoActive() {
-  return new Date() < PROMO_END;
-}
-
 export type CartVariant = { label: string; priceValue: number };
 
 type CartCtx = {
   items: CartItem[];
-  discountedItems: CartItem[];
   count: number;
   total: number;
-  payableTotal: number;
   add: (book: Book, qty?: number, variant?: CartVariant) => void;
   remove: (key: string) => void;
   setQty: (key: string, qty: number) => void;
@@ -98,41 +84,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clear = () => setItems([]);
 
-  const hasAbetkaBook = items.some((item) => item.slug === ABETKA_BOOK_SLUG);
-  const hasAbetkaCards = items.some((item) => item.slug === ABETKA_CARDS_SLUG);
-  const promoActive = isAbetkaBundlePromoActive() && hasAbetkaBook && hasAbetkaCards;
-  const discountedItems = promoActive
-    ? items.map((item) =>
-        item.slug === ABETKA_BOOK_SLUG
-          ? {
-              ...item,
-              price: `${ABETKA_BUNDLE_BOOK_PRICE} грн`,
-              priceValue: ABETKA_BUNDLE_BOOK_PRICE,
-            }
-          : item.slug === ABETKA_CARDS_SLUG
-            ? {
-                ...item,
-                price: `${ABETKA_BUNDLE_CARD_PRICE} грн`,
-                priceValue: ABETKA_BUNDLE_CARD_PRICE,
-              }
-            : item,
-      )
-    : items;
-
   const count = items.reduce((s, i) => s + i.qty, 0);
   const total = items.reduce((s, i) => s + i.qty * i.priceValue, 0);
-  const bundleQuantity = promoActive
-    ? Math.min(
-        items.find((item) => item.slug === ABETKA_BOOK_SLUG)?.qty ?? 0,
-        items.find((item) => item.slug === ABETKA_CARDS_SLUG)?.qty ?? 0,
-      )
-    : 0;
-  const payableTotal = total - bundleQuantity * ABETKA_BUNDLE_DISCOUNT;
 
   return (
-    <Ctx.Provider
-      value={{ items, discountedItems, count, total, payableTotal, add, remove, setQty, clear }}
-    >
+    <Ctx.Provider value={{ items, count, total, add, remove, setQty, clear }}>
       {children}
     </Ctx.Provider>
   );
