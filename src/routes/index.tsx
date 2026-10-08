@@ -15,6 +15,10 @@ export const Route = createFileRoute("/")({
         content:
           "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
       },
+      {"property": "og:title", "content": "Ingigerda — Інґіґерда (Інгігерда)"},
+      {"property": "og:description", "content": "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
     ],
   }),
   component: HomePage,

@@ -13,6 +13,10 @@ export const Route = createFileRoute("/about")({
         content:
           "Біографія Інґіґерди (Ірини Рудики) — української поетеси, авторки книг «Уламки» та «Смачненька абетка», засновниці проєкту «Літературні забави».",
       },
+      {"property": "og:title", "content": "Про мене — Інґіґерда (Ірина Рудика)"},
+      {"property": "og:description", "content": "Біографія Інґіґерди (Ірини Рудики) — української поетеси, авторки книг «Уламки» та «Смачненька абетка», засновниці проєкту «Літературні забави»."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
     ],
   }),
   component: AboutPage,

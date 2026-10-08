@@ -14,6 +14,10 @@ export const Route = createFileRoute("/contact")({
         content:
           "Контакти Інґіґерди: Telegram @ingi_gerda, Instagram, Facebook, YouTube. Замовлення книг та запрошення на події.",
       },
+      {"property": "og:title", "content": "Контакти — Інґіґерда"},
+      {"property": "og:description", "content": "Контакти Інґіґерди: Telegram @ingi_gerda, Instagram, Facebook, YouTube. Замовлення книг та запрошення на події."},
+      {"property": "og:type", "content": "website"},
+      {"name": "twitter:card", "content": "summary_large_image"},
     ],
   }),
   component: ContactPage,
