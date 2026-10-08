@@ -21,6 +21,8 @@ export type BookRow = {
   gallery: string[] | null;
   sort_order: number;
   hidden: boolean;
+  order_enabled?: boolean;
+  availability_text?: string;
 };
 
 function toSpecs(value: unknown): BookSpec[] | undefined {
@@ -53,6 +55,8 @@ export function mergeBook(row: BookRow, base?: Book): Book {
     title: row.title || base?.title || row.slug,
     price: row.price || base?.price || "",
     priceValue: row.price_value ?? base?.priceValue ?? 0,
+    orderEnabled: row.order_enabled ?? base?.orderEnabled ?? true,
+    availabilityText: row.availability_text ?? base?.availabilityText,
     cover,
     gallery: gallery.length ? gallery : cover ? [cover] : [],
     short: row.short || base?.short || "",

@@ -1,7 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 
 const itemSchema = z.object({
+  slug: z.string().trim().min(1).max(100),
   title: z.string().trim().min(1).max(200),
   qty: z.number().int().min(1).max(99),
   price: z.string().trim().max(50),
@@ -42,6 +45,28 @@ function spoiler(value: string): string {
 export const sendOrder = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => orderSchema.parse(data))
   .handler(async ({ data }) => {
+    const url = process.env['SUPABASE_URL'];
+    const key = process.env['SUPABASE_PUBLISHABLE_KEY'];
+    if (!url || !key) throw new Error("Не вдалося перевірити доступність книг. Спробуйте пізніше.");
+    const catalog = createClient<Database>(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: { fetch: (input, init) => {
+        const headers = new Headers(init?.headers);
+        if (key.startsWith("sb_") && headers.get("Authorization") === `Bearer ${key}`) headers.delete("Authorization");
+        headers.set("apikey", key);
+        return fetch(input, { ...init, headers });
+      } },
+    });
+    const { data: rows, error } = await catalog.from("books")
+      .select("slug, order_enabled, hidden, price_value")
+      .in("slug", data.items.map((item) => item.slug));
+    if (error) throw new Error("Не вдалося перевірити доступність книг. Спробуйте пізніше.");
+    for (const item of data.items) {
+      const book = rows?.find((row) => row.slug === item.slug);
+      if (!book || book.hidden || !book.order_enabled || !book.price_value || book.price_value <= 0) {
+        throw new Error("Одна з книг ще недоступна для замовлення. Оновіть кошик.");
+      }
+    }
     const token = process.env.TELEGRAM_BOT_TOKEN;
     if (!token) {
       throw new Error("TELEGRAM_BOT_TOKEN не налаштовано");

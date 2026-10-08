@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Book ordering availability is stored separately from price in the books table and shared across catalog, details, cart and order validation, so upcoming titles cannot be purchased accidentally.
+- New-book announcements use the live catalog and session-scoped dismissal, so they stop appearing when the book becomes orderable or hidden.

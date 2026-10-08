@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import type { Book } from "./site-data";
+import { canOrder, type Book } from "./site-data";
 
 export type CartItem = {
   /** Унікальний ключ позиції: slug + варіант обкладинки */
@@ -49,6 +49,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items]);
 
   const add: CartCtx["add"] = (book, qty = 1, variant) => {
+    if (!canOrder(book)) return;
     const key = variant ? `${book.slug}::${variant.label}` : book.slug;
     setItems((curr) => {
       const existing = curr.find((i) => (i.key ?? i.slug) === key);

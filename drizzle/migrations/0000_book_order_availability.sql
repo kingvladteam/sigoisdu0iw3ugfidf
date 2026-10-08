@@ -1,0 +1,1 @@
+ALTER TABLE public.books ADD COLUMN order_enabled boolean NOT NULL DEFAULT true, ADD COLUMN availability_text text NOT NULL DEFAULT '';

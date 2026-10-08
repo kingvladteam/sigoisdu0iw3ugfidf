@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { SectionLabel } from "@/components/site/SectionLabel";
 import { Button } from "@/components/ui/button";
 import { useBooks } from "@/lib/books-db";
-import { displayPrice } from "@/lib/site-data";
+import { canOrder, displayPrice } from "@/lib/site-data";
 import { useCart } from "@/lib/cart";
 import { toast } from "sonner";
 
@@ -80,7 +80,7 @@ function BooksIndex() {
                     <img
                       src={book.cover}
                       alt={`Обкладинка «${book.title}»`}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
                   </Link>
@@ -97,7 +97,13 @@ function BooksIndex() {
                       {book.short}
                     </p>
                     <div className="mt-5 flex items-center gap-2">
-                      {book.variants?.length ? (
+                      {!canOrder(book) ? (
+                        <Button asChild variant="outline" className="flex-1 border-accent text-accent">
+                          <Link to="/books/$slug" params={{ slug: book.slug }}>
+                            <ArrowRight className="mr-1.5 h-4 w-4" /> Про книгу
+                          </Link>
+                        </Button>
+                      ) : book.variants?.length ? (
                         <Button
                           asChild
                           className="flex-1 bg-accent text-accent-foreground transition-all hover:scale-[1.02] hover:bg-accent/90"
