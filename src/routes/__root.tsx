@@ -16,6 +16,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CartProvider } from "@/lib/cart";
+import { NewBookAnnouncement } from "@/components/site/NewBookAnnouncement";
 
 const lostVerses = [
   "Пасхалка №404: ця сторінка пішла по новий наклад «Уламків».",
@@ -139,8 +140,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Інґіґерда (Ingigerda), також Інгігерда, — сучасна українська письменниця, організаторка мистецьких імпрез, громадська діячка, фахівчиня з розвитку людського капіталу.",
       },
-      { property: "og:image", content: "/assets/site_banner.png" },
-      { name: "twitter:image", content: "/assets/site_banner.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -185,6 +184,7 @@ function RootComponent() {
             <PageTransition />
           </main>
           <Footer />
+          <NewBookAnnouncement />
         </div>
       </CartProvider>
     </QueryClientProvider>

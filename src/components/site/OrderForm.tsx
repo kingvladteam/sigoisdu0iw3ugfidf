@@ -57,7 +57,7 @@ export function OrderForm({
       delivery: "nova-poshta" | "ukrposhta" | "pickup";
       consent: true;
       comment: string;
-      items: { title: string; qty: number; price: string; priceValue: number }[];
+      items: { slug: string; title: string; qty: number; price: string; priceValue: number }[];
     }) => sendOrderFn({ data }),
     onSuccess: () => {
       setConfirmOpen(true);
@@ -93,6 +93,7 @@ export function OrderForm({
       consent: true as const,
       comment: String(fd.get("comment") || "").trim(),
       items: items.map((i) => ({
+        slug: i.slug,
         title: i.variant ? `${i.title} (${i.variant})` : i.title,
         qty: i.qty,
         price: i.price,
