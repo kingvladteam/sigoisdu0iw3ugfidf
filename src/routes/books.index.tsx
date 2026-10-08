@@ -75,7 +75,7 @@ function BooksIndex() {
                   <Link
                     to="/books/$slug"
                     params={{ slug: book.slug }}
-                    className="relative aspect-[3/4] overflow-hidden bg-muted"
+                    className="relative block aspect-[3/4] overflow-hidden bg-muted"
                   >
                     <img
                       src={book.cover}
