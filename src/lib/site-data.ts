@@ -1,3 +1,4 @@
+import familyCodeAsset from "@/assets/family-code.png.asset.json";
 import ulamkyAsset from "@/assets/ulamky.jpg.asset.json";
 import abetkaAsset from "@/assets/abetka.jpg.asset.json";
 import abetka2Asset from "@/assets/abetka2.jpg.asset.json";
@@ -25,6 +26,8 @@ export type Book = {
   title: string;
   price: string;
   priceValue: number;
+  orderEnabled?: boolean;
+  availabilityText?: string;
   audience?: string;
   pages?: string;
   cover: string;
@@ -47,11 +50,77 @@ export function minPrice(book: Book): number {
 
 /** Текст ціни для списку книг: «від 300 грн», якщо є варіанти. */
 export function displayPrice(book: Book): string {
+  if (!canOrder(book)) return book.availabilityText || "Готується до передзамовлення";
   if (book.variants?.length) return `від ${minPrice(book)} грн`;
   return book.price;
 }
 
+export function canOrder(book: Book): boolean {
+  return book.orderEnabled !== false && minPrice(book) > 0;
+}
+
 export const books: Book[] = [
+{
+  "slug": "simeinyi-kod",
+  "title": "Сімейний код: психологія стосунків свекруха - невістка",
+  "price": "",
+  "priceValue": 0,
+  "orderEnabled": false,
+  "availabilityText": "Готується до передзамовлення! Очікуємо в жовтні",
+  "short": "Про стосунки свекрухи й невістки, родинні ролі та п’ять орієнтирів для побудови здорових сімейних взаємин.",
+  "long": [
+    "Свекруха й невістка: дві дорослі жінки, які раптом опиняються в одній родинній системі, де кожній доводиться шукати своє місце поруч із чоловіком, якого люблять. «Сімейний код» пояснює простими словами, що відбувається за лаштунками таких стосунків. Авторки розповідають про сепарацію, ролі матері й дружини в житті чоловіка, «трикутники» та найпоширеніші деструктивні сценарії, що виникають у родині.",
+    "Книга без пошуку винних і готових рецептів «як правильно», проте з реальними історіями, принципами взаємодії дорослих людей та п’ятьма орієнтирами для побудови здорових сімейних стосунків. Вона адресована невісткам, свекрухам, тим, хто лише готується ними стати, і чоловікам, яким доводиться шукати своє місце між матір’ю та дружиною. Для психологів, коучів і медіаторів книга може бути додатковим інструментом у роботі з родинними взаєминами."
+  ],
+  "specs": [
+    {
+      "label": "Видавництво",
+      "value": "-"
+    },
+    {
+      "label": "Мова",
+      "value": "Українська"
+    },
+    {
+      "label": "Рік видання",
+      "value": "2026"
+    },
+    {
+      "label": "Кількість сторінок",
+      "value": "-"
+    },
+    {
+      "label": "Розмір",
+      "value": "-"
+    },
+    {
+      "label": "Ілюстрації",
+      "value": "-"
+    },
+    {
+      "label": "Обкладинка",
+      "value": "-"
+    },
+    {
+      "label": "Категорія",
+      "value": "науково-популярна література"
+    },
+    {
+      "label": "Вік",
+      "value": "18+"
+    },
+    {
+      "label": "Наклад",
+      "value": "-"
+    },
+    {
+      "label": "ISBN",
+      "value": "-"
+    }
+  ],
+  cover: familyCodeAsset.url,
+  gallery: [familyCodeAsset.url]
+},
   {
     slug: "ulamky",
     title: "Уламки",

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { getBook } from "@/lib/site-data";
+import { canOrder, displayPrice, getBook } from "@/lib/site-data";
 import { useBooks } from "@/lib/books-db";
 import { useCart } from "@/lib/cart";
 
@@ -20,23 +20,28 @@ export const Route = createFileRoute("/books/$slug")({
         meta: [
           { title: "Книга — Інґіґерда" },
           { name: "robots", content: "noindex,follow" },
+          { name: "description", content: "Книги Інґіґерди: описи, фото та характеристики." },
+          { property: "og:title", content: "Книга — Інґіґерда" },
+          { property: "og:description", content: "Книги Інґіґерди: описи, фото та характеристики." },
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary" },
         ],
       };
     }
-    const description = `${b.short} Купити книгу можна онлайн із доставкою по Україні.`;
+    const description = `${b.short} ${canOrder(b) ? "Замовляйте з доставкою по Україні." : displayPrice(b)}`;
     return {
       meta: [
-        { title: `${b.title} — купити книгу Інґіґерди` },
+        { title: `${b.title} — Інґіґерда` },
         { name: "description", content: description },
         { name: "robots", content: "index,follow" },
         { property: "og:title", content: `${b.title} — Інґіґерда` },
         { property: "og:description", content: description },
-        { property: "og:image", content: b.cover },
+        ...(b.cover.startsWith("https://") ? [{ property: "og:image", content: b.cover }, { name: "twitter:image", content: b.cover }] : []),
         { property: "og:type", content: "book" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: `${b.title} — Інґіґерда` },
         { name: "twitter:description", content: description },
-        { name: "twitter:image", content: b.cover },
+
       ],
     };
   },
@@ -68,7 +73,8 @@ function BookPage() {
   );
   const selectedVariantIdx = variantIdx ?? cheapestVariantIdx;
   const variant = variants[selectedVariantIdx] ?? variants[0];
-  const currentPrice = variant ? `${variant.priceValue} грн` : book.price;
+  const available = canOrder(book);
+  const currentPrice = !available ? displayPrice(book) : variant ? `${variant.priceValue} грн` : book.price;
   const inCart = items.some((i) =>
     variant ? i.slug === book.slug && i.variant === variant.label : i.slug === book.slug,
   );
@@ -108,7 +114,7 @@ function BookPage() {
             <img
               src={book.cover}
               alt={`Обкладинка «${book.title}»`}
-              className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              className="aspect-[3/4] w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
             />
             <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-xs text-foreground/80 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
               <Expand className="h-3.5 w-3.5" /> Збільшити
@@ -141,7 +147,7 @@ function BookPage() {
           <h1 className="font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
           <p
             key={`${book.slug}-${selectedVariantIdx}-${currentPrice}`}
-            className="price-change mt-3 inline-flex min-h-10 items-center font-display text-3xl text-accent"
+            className={`price-change mt-3 inline-flex min-h-10 items-center font-display text-accent ${available ? "text-3xl" : "text-xl leading-relaxed"}`}
             aria-live="polite"
           >
             {currentPrice}
@@ -151,7 +157,7 @@ function BookPage() {
           )}
           <div className="gold-line my-6 w-20" />
 
-          {variants.length > 0 && (
+          {available && variants.length > 0 && (
             <div className="mb-8">
               <p className="text-sm uppercase tracking-wider text-muted-foreground">
                 Оберіть обкладинку
@@ -176,7 +182,7 @@ function BookPage() {
             </div>
           )}
 
-          <div className="mb-8 flex flex-wrap gap-3">
+          {available && <div className="mb-8 flex flex-wrap gap-3">
             <Button
               size="lg"
               onClick={() => {
@@ -201,7 +207,7 @@ function BookPage() {
             >
               <Link to="/cart">Перейти до кошика</Link>
             </Button>
-          </div>
+          </div>}
 
           <div className="space-y-4 text-base leading-relaxed text-foreground/85">
             {book.long.map((p: string, i: number) => (
@@ -336,7 +342,7 @@ function RelatedBooks({ currentSlug }: { currentSlug: string }) {
                 <p className="font-display text-xl font-semibold transition-colors group-hover:text-accent">
                   {b.title}
                 </p>
-                <p className="text-sm text-accent">{b.price}</p>
+                <p className="text-sm text-accent">{displayPrice(b)}</p>
                 <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{b.short}</p>
               </div>
             </Link>

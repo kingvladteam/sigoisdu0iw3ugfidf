@@ -9,6 +9,7 @@ import { books as staticBooks } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/admin")({
@@ -40,6 +41,8 @@ type Draft = {
   gallery: string[];
   sort_order: number;
   hidden: boolean;
+  order_enabled: boolean;
+  availability_text: string;
 };
 
 function rowToDraft(row: BookRow): Draft {
@@ -59,6 +62,8 @@ function rowToDraft(row: BookRow): Draft {
     gallery: merged.gallery,
     sort_order: row.sort_order,
     hidden: row.hidden,
+    order_enabled: merged.orderEnabled !== false,
+    availability_text: merged.availabilityText ?? "",
   };
 }
 
@@ -192,11 +197,16 @@ function BookEditor({ row }: { row: BookRow }) {
     const minValue = variants.length
       ? Math.min(...variants.map((v) => v.price_value))
       : draft.price_value;
+    if (draft.order_enabled && (!Number.isFinite(minValue) || minValue <= 0)) {
+      setSaving(false);
+      toast.error("Щоб увімкнути замовлення, вкажіть ціну понад 0 грн для книги та кожного варіанта.");
+      return;
+    }
     const { error } = await supabase
       .from("books")
       .update({
         title: draft.title,
-        price: variants.length ? `від ${minValue} грн` : draft.price,
+        price: variants.length ? `від ${minValue} грн` : draft.order_enabled ? `${minValue} грн` : draft.price,
         price_value: minValue,
         short: draft.short,
         long_text: draft.long.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean),
@@ -206,6 +216,8 @@ function BookEditor({ row }: { row: BookRow }) {
         gallery: draft.gallery,
         sort_order: draft.sort_order,
         hidden: draft.hidden,
+        order_enabled: draft.order_enabled,
+        availability_text: draft.availability_text,
       })
       .eq("id", row.id);
     setSaving(false);
@@ -287,6 +299,16 @@ function BookEditor({ row }: { row: BookRow }) {
         </div>
       </div>
 
+      <div className="mt-6 space-y-4 border-y border-border py-5">
+        <div className="flex items-center justify-between gap-4">
+          <Label htmlFor={`order-${draft.id}`}>Доступна для замовлення</Label>
+          <Switch id={`order-${draft.id}`} checked={draft.order_enabled} onCheckedChange={(value) => set("order_enabled", value)} />
+        </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor={`availability-${draft.id}`}>Повідомлення замість ціни (коли замовлення вимкнено)</Label>
+          <Input id={`availability-${draft.id}`} value={draft.availability_text} onChange={(e) => set("availability_text", e.target.value)} />
+        </div>
+      </div>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div className="grid gap-1.5">
           <Label className="text-sm">Назва</Label>
