@@ -80,7 +80,7 @@ function BooksIndex() {
                     <img
                       src={book.cover}
                       alt={`Обкладинка «${book.title}»`}
-                      className={`h-full w-full ${["simeinyi-kod", "na-ivana-kupala", "kozhnomu-svoi-zhnyva"].includes(book.slug) ? "object-cover" : "object-contain"} transition-transform duration-700 group-hover:scale-110`}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
                   </Link>
