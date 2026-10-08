@@ -70,7 +70,7 @@ function BooksIndex() {
           {books.map((book, i) => {
             const inCart = items.some((it) => it.slug === book.slug);
             return (
-              <Reveal key={book.slug} delay={i * 100}>
+              <Reveal key={book.slug} delay={(i + 1) * 100}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-2xl">
                   <Link
                     to="/books/$slug"
