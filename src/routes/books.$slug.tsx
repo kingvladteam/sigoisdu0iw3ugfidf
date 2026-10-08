@@ -114,7 +114,7 @@ function BookPage() {
             <img
               src={book.cover}
               alt={`Обкладинка «${book.title}»`}
-              className="aspect-[3/4] w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+              className={`aspect-[3/4] w-full ${["simeinyi-kod", "na-ivana-kupala", "kozhnomu-svoi-zhnyva"].includes(book.slug) ? "object-cover" : "object-contain"} transition-transform duration-700 group-hover:scale-[1.03]`}
             />
             <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/85 px-2.5 py-1 text-xs text-foreground/80 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
               <Expand className="h-3.5 w-3.5" /> Збільшити
