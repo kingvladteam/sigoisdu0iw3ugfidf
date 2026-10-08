@@ -16,12 +16,14 @@ export type Database = {
     Tables: {
       books: {
         Row: {
+          availability_text: string
           cover: string | null
           created_at: string
           gallery: string[] | null
           hidden: boolean
           id: string
           long_text: string[] | null
+          order_enabled: boolean
           price: string | null
           price_value: number | null
           short: string | null
@@ -33,12 +35,14 @@ export type Database = {
           variants: Json
         }
         Insert: {
+          availability_text?: string
           cover?: string | null
           created_at?: string
           gallery?: string[] | null
           hidden?: boolean
           id?: string
           long_text?: string[] | null
+          order_enabled?: boolean
           price?: string | null
           price_value?: number | null
           short?: string | null
@@ -50,12 +54,14 @@ export type Database = {
           variants?: Json
         }
         Update: {
+          availability_text?: string
           cover?: string | null
           created_at?: string
           gallery?: string[] | null
           hidden?: boolean
           id?: string
           long_text?: string[] | null
+          order_enabled?: boolean
           price?: string | null
           price_value?: number | null
           short?: string | null
