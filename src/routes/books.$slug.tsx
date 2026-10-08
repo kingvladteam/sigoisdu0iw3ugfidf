@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, ShoppingBag, Expand, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Expand, X, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
@@ -75,6 +75,10 @@ function BookPage() {
   const variant = variants[selectedVariantIdx] ?? variants[0];
   const available = canOrder(book);
   const currentPrice = !available ? displayPrice(book) : variant ? `${variant.priceValue} грн` : book.price;
+  const availabilityParts = displayPrice(book).split("!").map((part) => part.trim());
+  const availabilityMessage = availabilityParts.length > 1
+    ? availabilityParts.slice(1).join("! ")
+    : availabilityParts[0];
   const inCart = items.some((i) =>
     variant ? i.slug === book.slug && i.variant === variant.label : i.slug === book.slug,
   );
@@ -145,13 +149,25 @@ function BookPage() {
 
         <Reveal delay={100}>
           <h1 className="font-display text-4xl font-medium md:text-5xl">{book.title}</h1>
-          <p
-            key={`${book.slug}-${selectedVariantIdx}-${currentPrice}`}
-            className={`price-change mt-3 inline-flex min-h-10 items-center font-display text-accent ${available ? "text-3xl" : "text-xl leading-relaxed"}`}
-            aria-live="polite"
-          >
-            {currentPrice}
-          </p>
+          {available ? (
+            <p
+              key={`${book.slug}-${selectedVariantIdx}-${currentPrice}`}
+              className="price-change mt-3 inline-flex min-h-10 items-center font-display text-3xl text-accent"
+              aria-live="polite"
+            >
+              {currentPrice}
+            </p>
+          ) : (
+            <div className="mt-4 flex max-w-md items-start gap-3 rounded-xl border border-accent/25 bg-accent/5 px-4 py-3.5" role="status">
+              <CalendarDays className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent">Передзамовлення</p>
+                <p className="mt-1 text-sm font-medium leading-relaxed text-foreground">
+                  {availabilityMessage}
+                </p>
+              </div>
+            </div>
+          )}
           {book.pages && (
             <p className="mt-1 text-sm text-muted-foreground">{book.pages}</p>
           )}
