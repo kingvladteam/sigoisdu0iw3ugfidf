@@ -45,8 +45,9 @@ function spoiler(value: string): string {
 export const sendOrder = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => orderSchema.parse(data))
   .handler(async ({ data }) => {
-    const url = process.env['SUPABASE_URL'];
-    const key = process.env['SUPABASE_PUBLISHABLE_KEY'];
+    const url = process.env['SUPABASE_URL'] || import.meta.env.VITE_SUPABASE_URL || "https://etnvnggxctkputfablwn.supabase.co";
+    const key = process.env['SUPABASE_PUBLISHABLE_KEY'] || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_yL8Gm6WJmK3Capsy01KOAQ_vye4Ew_m";
+    const baseSlug = (s: string) => s.split("::")[0];
     if (!url || !key) throw new Error("Не вдалося перевірити доступність книг. Спробуйте пізніше.");
     const catalog = createClient<Database>(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
@@ -59,10 +60,11 @@ export const sendOrder = createServerFn({ method: "POST" })
     });
     const { data: rows, error } = await catalog.from("books")
       .select("slug, order_enabled, hidden, price_value")
-      .in("slug", data.items.map((item) => item.slug));
+      .in("slug", data.items.map((item) => baseSlug(item.slug)));
+    if (error) console.error("Catalog check failed", error);
     if (error) throw new Error("Не вдалося перевірити доступність книг. Спробуйте пізніше.");
     for (const item of data.items) {
-      const book = rows?.find((row) => row.slug === item.slug);
+      const book = rows?.find((row) => row.slug === baseSlug(item.slug));
       if (!book || book.hidden || !book.order_enabled || !book.price_value || book.price_value <= 0) {
         throw new Error("Одна з книг ще недоступна для замовлення. Оновіть кошик.");
       }
