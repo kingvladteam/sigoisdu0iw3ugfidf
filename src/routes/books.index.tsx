@@ -50,7 +50,7 @@ function BooksIndex() {
             <div>
               <h1 className="font-display text-4xl font-medium md:text-5xl">Усі книги</h1>
               <p className="mt-3 max-w-2xl text-muted-foreground">
-                Додавайте у кошик одразу декілька книг — замовите все одним повідомленням.
+                Формуйте замовлення, додаючи у кошик книги, які сподобаються.
               </p>
             </div>
             <Button
