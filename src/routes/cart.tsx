@@ -56,7 +56,7 @@ function CartPage() {
               <ShoppingBag className="h-12 w-12 text-muted-foreground/60" />
               <h2 className="mt-6 font-display text-2xl">Кошик порожній</h2>
               <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                Перегляньте книги авторки і додайте їх у кошик — можна замовити декілька одразу.
+                Формуйте замовлення, додаючи у кошик книги, які сподобаються.
               </p>
               <Button
                 asChild
