@@ -35,6 +35,8 @@ const articles = [
     url: "https://huxley.media/pismennicja-irina-rudika-pro-sens-kulturi-j-osviti-u-chasi-viprobuvan/",
     cta: "Читати та слухати подкаст",
     image: "/assets/ingigerda-huxley.png",
+    imageAlt: "Ірина Рудика (Інґіґерда) для Huxley",
+    imageFit: "cover" as const,
   },
   {
     icon: BookOpen,
@@ -44,6 +46,9 @@ const articles = [
       "Народилася на Рівненщині, багато років мешкає в Києві. Має дві освіти: медичну та економічну. Скільки себе памʼятає, займалася творчістю: малювала чорно-білу графіку, захоплювалася…",
     url: "https://www.barabooka.com.ua/ingigerda/",
     cta: "Читати далі",
+    image: "/assets/barabooka-logo.png",
+    imageAlt: "Barabooka",
+    imageFit: "logo" as const,
   },
   {
     icon: Newspaper,
@@ -54,8 +59,78 @@ const articles = [
       "Про книгу-абетку, надруковану відновленим прадавнім шрифтом «Рутенія», та місію її авторки.",
     url: "https://kultura.rayon.in.ua/topics/580757-smachnenka-abetka-abo-yak-ingi-gerda-populyarizue-ukrainsku-kulturu-cherez-rutenskiy-shrift",
     cta: "Читати статтю",
+    image: "/assets/ingigerda-abetka-author.png",
+    imageAlt: "Книга «Смачненька абетка» та авторка Інґіґерда",
+    imageFit: "cover" as const,
   },
 ];
+
+function MediaCard({ article }: { article: (typeof articles)[number] }) {
+  return (
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card/60 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_24px_48px_-20px_var(--color-accent)]"
+    >
+      {article.imageFit === "logo" ? (
+        <div className="flex aspect-[16/9] items-center justify-center bg-paper px-8">
+          <img
+            src={article.image}
+            alt={article.imageAlt}
+            className="h-10 w-auto max-w-full md:h-12"
+            loading="lazy"
+          />
+        </div>
+      ) : (
+        <div className="relative aspect-[16/9] overflow-hidden">
+          <img
+            src={article.image}
+            alt={article.imageAlt}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+      )}
+      <div className="flex flex-1 flex-col p-8">
+        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+          <article.icon className="h-3.5 w-3.5" />
+          {article.source}
+        </span>
+        <h3 className="mt-4 font-display text-xl font-medium leading-snug md:text-2xl">
+          {article.title}
+        </h3>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/75">
+          {article.excerpt}
+        </p>
+        <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+          {article.cta}
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
+      </div>
+    </a>
+  );
+}
+
+function VideoCard({ title, videoId }: { title: string; videoId: string }) {
+  return (
+    <div className="mx-auto w-full max-w-3xl">
+      <h2 className="mb-4 font-display text-xl font-medium md:text-2xl">{title}</h2>
+      <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
+        <div className="aspect-video w-full">
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            loading="lazy"
+            className="h-full w-full"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function MediaPage() {
   return (
@@ -83,7 +158,7 @@ function MediaPage() {
             <div className="relative aspect-[3/2] overflow-hidden md:aspect-auto">
               <img
                 src={articles[0].image}
-                alt="Ірина Рудика (Інґіґерда) для Huxley"
+                alt={articles[0].imageAlt}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
@@ -107,76 +182,31 @@ function MediaPage() {
           </a>
         </Reveal>
 
+        {/* Article cards */}
+        <div className="mt-16 grid gap-6 md:grid-cols-2">
+          {articles.slice(1).map((a, i) => (
+            <Reveal key={a.url} delay={i * 100} className="h-full">
+              <MediaCard article={a} />
+            </Reveal>
+          ))}
+        </div>
+
         {/* YouTube embeds */}
         <Reveal delay={150}>
           <div className="mt-16">
             <SectionLabel>Відео</SectionLabel>
-            <h2 className="mb-6 font-display text-2xl font-medium md:text-3xl">
-              Інґіґерда — про «Літературні забави» і не тільки
-            </h2>
-            <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
-              <div className="aspect-video w-full">
-                <iframe
-                  src="https://www.youtube.com/embed/h2xPDvAWAfY"
-                  title="Інґіґерда – про «Літературні забави» і не тільки"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  loading="lazy"
-                  className="h-full w-full"
-                />
-              </div>
+            <div className="mt-8 space-y-12">
+              <VideoCard
+                title="Інґіґерда — про «Літературні забави» і не тільки"
+                videoId="h2xPDvAWAfY"
+              />
+              <VideoCard
+                title="Неочевидне партнерство: медіація в літературі"
+                videoId="N26rMgeHR-4"
+              />
             </div>
           </div>
         </Reveal>
-
-        <Reveal delay={175}>
-          <div className="mt-12">
-            <h2 className="mb-6 font-display text-2xl font-medium md:text-3xl">
-              Неочевидне партнерство: медіація в літературі
-            </h2>
-            <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
-              <div className="aspect-video w-full">
-                <iframe
-                  src="https://www.youtube.com/embed/N26rMgeHR-4"
-                  title="Неочевидне партнерство: медіація в літературі"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  loading="lazy"
-                  className="h-full w-full"
-                />
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Article cards */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
-          {articles.slice(1).map((a, i) => (
-            <Reveal key={a.url} delay={i * 100}>
-              <a
-                href={a.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex h-full flex-col rounded-2xl border border-border bg-card/60 p-8 transition-all duration-500 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_24px_48px_-20px_var(--color-accent)]"
-              >
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-accent">
-                  <a.icon className="h-3.5 w-3.5" />
-                  {a.source}
-                </span>
-                <h3 className="mt-4 font-display text-xl font-medium leading-snug md:text-2xl">
-                  {a.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/75">
-                  {a.excerpt}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
-                  {a.cta}
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </a>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
